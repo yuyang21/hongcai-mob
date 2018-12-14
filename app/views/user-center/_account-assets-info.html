@@ -1,0 +1,73 @@
+<div class="account-owner">
+  <p class="title">我的资产</p>
+  <div class="account-panel bg-white">
+    <div class="icon"><img src="/images/user-center/balance1.png" alt=""></div>
+    <div class="title-text">可用余额</div>
+    <div class="more"><strong class="ft-orange ft-1p8">{{ userAccount.balance | number:2 }}</strong>元</div>
+  </div>
+  <div class="account-panel bg-white">
+    <div class="icon"><img src="/images/user-center/balance2.png" alt=""></div>
+    <div class="title-text">累计利息</div>
+    <div class="more"><strong class="ft-orange ft-1p8">{{ userAccount.totalProfit | number:2 }}</strong>元</div>
+  </div>
+  <div class="account-panel bg-white">
+    <div class="icon"><img src="/images/user-center/balance3.png" alt=""></div>
+    <div class="title-text">待收本金</div>
+    <div class="more"><strong class="ft-orange ft-1p8">{{ userAccount.waitingCapital | number:2 }}</strong>元</div>
+  </div>
+  <div class="account-panel bg-white">
+    <div class="icon"><img src="/images/user-center/balance4.png" alt=""></div>
+    <div class="title-text">待收利息</div>
+    <div class="more"><strong class="ft-orange ft-1p8">{{ userAccount.waitingProfit  | number:2}}</strong>元</div>
+  </div>
+  <!-- <p><img src="/images/user-center/balance1.png" alt="">可用余额<span class="u-pull-right">
+        <strong class="ft-orange ft-1p8">{{ userAccount.balance | number:2 }}</strong>
+        元
+      </span></p> -->
+  <!-- <p><img src="/images/user-center/balance2.png" alt="">累计利息<span class="u-pull-right">
+        <strong class="ft-orange ft-1p8">{{ userAccount.totalProfit | number:2 }}</strong>
+        元
+      </span></p>
+  <p><img src="/images/user-center/balance3.png" alt="">待收本金<span class="u-pull-right">
+        <strong class="ft-orange ft-1p8">{{ userAccount.waitingCapital | number:2 }}</strong>
+        元
+      </span></p>
+  <p><img src="/images/user-center/balance4.png" alt="">待收利息<span class="u-pull-right">
+        <strong class="ft-orange ft-1p8">{{ userAccount.waitingProfit  | number:2}}</strong>
+        元
+      </span></p> -->
+</div>
+<!-- <table class="account-tab2 u-full-width margin-t-2 margin-0 ft-1p4">
+<tr><th colspan="2" class="title">我的资产</th></tr>
+  <tr>
+    <td class="border-grey padding-0p5 ft-grey1">
+      <span class="u-pull-left padding-l-0p5">可用余额&nbsp;</span>
+      <span class="u-pull-left">
+        <strong class="ft-orange">{{ userAccount.balance | number:2 }}</strong>
+        &nbsp;元
+      </span>
+    </td>
+    <td class="border-grey padding-0p5 ft-grey1">
+      <span class="u-pull-left">冻结资金&nbsp;</span>
+      <span class="u-pull-left">
+        <strong class="ft-orange">{{ userAccount.freezeCapital | number:2 }}</strong>
+        &nbsp;元
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td class="border-grey padding-0p5 ft-grey1">
+      <span class="u-pull-left padding-l-0p5">待收本金&nbsp;</span>
+      <span class="u-pull-left">
+        <strong class="ft-orange">{{ userAccount.waitingCapital | number:2 }}</strong>
+        &nbsp;元
+      </span>
+    </td>
+    <td class="border-grey padding-0p5 ft-grey1">
+      <span class="u-pull-left">待收利息&nbsp;</span>
+      <span class="u-pull-left">
+        <strong class="ft-orange">{{ userAccount.waitingProfit  | number:2}}</strong>
+        &nbsp;元
+      </span></td>
+  </tr>
+</table> -->

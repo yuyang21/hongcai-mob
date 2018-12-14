@@ -1,0 +1,32 @@
+<!-- 游戏兑换页 -->
+<div class="exchage-cdkey">
+	<img src="/images/exchange/tanmu01.png" width="100%" class="display-bl">
+	<img src="/images/exchange/tanmu02.png" width="100%" class="display-bl">
+	<img src="/images/exchange/tanmu03.png" width="100%" class="display-bl">
+	<img src="/images/exchange/tanmu04.png" width="100%" class="display-bl">
+	<img src="/images/exchange/tanmu05.png" width="100%" class="display-bl">
+	<img src="/images/exchange/tanmu06.png" width="100%" class="display-bl">
+	<form>
+		<input type="text" name="exchange" ng-model="cdkey.exchangeCode" placeholder="请输入兑换码">
+	</form>
+	<img src="/images/exchange/tanmu07.png" width="100%" class="display-bl" ng-click="exchangeCdkey(cdkey);" ng-nit="cdkey = false">
+	<img src="/images/exchange/tanmu08.png" width="100%" class="display-bl">
+	<img src="/images/exchange/tanmu09.png" width="100%" class="display-bl">
+</div>
+<div class="project-mask exchange-mask padding-b-7" ng-show="showCdkey">
+	<img src="/images/exchange/sucess01.png" width="100%" class="display-bl">
+	<img src="/images/exchange/sucess02.png" width="100%" class="display-bl">
+	<img src="/images/exchange/sucess03.png" width="100%" class="display-bl">
+	<img src="/images/exchange/sucess04.png" width="100%" class="display-bl">
+	<img src="/images/exchange/sucess05.png" width="100%" class="display-bl">
+	<p class="cdkey margin-t-1 text-center">
+		兑换码为：{{cdkey}}
+	</p>
+	<img src="/images/exchange/sucess06.png" width="100%" class="display-bl">
+	<img src="/images/exchange/sucess07.png" width="100%" class="display-bl">
+	<img src="/images/exchange/sucess08.png" width="100%" class="display-bl">
+	<img src="/images/exchange/sucess09.png" width="100%" class="display-bl">
+	<div class="exc-btn-wrap">
+		<img src="/images/exchange/sucess10.png" width="100%" class="display-bl margin-b-1" ui-sref="root.project-list">
+	</div>
+</div>

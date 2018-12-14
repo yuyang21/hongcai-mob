@@ -1,0 +1,105 @@
+<!-- 活动分享落地页 -->
+<div class="invite-sharing" id="activity" ng-show="!isActivityEnd">
+	<!-- 头部header -->
+	<div class="box1">
+		<img src="/images/invite/invite-sharing-header01.png" class="display-bl" width="100%">
+		<img src="/images/invite/invite-sharing-header02.png" class="display-bl" width="100%">
+		<img src="/images/invite/invite-sharing-header03.png" class="display-bl" width="100%">
+		<img src="/images/invite/invite-sharing-header04.png" class="display-bl" width="100%">
+		<img src="/images/invite/invite-sharing-header05.png" class="display-bl" width="100%">
+		<img src="/images/invite/invite-sharing-header06.png" class="display-bl" width="100%">
+		<img src="/images/invite/invite-sharing-header07.png" class="display-bl" width="100%">
+		<img src="/images/invite/invite-sharing-header08.png" class="display-bl" width="100%">
+		<img src="/images/invite/invite-sharing-header09.png" class="display-bl" width="100%">
+		<img src="/images/invite/invite-sharing-header10.png" class="display-bl" width="100%">
+	</div>
+	<div class="sharing-content">
+		<!-- 注册表单 -->
+		<form autocomplete="off" class="invite-form margin-0" name="registerForm" autocomplete="on"  id="registerForm" novalidate>
+		    <div class="to-register">
+		      <!-- 手机号码 -->
+		      <input id="mobilesignup" name="mobile" ng-model="user.mobile" type="tel" placeholder="请输入您的手机号" required/>
+		      <!-- 图形验证码 -->
+		      <input id="picCaptcha" name="picCaptcha" ng-model="user.picCaptcha" required type="text" placeholder="请输入图形验证码" class="picCaptcha"/>
+		      <img src="{{getPicCaptcha}}" id="checkCaptcha" class="captchacode fr bg-white" ng-click="refreshCode()">
+		      <!-- 手机验证码 -->
+		      <input id="mobileCaptcha" name="captchasignup" ng-model="user.captcha" required="required" type="number" placeholder="请输入手机验证码" class="mobileCaptcha"/>
+		      <div id="mobilecode" capcha-countdown>获取</div>
+		    </div>
+		    <!-- 接受邀请按钮 -->
+		    <div class="invited-btn">
+		    	<img src="/images/invite/invite-sharing-btn.png" alt="" ng-click="signUp(user);">
+		    </div>
+		</form>
+
+		<!-- 已领取礼包好友 -->
+		<div class="received-lists" ng-if="inviteList.length>0">
+			<!-- 图片 -->
+			<div class="taked-icon text-center margin-t-3"><img src="/images/invite/invite-sharing-taked.png" alt="" width="28%"></div>
+			<!-- 领取好友列表 只显示最新的10条-->
+			<ul class="lists">
+				<li class="border-none" ng-repeat="item in inviteList">
+				<p><span>{{item.mobile}}</span> <span>{{item.createTime || 0 | date: 'yyyy.MM.dd HH:mm'}}</span></p>
+				<p>{{item.encourage}}</p>
+				</li>
+			</ul>
+		</div>
+
+		<!-- 友情提示 -->
+		<div class="friend-tip">
+			<!-- 图片 -->
+		  <div class="taked-icon text-center margin-t-2 margin-b-2"><img src="/images/invite/invite-sharing-tips.png" alt="" width="28%"></div>
+		  <div class="tip-box">
+		  	<div class="tip">
+		  		同一手机号、身份证号的新用户，只享受一次合伙人礼包，不可重复获得。
+		  	</div>
+		  </div>
+		</div>
+
+		<!--  关于宏财 -->
+		<div class="friend-tip">
+			<!-- 图片 -->
+		  <div class="taked-icon text-center margin-t-2 margin-b-2"><img src="/images/invite/invite-sharing-about.png" alt="" width="28%"></div>
+		  <div class="tip-box">
+		  	<div class="tip">
+		  		<div>国资背景</div>
+		  		<div class="margin-b-1p5"><i class="fa fa-check" aria-hidden="true"></i>2016年获1亿元A轮战略融资 <br><i class="fa fa-check" aria-hidden="true"></i>同时拥有国资背景和博士高管团队的互联网金融平台 <br><i class="fa fa-check" aria-hidden="true"></i>十多年积累的金融生态圈优质资产</div>
+		  		<div>资金存管</div>
+		  		<div class="margin-b-1p5"><i class="fa fa-check" aria-hidden="true"></i>2016年宏财网成为北京网贷协会成员 <br><i class="fa fa-check" aria-hidden="true"></i>首批接入北京市金融局、北京网贷协会组建的海口联合农商银行资金存管系统 <br><i class="fa fa-check" aria-hidden="true"></i>用户资金与平台资金严格隔离，所有资金来往经由海口联合农商银行</div>
+		  		<div>产品特点</div>
+		  		<div class="margin-b-1p5"><i class="fa fa-check" aria-hidden="true"></i>短期投资项目为主，同时具备良好的流动性和不错的收益率 <br><i class="fa fa-check" aria-hidden="true"></i>源自金融生态圈优质资产，项目信息知根知底，风控严谨可靠 <br><i class="fa fa-check" aria-hidden="true"></i>使用SSL128位数据加密与两地三中心容灾备份体系，保障用户信息与数据安全</div>
+		  	</div>
+		  </div>
+		</div>
+	</div>
+</div>
+
+<!-- 注册之后活动结束 -->
+<div class="project-mask" auto-h ng-show="isActivityEnd">
+	<img src="/images/invite/offline01.png" width="100%" class="display-bl">
+	<img src="/images/invite/offline02.png" width="100%" class="display-bl">
+	<img src="/images/invite/offline03.png" width="100%" class="display-bl">
+	<img src="/images/invite/offline04.png" width="100%" class="display-bl">
+	<img src="/images/invite/offline05.png" width="100%" class="display-bl">
+	<img src="/images/invite/offline06.png" width="100%" class="display-bl">
+	<img src="/images/invite/offline07.png" width="100%" class="display-bl">
+	<img src="/images/invite/offline08.png" width="100%" class="display-bl">
+	<img src="/images/invite/offline09.png" width="100%" class="display-bl">
+	<img src="/images/invite/offline10.png" width="100%" class="display-bl">
+	<img src="/images/invite/offline11.png" width="100%" class="display-bl">
+	<div class="offline-bg"></div>
+</div>
+
+<!-- 受邀成功弹窗 -->
+<div class="project-mask bg-grey6" auto-h id="successMask" ng-show="isSuccess">
+<!-- <div class="project-mask bg-grey6" auto-h id="successMask"> -->
+	<div class="successMask text-center">
+		<img src="/images/invite/register-01.png" alt="" width="70%">
+		<img src="/images/channel-landing/register-02.png" alt="" width="70%">
+		<img src="/images/invite/register-03.png" alt="" width="43%">
+		<img src="/images/invite/register-04.png" alt="" width="80%">
+		<!-- 立即查收按钮：点击按钮跳转至app下载页，iOS跳转至App Store，安卓跳至应用宝； -->
+		<img src="/images/invite/register-05.png" alt="" width="94%" onclick="javascript:window.location.href='http://a.app.qq.com/o/simple.jsp?pkgname=com.hoolai.hongcai'">
+	</div>
+</div>
+

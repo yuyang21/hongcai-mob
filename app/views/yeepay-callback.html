@@ -1,0 +1,78 @@
+<div class="bg-white padding-l-1 padding-r-1 padding-t-3 padding-b-3 overflow-hid text-center" ng-switch="page">
+  <div class="overflow-hid" ng-hide="page == 10 ">
+    <img src="/images/success-re_03.png" width="30%">
+    <p class="padding-t-1 ft-2 ft-black2 margin-t-2">
+      <strong ng-switch-default>恭喜您，成功开通银行资金存管账户！</strong>
+      <strong ng-switch-when="1">恭喜您，成功充值{{amount | number:2}}元！</strong>
+      <strong ng-switch-when="2">恭喜您，成功提现{{amount | number:2}}元！</strong>
+      <strong ng-switch-when="3">恭喜您，成功出借{{amount}}元，<br><span class="text-center">开始计息！<span ng-show="coupon.type == 1">额外加息{{coupon.value}}%</span><span  ng-show="coupon.type == 2">额外奖励{{coupon.value}}元</span></span></strong>
+      <strong ng-switch-when="4">恭喜您，成功绑定银行卡！</strong>
+      <strong ng-switch-when="5">恭喜您，成功修改手机号！</strong>
+      <strong ng-switch-when="6">恭喜您，成功出借{{amount}}元！</strong>
+      <strong ng-switch-when="7">恭喜您，成功开通存管账号！</strong>
+      <strong ng-switch-when="8">恭喜您，成功解绑银行卡！</strong>
+      <strong ng-switch-when="9">恭喜您，成功申请解绑银行卡！</strong>
+    </p>
+    <div class="column twelve padding-l-1 padding-r-1 margin-b-1 padding-b-2 margin-t-2">
+
+      <div  ng-switch-default>
+        <div class="one-half column button button-primary u-pull-left border-none" ui-sref="root.project-list">
+          <span>浏览项目</span>
+        </div>
+        <div class="one-half column button button-primary u-pull-left border-none" ui-sref="root.userCenter.recharge">
+          <span>充值</span>
+        </div>
+      </div>
+
+      <div class="one-half column button button-primary u-pull-left border-none" ng-switch-when="1" ui-sref="root.project-list">
+        <span>浏览项目</span>
+      </div>
+      <div class="one-half column button button-primary u-pull-left border-none" ng-switch-when="2" ui-sref="root.project-list">
+        <span>浏览项目</span>
+      </div>
+      <!-- userCenter.credits -->
+      <div ng-switch-when="3">
+        <p class="ft-1p5 ft-grey">项目募集期间，宏财网将按照借款项目的年化利率，给您发放了募集期奖励，请注意查收哦~</p>
+        <div class="one-half column button button-primary u-pull-left border-none" ui-sref="root.userCenter.credits-overview">
+          <span>我的出借</span>
+        </div>
+        <div class="one-half column button button-primary u-pull-left border-none" ui-sref="root.project-list">
+          <span>浏览项目</span>
+        </div>
+      </div>
+      <div class="one-half column button button-primary u-pull-left border-none" ng-switch-when="4" ui-sref="root.project-list">
+        <span>浏览项目</span>
+      </div>
+      <div class="one-half column button button-primary u-pull-left border-none" ng-switch-when="5" ui-sref="root.project-list">
+        <span>浏览项目</span>
+      </div>
+      <div class="one-half column button button-primary u-pull-left border-none" ng-switch-when="6" ui-sref="root.project-list">
+        <span>浏览项目</span>
+      </div>
+      <div ng-switch-when="7">
+        <div class="one-half column button button-primary u-pull-left border-none" ui-sref="root.project-list">
+          <span>浏览项目</span>
+        </div>
+        <div class="one-half column button button-primary u-pull-left border-none" ui-sref="root.userCenter.account-overview">
+          <span>我的账户</span>
+        </div>
+      </div>
+      <div ng-switch-when="8">
+        <div class="one-half column button button-primary u-pull-left border-none" ui-sref="root.userCenter.setting">
+          <span>绑定新银行卡</span>
+        </div>
+        <div class="one-half column button button-primary u-pull-left border-none" ui-sref="root.main">
+          <span>逛逛首页</span>
+        </div>
+      </div>
+      <div ng-switch-when="9">
+        <div class="one-half column button button-primary u-pull-left border-none" ui-sref="root.userCenter.account-overview">
+          <span>我的账户</span>
+        </div>
+        <div class="one-half column button button-primary u-pull-left border-none" ui-sref="root.main">
+          <span>逛逛首页</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

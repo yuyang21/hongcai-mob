@@ -1,0 +1,68 @@
+<div class="row margin-t-2" ng-switch="fundsFlag">
+  <!-- 未登录状态下 -->
+  <div ng-switch-when=0>
+    <div class="padding-t-1p5 padding-b-1p5 text-center bg-grey4 border-grey-top border-grey-bottom ft-1p6" ng-click="toLog()">
+      <p class="margin-b-0">您的账号未登录</p>
+      <p class="margin-b-0">出借请<span class="ft-red">登录</span></p>
+    </div>
+  </div>
+  <!-- 普通用户 -->
+  <div ng-switch-when=1>
+    <!-- 可融资状态下 -->
+    <div ng-show="project.status === 7">
+      <div class="padding-t-1p5 padding-b-1p5 text-center bg-grey4 border-grey-top border-grey-bottom ft-1p6" ng-click="toRealNameAuth()">
+        <p class="margin-b-0">您的账号未开通第三方存管</p>
+        <p class="margin-b-0"><span class="ft-red">点击这里</span>开通</p>
+      </div>
+    </div>
+    <!-- 不可融资状态下 -->
+    <div ng-show="project.status !== 7">
+      <div class="width-pull overflow-hid bg-orange1 padding-l-1 padding-r-1 padding-t-1 padding-b-1 border-orange3 ft-1p5">
+        <span class="u-pull-left"><i class="fa fa-jpy ft-orange"></i>&nbsp;账户余额&nbsp;<strong class="ft-orange">{{ account.balance | currency:"":2 || 0}}</strong>元</span>
+        <span class="u-pull-right"><i class="fa fa-pie-chart ft-orange"></i>&nbsp;可投金额&nbsp;<strong class="ft-orange">{{jigoubaoProjectInvestNum/10000 | currency:"":2 || 0}}</strong>万元</span>
+      </div>
+    </div>
+  </div>
+  <!-- 实名用户 -->
+  <div ng-switch-when=2>
+    <!-- 可融资状态下 -->
+    <div ng-show="project.status === 7">
+      <div class="width-pull overflow-hid bg-orange1 padding-l-1 padding-r-1 padding-t-1 padding-b-1 border-orange3 ft-1p5">
+        <span class="u-pull-left"><i class="fa fa-jpy ft-orange"></i>&nbsp;账户余额&nbsp;<strong class="ft-orange">{{ account.balance | currency:"":2 || 0}}</strong>元</span>
+        <span class="u-pull-right"><i class="fa fa-pie-chart ft-orange"></i>&nbsp;可投金额&nbsp;<strong class="ft-orange">{{jigoubaoProjectInvestNum/10000 | currency:"":2 || 0}}</strong>万元</span>
+      </div>
+      <form name="investForm" class="investForm overflow-hid">
+        <div class="hint text-center bg-red1 padding-t-0p5 padding-b-0p5 box-shadow" ng-show="msg">
+          <span class="ft-white"><i class="fa fa-info">&nbsp;</i>{{msg}}</span>
+        </div>
+
+        <div class="padding-l-2 padding-r-2 margin-t-2 overflow-hid">
+          <input type="number" name="investAmount" placeholder="100元起投" class="investAmount u-pull-left padding-t-1 padding-b-1" ng-model="project.investAmount" ng-disabled="account.balance <=0" required>
+          <button class="button button-primary border-ra-0p5 u-pull-left" ng-show="checkLargeUserCanAmount(project) || account.balance <= 0" ng-click="toRecharge()">充值</button>
+          <button class="button button-primary border-ra-0p5 u-pull-left" ng-hide="checkLargeUserCanAmount(project) || account.balance <= 0" ng-click="toInvest(project)" ng-disabled="!project.investAmount" my-click-once>出借</button>
+        </div>
+      </form>
+    </div>
+    <!-- 不可融资状态下 -->
+    <div ng-show="project.status !== 7">
+      <!-- 不可出借时 -->
+      <div class="width-pull overflow-hid bg-orange1 padding-l-1 padding-r-1 padding-t-1 padding-b-1 border-orange3 ft-1p5">
+        <span class="u-pull-left"><i class="fa fa-users ft-orange"></i>&nbsp;账户余额&nbsp;<strong class="ft-orange">{{ account.balance | currency:"":2 || 0}}</strong>元</span>
+        <span class="u-pull-right"><i class="fa fa-pie-chart ft-orange"></i>&nbsp;可投金额&nbsp;<strong class="ft-orange">{{jigoubaoProjectInvestNum/10000 | currency:"":2 || 0}}</strong>万元</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="project-mask" ng-show="rewardFlag">
+  <div class="bg-white project-mask-inner">
+    <p class="margin-b-1 padding-l-2" ng-show="selectCoupon !== null && project.product.type !== 1">
+      <select type="button" class="btn btn-default" ng-model="selectCoupon" data-html="1" data-animation="am-flip-x" ng-options="coupon as coupon.rateText for coupon in increaseRateCoupons" required>
+      </select>
+    </p>
+    <p class="margin-b-1 padding-l-2 padding-r-2">
+      <button class="button button-primary" style="width:48%;" ng-click="$parent.rewardFlag = false;">取消</button>
+      <button class="button button-primary" style="width:48%;" ng-click="confirmUseReward(project, selectCoupon)">确定</button>
+    </p>
+  </div>
+</div>

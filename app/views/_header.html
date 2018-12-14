@@ -1,0 +1,8 @@
+<!-- 添加导航栏返回上一页 -->
+<div ng-show="showBack">
+  <nav id="header" class="position-re bg-greyf7 padding-l-1 padding-r-1 overflow-hid text-center margin-ato" >
+    <span class="ft-grey5 back" onClick="javascript: history.go(-1);"><i class="fa fa-angle-left ft-2p8 position-icon" aria-hidden="true"></i><i class="ft-normal1 ft-1p6 margin-l-2px">返回</i></span>
+    <span ng-bind="headerTitle || '宏财网'" class="ft-grey5 ft-1p8 position-re top-0p1"></span>
+  </nav>
+  <div class="nav-block"></div>
+</div>

@@ -1,0 +1,365 @@
+// 债权转让项目详情页
+.assignments-detail{
+  background-color:#f5f5f5;
+  @media (max-width:320px){
+    margin-bottom: 3rem;
+  }
+  .header{
+    width: 100%;
+    overflow: auto;
+    background-color:#fe8f40;
+    padding:1.6rem 2.4rem 0.5rem;
+    color:#ffeceb;
+    @media (max-width:360px){
+      padding:1.6rem 1rem 0.5rem;
+    }
+    ul {
+      overflow: hidden;
+      width: 100%;
+      margin-bottom: 0;
+      li {
+        float: left;
+        width: 30%;
+        text-align: center;
+        p {
+          margin-bottom: 0rem;
+        }
+        p:nth-child(1) {
+          color: #fffefe;
+          font-family: Arial;
+        }
+        p:nth-child(2) {
+          color: #eee;
+          font-size: 1.4rem;
+          margin-top: 0.2rem;
+        }
+      }
+      li:nth-child(1) {
+        margin-left: 1rem;
+        margin-top: 0.2rem;
+        p:nth-child(1) {
+          font-size: 3.8rem;
+        }
+      }
+      li:nth-child(3), li:nth-child(2) {
+        p:nth-child(1) {
+          font-size: 1.6rem;
+        }
+      }
+      @media (max-width:414px){
+        li:nth-child(2) {
+          margin: 2.5rem 0 0 1.8rem;
+          p:nth-child(1) {
+            margin-bottom: 1rem;
+          }
+        }
+        li:nth-child(3) {
+          margin-top: 2.5rem;
+          p:nth-child(1) {
+            margin-bottom: 1rem;
+          }
+        }
+      }
+      @media (max-width:375px){
+        li:nth-child(2) {
+          margin: 2.5rem 0 0 1.6rem;
+        }
+        li:nth-child(3) {
+          margin-top: 2.5rem;
+        }
+      }
+      @media (max-width:360px){
+        li:nth-child(1) {
+          p:nth-child(1) {
+            font-size: 3.6rem;
+            // margin-top: 0.2rem;
+          }
+        }
+        li:nth-child(2) {
+          margin: 2.5rem 0 0 1.1rem;
+        }
+        li:nth-child(3) {
+          margin-top: 2.5rem;
+        }
+      }
+    }
+  }
+  .content{
+    overflow:hidden;
+    padding: 0 1.5rem;
+    background-color:#fff;
+    .column{
+      font-size: 1.5rem;
+      border-bottom: 0.1rem solid #eee;
+      padding:1.2rem 0rem;
+      background-color:#fff;
+      margin-left: 0;
+      .txt-left {   
+        color: #666666;
+        padding-top: .5rem;
+      }
+      .txt-right {
+        color: #ff5400;
+        b {
+          display: inline-block;
+          padding: 0rem 1.5rem;
+          color: #fefefe;
+          background-color: #ff6c01;
+          border-radius:  1rem;
+          font-size: 1.3rem;
+          margin-top: 0.5rem;
+        }
+        .angle-down {
+          font-size: 2.8rem;
+          color: #bbb;
+        }
+      }
+      span{
+        font-size:1.5rem;
+      }
+      span.award_coupon{
+        display: inline-block;
+        text-align: right;
+        width: 80%;
+      }
+      span:nth-child(1) {
+        @media (max-width:320px) {
+          font-size:1.3rem;
+        }
+      }
+      span:nth-child(2) {
+        float:right;
+        color:#9f9d9e;
+        b{
+          position: relative;
+          top: -0.2rem;
+          @media (max-width:320px) {
+            font-size:1.3rem;
+          }
+        }
+        i{
+          font-size:2.8rem;
+          margin-left:0.5rem;
+          margin-top:0.1rem;
+          @media (max-width:320px) {
+            margin-left:0.1rem;
+          }
+        }
+      }
+    }
+    
+  }
+  .content2 {
+    background-color:#fff;
+    ul{
+      background-color:#fff;
+      padding:1.5rem 1.5rem 1rem;
+      overflow:hidden;
+      margin-bottom: 0;
+    }
+    ul li{
+      list-style: none;
+      float: left;
+      margin-bottom: 0;
+      width:50%;
+      box-sizing:border-box;
+      background-color:#fff;
+      p{
+        margin-bottom:0;
+        font-size:1.5rem;
+        @media (max-width:320px) {
+          font-size:1.4rem;
+        }
+      }
+      p:nth-child(1) {
+        color:#666;
+      }
+      p:nth-child(2) {
+        color:#ff6a00;
+      }
+    }
+    ul li:nth-child(2) {
+      border-left:0.1rem solid #eee;
+      text-align:right;
+    }
+    .invest{
+      background-color:#fff;
+      padding-left:1.5rem;
+      padding-right:1.5rem;
+      text-align:center;
+      div {
+        display:inline-block;
+        width:4rem;
+        height:4rem;
+        font-size:1.6rem;
+        position: relative;
+        top: 4px;
+      }
+      .grey-status{
+        border: 0.1rem solid #ccc;
+        background-color:#eeedeb;
+      }
+      .orange-status{
+        border: 0.1rem solid #ff4e00;
+        background-color:#ffccaf;
+      }
+      .plus{
+        hr{
+          margin-top: 1.9rem;
+          margin-left: 0.6rem;
+          width: 2.6rem;
+          border-top: 1px solid #ccc;
+        }
+      }
+      .add{
+        hr{
+          margin-top: 1.9rem;
+          margin-left: 0.6rem;
+          width: 2.6rem;
+          border-top: 1px solid #ff4e00;
+        }
+        hr:nth-child(2) {
+          margin-top:-3.6rem;
+          transform:rotate(90deg);
+          -ms-transform:rotate(90deg); /* Internet Explorer */
+          -moz-transform:rotate(90deg); /* Firefox */
+          -webkit-transform:rotate(90deg); /* Safari 和 Chrome */
+          -o-transform:rotate(90deg); /* Opera */
+        }
+      }
+      i{
+        background-color:red;
+        width:4rem;
+        height:4rem;
+        font-size:1.6rem;
+      }
+      .invest-input{
+        border-radius:0;
+        border:0.1rem solid #e8e8e8;
+        text-align:left;
+        color:#333 !important;
+        font-size: 1.6rem;
+        width:94%;
+        height:4rem;
+        padding: 6px 10px !important;
+        margin: 0 0.9rem 1rem;
+        position:relative;
+        @media (max-width:320px) {
+          margin: 0 0rem 2rem;
+        }
+        
+      }
+      /* 通用 */
+      .invest-input::-webkit-input-placeholder { color:#666 !important; font-size: 1.5rem; line-height:normal!important;}
+
+    }
+    .payMoney {
+      .payMessage {
+        padding: 1rem 1.5rem 0.2rem 2.1rem;
+        width: 80%;
+        margin: 0 auto;
+        background: url('/images/project/assignment-rect.png');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        @media (max-width:414px){
+          width: 73%;
+        }
+        @media (max-width:360px){
+          width: 79%;
+        }
+        @media (max-width:360px){
+          width: 80%;
+        }
+        @media (max-width:320px){
+          width: 93%;
+        }
+      }
+    }
+    button.btn-disabled {
+      background-color: #FEB682;
+      border-color: #FEB682;
+      color: #fff;
+    }
+    .invest-btn{
+      padding:2rem 2.5rem;
+      @media (min-width:320px){
+        position: static;
+        border-top: none;
+        background-color: #fff;
+        padding-top: 0;
+      }
+      @media (max-width:375px){
+        padding-bottom: 6rem;
+      }
+      button{
+        width: 100%;
+        box-sizing: border-box;
+        font-weight: normal !important;
+        border-radius: .5rem !important;
+        margin-bottom:0;
+      }
+    }
+  }
+}
+// 转让记录
+.investor-orders {
+  color: #666666;
+  background-color: #f8f9fb;
+  .padding-lr-1p5 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  p {
+    line-height: 1.8rem;
+  }
+  .thead {
+    overflow: hidden;
+    li {
+      width: 33.3333%;
+      float: left;
+      text-align: center !important;
+      border-color: #dddddd;
+      font-size: 1.5rem;
+      margin-bottom: 0;
+      padding: 12px 0px;
+      border-bottom: 1px solid #ddd;
+    }
+  }
+  table {
+    width: 100%;
+    td {
+      width: 33.3333%;
+      text-align: center !important;
+      
+    }
+    .auto-height {
+      height: 600px;
+      p{margin-top: -10rem;}
+    }
+    tbody{
+      tr {
+        td {
+          border: none !important;
+          font-size: 1.4rem;
+        }
+        td:nth-child(1) {
+          padding-left: 2rem;
+          width: 40%;
+        }
+        td:nth-child(2) {
+          width: 20%;
+        }
+        td:nth-child(3) {
+          padding-right: 2rem;
+          width: 40%;
+        }
+      }
+      tr:nth-child(odd) {
+        background-color: #fff;
+      }
+      tr:nth-child(even) {
+        background-color: #f8f9fb;
+      }
+    }
+  }
+}

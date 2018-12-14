@@ -1,0 +1,47 @@
+<div class="exchange-flowers">
+	<img src="/images/exchange/moca01.png" class="display-bl" width="100%">
+	<img src="/images/exchange/moca02.png" class="display-bl" width="100%">
+	<img src="/images/exchange/moca03.png" class="display-bl" width="100%">
+	<img src="/images/exchange/moca04.png" class="display-bl" width="100%">
+	<img src="/images/exchange/moca05.png" class="display-bl" width="100%">
+	<div class="sharing-content margin-b-2 margin-t-4">
+	  <!-- 注册表单 -->
+	  <form autocomplete="off" class="invite-form margin-0" name="registerForm" autocomplete="on" novalidate>
+	    <div class="to-register">
+	      <!-- 手机号码 -->
+	      <input class="mobilesignup" name="mobile" ng-model="user.mobile" type="tel" placeholder="请输入您的手机号" required/>
+	      <!-- 图形验证码 -->
+	      <input name="picCaptcha" ng-model="user.picCaptcha" required type="text" placeholder="请输入图形验证码" class="picCaptcha"/>
+	      <img src="{{getPicCaptcha}}" id="checkCaptcha" class="captchacode fr" ng-click="refreshCode()">
+	      <!-- 手机验证码 -->
+	      <input name="captchasignup" ng-model="user.captcha" required="required" type="number" placeholder="请输入手机验证码" class="mobileCaptcha"/>
+	      <div class="mobilecode" id="mobcode" capcha-countdown>获取</div>
+	    </div>
+	    <!-- 立即注册按钮 -->
+	    <button type="submit" class="invited-btn" ng-click="signUp(user)">立即注册</button>
+	  </form>
+	</div>
+	<img src="/images/exchange/moca06.png" class="display-bl" width="100%">
+	<img src="/images/exchange/moca07.png" class="display-bl" width="100%">
+	<img src="/images/exchange/moca08.png" class="display-bl" width="100%">
+	<img src="/images/exchange/moca09.png" class="display-bl" width="100%">
+	<img src="/images/exchange/moca10.png" class="display-bl" width="100%">
+	<img src="/images/exchange/moca11.png" class="display-bl" width="100%">
+	<img src="/images/exchange/moca12.png" class="display-bl" width="100%">
+	<img src="/images/exchange/moca13.png" class="display-bl" width="100%">
+	<img src="/images/exchange/moca14.png" class="display-bl" width="100%">
+	<img src="/images/exchange/moca15.png" class="display-bl" width="100%">
+	<img src="/images/exchange/moca16.png" class="display-bl" width="100%">
+</div>
+
+<!-- 受邀成功弹窗 ng-show="isSuccess"-->
+<div class="project-mask bg-grey6 channel-mask" ng-show="isSuccess">
+  <div class="text-center margin-t-5 position-re" id="mocaMask">
+    <img src="/images/exchange/exc-sucess.png" alt="" width="80%">
+    <img src="/images/exchange/bag.png" alt="" width="90%">
+    <img src="/images/exchange/download.png" alt="" width="76%" class="margin-t-1">
+    <img src="/images/exchange/words.png" alt="" width="80%" class="margin-t-4">
+    <!-- 立即领取按钮：点击按钮跳转至app下载页，iOS跳转至App Store，安卓跳至应用宝； -->
+    <button type="button" onClick="javascript:window.location.href='http://a.app.qq.com/o/simple.jsp?pkgname=com.hoolai.hongcai'">马上领取</button>
+  </div>
+</div>

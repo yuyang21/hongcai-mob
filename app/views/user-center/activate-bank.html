@@ -1,0 +1,16 @@
+<div class="project-mask bg-grey0p8" ng-show="showActivateTip">
+  <div class="activate-bank">
+    <div class="activate-head">
+      <img src="images/user-center/activate-bank-bg.png" alt="">
+    </div>
+    <div class="activate-tip">
+      <p class="margin-b-0">尊敬的宏财用户, 您的账户已经升级为银行资金存管账户, 请点击下方按钮开通, 尽享安全出借。</p>
+       <div class="activate-btn text-center clearfix">
+        <p class="fl" ng-click="cancel()" ui-sref="root.bank-custody">了解详情</p>
+        <p class="fr" ng-click="toOpen()" >立即开通</p>  
+      </div>
+    </div>
+   
+    <img src="images/user-center/activate-bank-close.png" class="position-ab close" ng-click="cancel()"></p>
+  </div>
+</div>

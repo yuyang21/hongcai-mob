@@ -1,0 +1,32 @@
+<!-- 项目出借人 -->
+<div class="investor-record">
+  <table>
+    <thead>
+      <tr>
+        <th>成交时间</th>
+        <th>用户名</th>
+        <th>出借金额</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 有出借 -->
+      <tr ng-repeat="order in orderList | orderBy : '-id' track by order.id" ng-show="orderList.length >0 ">
+        <td class="ft-grey4">{{order.createTime | date: "yyyy-MM-dd"}}</td>
+        <td class="ft-blue">{{order.userName}}</td>
+        <td><span class="ft-orange0">{{order.orderAmount| number : 0}}</span>元</td>
+      </tr>
+      <!-- 没出借 -->
+      <tr class="text-center" ng-show="orderList.length <=0 ">
+        <td colspan="3">
+          <img src="/images/project/no-record.png" width="17%" class="margin-t-2">
+          <p class="ft-grey4 margin-b-0 margin-t-1p5">该项目暂未有人出借</p>
+          <p class="ft-grey4 margin-b-0">快做第一出借人吧</p>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+  <div class="text-center" ng-show="totalPage > page">
+    <p><i class="fa fa-list-ul ft-orange"></i>&nbsp;<a class="ft-black" ng-click="loadMore();">查看更多出借信息</a></p>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<!-- 有未支付订单 -->
+  <div class="mask1 unfinished-order">
+    <div class="bg-white position-ab bottom-0 padding-r-2 padding-l-2 padding-t-1  width-pull">
+      <div class="clearfix"  ng-click="cancel()">
+        <div class="click-close"><img src="/images/user-center/close1.png" class="fr" alt=""></div>
+      </div>
+      <div class="text-left ft-black3">
+        <p class="unfinished-order-tittle ft-orange margin-b-1p5 ft-1p8">您当前有一笔尚未支付的订单：</p>
+        <p class="margin-b-0">项目名称：{{order.projectName}}</p>
+        <p class="margin-b-0">年化利率：{{order.projectAnnualEarnings}}%</p>
+        <p class="margin-b-0">项目期限：{{projectDays}}天</p>
+        <p class="margin-b-1p5">出借金额：<span class="ft-orange">{{order.orderAmount}}元</span></p>
+        <p class="margin-b-0 ft-red unfinished-order-tip">放弃该笔出借点击取消订单；完成该笔出借点击继续支付</p>
+      </div>
+      <div class="margin-t-2 margin-b-1p5 clearfix ft-1p8">
+        <button class="button btn-close half1 fl text-center" ng-click="cancelUnpay()">取消订单</button>
+        <button class="button button-primary half1 fr" ng-click="goonPay()">继续支付</button>
+      </div>
+    </div>
+  </div>

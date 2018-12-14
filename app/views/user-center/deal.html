@@ -1,0 +1,38 @@
+<div class="new-deal bg-white margin-b-7 {{ showSelect ? 'position-fix' : ''}}" ng-if="dealType && !showLoadingToast">
+
+  <div class="">
+    <div class="column dealType" ng-click="select()">
+      <span class="txt-left fl">{{ selected || '全部'}}</span>
+      <div class="txt-right fr">
+        <span class="deal-angle-down {{ showSelect ? 'deal-angle-up' : ''}}"></span>
+      </div>
+    </div>
+    <div class="mask-type" ng-show="dealDate && showSelect">
+      <ul class="allType">
+        <li class="ft-666 {{ selected == dealType.type ? 'ft-orange' : ''}}" ng-repeat=" dealType in dealType" ng-click="selectDealType(dealType)">{{dealType.type}}</li>
+      </ul>
+    </div>
+    <ul class="padding-l-1p5 padding-r-1p5 overflow-hid" ng-if="dealDate && deals.length > 0">
+      <li class="column overflow-hid margin-l-0 padding-t-1 border-greye-bottom margin-b-0" ng-repeat="item in deals track by $index">
+        <div class="overflow-hid ft-1p4 padding-b-0p5">
+          <span class="txt-left fl dealMap ft-666" ng-if="item.type !== 18">{{dealMap[item.type] }}</span>
+          <span class="txt-left fl dealMap ft-666" ng-if="item.type == 18 && item.description.length < 16">{{item.description}}</span>
+          <span class="txt-left fl dealMap ft-666" ng-if="item.type == 18 && item.description.length >= 16">{{item.description | limitTo: 16 }}...</span>
+          <span class="txt-right fr payAmount ft-Arial" ng-class="{'ft-3e' : item.getAmount > 0, 'ft-green' : item.payAmount > 0}"><span ng-show="item.getAmount > 0">+</span><span ng-show="item.payAmount > 0">-</span>{{item.amount |currency:"":2 || 0}} 元</span>
+        </div>
+        <div class="overflow-hid ft-ccc ft-1p3 padding-b-0p8">
+          <span class="txt-left fl createTime ft-Arial">{{item.createTime | date: 'yyyy-MM-dd'}}</span>
+          <span class="txt-right fr balance">余额 : <span class="ft-Arial">{{item.balance |currency:"":2 || 0}} </span>元</span>
+        </div>
+      </li>
+    </ul>
+    <div class="padding-l-3 padding-r-3 text-center padding-t-5" ng-if="dealDate && !showLoadingToast && deals.length <= 0">
+      <img src="images/user-center/deal-list.png" width="35%" class="margin-t-3">
+      <p class="text-center padding-t-2">暂无记录哦~</p>
+      <button type="button" class="u-full-width ft-1p8 button button-primary" ui-sref="root.project-list">浏览出借产品</button>
+    </div>
+    <div class="text-center bg-white" ng-show="totalPage > page">
+      <p class="margin-b-0"><i class="fa fa-list-ul ft-orange"></i>&nbsp;<a class="ft-666" ng-click="loadDealMuch(dealNo);">查看更多交易记录</a></p>
+    </div>
+  </div>
+</div>

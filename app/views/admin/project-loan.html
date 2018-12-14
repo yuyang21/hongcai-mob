@@ -1,0 +1,108 @@
+<!-- 项目投资记录 -->
+<html class="no-js" lang="zh-cn">
+<script type="text/javascript" src="/styles/un-min/jquery.min.js"></script>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1">
+  <title>项目投资记录</title>
+  <script src="/styles/un-min/rem.js"></script>
+	<style>
+	 	body {
+	 		margin: 0;
+	 	}
+	 	table{
+	    width: 95%;
+	  	margin: .4rem auto 1rem;
+	    border-collapse: collapse;
+	    border: 1px solid #ddd;
+	    text-align: center;
+	    border-radius: .2rem;
+		}
+		thead{
+			color: #666;
+		}
+		thead th{
+			line-height: .7rem;
+			border: 1px solid #ddd;
+		}
+		tbody tr{
+			line-height: .7rem;
+		}
+		td{
+			border: 1px solid #ddd;
+		}
+	 	.loanBtn {
+	 		width: 100%;
+	    box-sizing: border-box;
+	    font-weight: 400;
+	    font-size: .3rem;
+	    text-align: center;
+	    padding: 15px;
+	    margin-bottom: 0;
+	    color: #FFF;
+	    background-color: #fd8f3f;
+	    border-color: #fd8f3f;
+	    position: fixed;
+	    bottom: 0;
+	 	}
+	</style>
+</head>
+<body>
+  <div class="project-listFull">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>投资人</th>
+					<th>投资金额</th>
+					<th>投资时间</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		<div class="loanBtn" onClick="loan();">确认放款</div>
+  </div>
+</body>
+<script type="text/javascript">
+	//获取url中的参数
+  function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]); return null; //返回参数值
+  }
+  function loan () {
+  	$.ajax({
+     	url: '/hongcai/rest/erp/project/loan?contrlFlag=true&fee=0&handLoan=true&projectId=' + getUrlParam('projectId'),
+     	type: 'POST',
+     	success: function( response ) {
+     		if (response && response.ret !== -1) {
+	      	alert('放款成功,点击确认5s后跳转至满标项目列表');
+					setTimeout(function() {
+						location.href= location.origin + '/views/admin/project-listFull.html'
+	        }, 5000)
+     		} else {
+     			alert(response.msg);
+     		}
+  		}
+ 		});
+  }
+  function getProjects () {
+  	$.get('/hongcai/rest/erp/project/getOrderList?skip=0&max=1000&projectId=' + getUrlParam('projectId') , function (res, status) {
+		  if (res && res.ret !== -1) {
+		  	var orderList = res.orderList
+		  	if (orderList.length > 0) {
+		  		for (var i = 0; i < orderList.length; i++) {
+		  			var date = new Date(orderList[i].createTime)
+		  			var strDate = date.getFullYear() + "-" + (date.getMonth()+1 < 10 ? '0' : '') + (date.getMonth()+1) + "-" + (date.getDate() < 10 ? '0' : '') + date.getDate() + " " + (date.getHours() < 10 ? '0' : '') + date.getHours() + ":" + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes() + ":" + (date.getSeconds() < 10 ? '0' : '') + date.getSeconds()
+		  			$('tbody').append('<tr><td>' + orderList[i].userName +'</td><td>' + orderList[i].orderAmount +'</td><td>'+ strDate +'</td></tr>')
+		  		}
+		  	} else {
+		  		$('table').hide();
+		  		$('.project-listFull').append('<div class="noRecord">暂无满标项目</div>')
+		  	}
+		  }
+		})
+  }
+	getProjects()
+</script>
+</html>

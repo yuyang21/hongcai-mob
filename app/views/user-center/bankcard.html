@@ -1,0 +1,53 @@
+<!-- 银行卡管理 -->
+<div class="bg-offWhite padding-t-1 bankcard-body min-height padding-b-5">
+  <div class="bg-white margin-b-1 padding-l-2 padding-r-2 border-t-greyd8 border-b-greyf5">
+    <div class="border-b-greyf5 clearfix padding-t-1p5 padding-b-1p5">
+      <p class="fl margin-b-0 ft-black4">银行</p>
+      <p class="fr margin-b-0 ft-grey4">{{bankcard.openBank}}</p>
+    </div class="border-b-greyf5">
+    <div class="clearfix padding-t-1p5 padding-b-1p5">
+      <p class="fl margin-b-0 ft-black4">银行卡号</p>
+      <p class="fr margin-b-0 ft-grey4">{{bankcard.cardNo}}</p>
+    </div>
+  </div>
+  <div class="bg-white margin-b-1 padding-l-2 padding-r-2 border-t-greyd8 border-b-greyf5">
+    <div class="clearfix padding-t-1p5 padding-b-1p5" ng-click="toRemoveCard()" ng-show="bankcard.status === 'VERIFIED'">
+      <p class="fl margin-b-0 ft-black4">解绑银行卡</p>
+      <i class="fa fa-angle-right fr ft-2p5"></i>
+    </div>
+    <div class="clearfix padding-t-1p5 padding-b-1p5" ng-show="bankcard.status === 'INIT'">
+      <p class="fl margin-b-0 ft-black4">您的银行卡正处于解绑中</p>
+    </div>
+  </div>
+  <div class="bg-white margin-b-1 padding-2 border-t-greyd8 border-b-greyf5">
+    <div class="tips">
+      <p class="ft-orange margin-b-0">温馨提示:</p>
+      <p class="ft-grey4 margin-b-0">1、当前银行卡{{bankcard.cardNo}}({{bankcard.openBank}})为您的提现银行卡；</p>
+      <p class="ft-grey4 margin-b-0">2、更换银行卡，需要您先解绑当前的银行卡；</p>
+      <p class="ft-grey4 margin-b-0" ng-show="payCompany === 'yeepay'">3、解绑成功卡，需1-2个工作日对您申请解绑的银行卡进行认证；</p>
+      <p class="ft-grey4 margin-b-0" ng-show="payCompany === 'yeepay'">4、解绑成功后，您可以申请绑定新的银行卡。</p>
+      <p class="ft-grey4 margin-b-0" ng-show="payCompany === 'cgt'">3、解绑成功后，您可以申请绑定新的银行卡。</p>
+    </div>
+  </div>
+</div>
+<!-- 解绑提示 -->
+<div class="project-mask bankcard-setting" ng-show="showMask">
+  <div class="project-mask-inner margin-t-20 text-center bg-white ft-black4 ft-1p6 padding-t-3 padding-b-3"  ng-show="showBankCard">
+    <!-- 账户总资产≤2元，可以自行解绑 -->
+    <div ng-if="account.tTotalAssets <= 2 || unbindBankCardApply.status === 1">
+      <p class="margin-b-0 ">解绑银行卡将会影响您的提现，</p>
+      <p class="margin-b-2">您确定要解绑此银行卡么？</p>
+      <div class="padding-l-2 padding-r-2 clearfix">
+        <button class="fr text-center bg-orange ft-white" ng-click="unBindBankcard()">确认解绑</button>
+        <button class="fl text-center bg-white ft-orange" ng-click="cancle()">取消</button>
+      </div>
+    </div>
+    <!-- 账户资产＞2元，需要联系客服解绑 -->
+    <div ng-if="account.tTotalAssets > 2 && unbindBankCardApply.status !== 1">
+     <p class="margin-b-0 padding-l-2 padding-r-2 text-justify">尊敬的用户，检测到您的账户总资产大于2元，为了您的资金安全，请联系客服进行人工解绑。客服热线：400-990-7626</p>
+      <div class="padding-l-2 padding-r-2 clearfix margin-t-2">
+        <button class="text-center bg-orange ft-white" ng-click="cancle()">我知道了</button>
+      </div>
+    </div>
+  </div>
+</div>

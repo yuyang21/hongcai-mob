@@ -1,0 +1,22 @@
+<footer class="footer bg-offWhite twelve text-center footer-pos normal-mid" style="border-top:0.1rem solid #ddd;" ng-show="showFooter" id="footer">
+  <div class="footer-up columns twelve ft-grey4 bg-offWhite">
+    <!-- <a ng-click="!timeout || go('root.issue')" class="border-grey-right-footer padding-t-1 padding-b-1 ">&nbsp;常见问题</a>  && showPath === ''"-->
+
+    <a ng-click="go('root.main')" href="javascript:;" ng-class="whichFooter == 1 ? 'active' : '' ">
+    <span ng-class="whichFooter == 1 ? 'active' : '' "></span>首页</a>
+    <a ng-click="go('root.project-list')" href="javascript:;" ng-class="whichFooter == 2 ? 'active' : '' ">
+    <span ng-class="whichFooter == 2 ? 'active' : '' "></span>出借</a>
+    <!-- <a ng-click="!timeout || go('root.main')" href="javascript:;" ng-class="whichFooter == 3 ? 'active' : '' ">
+    <span ng-class="whichFooter == 3 ? 'active' : '' "></span>投资</a> -->
+    <a ng-click="go('root.login')" ng-show="!isLogged" href="javascript:;" ng-class="whichFooter == 3 ? 'active' : '' ">
+    <span ng-class="whichFooter == 3 ? 'active' : '' "></span>注册/登录</a>
+    <a ng-click="go('root.userCenter.account-overview')" ng-show="isLogged" href="javascript:;" ng-class="whichFooter == 3 ? 'active' : '' ">
+    <span ng-class="whichFooter == 3 ? 'active' : '' "></span>我的</a>
+  </div>
+</footer>
+<!-- <script>
+  $(".footer-up a").click(function(){
+    $(this).find("span").addClass('active').parents('a').siblings().find("span").removeClass('active');
+    $(this).addClass('active').siblings().removeClass('active');
+  });
+</script> -->

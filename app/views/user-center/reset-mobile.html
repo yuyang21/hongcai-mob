@@ -1,0 +1,19 @@
+<div class="padding-l-1 padding-r-1 padding-t-1 text-center margin-b-7">
+  <p class="ft-2p5 ft-89 margin-b-1 margin-t-1">修改手机号</p>
+  <form autocomplete="off" class="getpwd-form margin-0 padding-b-2 padding-t-1 ft-grey" name="resetMobileForm" autocomplete="on"  id="">
+    <div class="to-getpwd ">
+      <!-- 手机号 -->
+      <input id="usermobile" name="mobile" ng-model="user.mobile" type="tel" placeholder="请输入新手机号" required/>
+      <!-- 图形验证码 -->
+      <input id="picCaptcha" name="picCaptcha" ng-model="user.picCaptcha" type="text" placeholder="请输入图形验证码" required class="captchacode"/>
+      <span><img src="{{getPicCaptcha}}" id="checkCaptcha" class="pic-verify no-padding margin-t--13 margin-l-5" width="78" height="40" ng-click="refreshCode()"></span>
+      <!-- 短信验证码 -->
+      <input id="captchasignup" name="captchasignup" ng-model="user.captcha" type="text" ng-required="resetMobileForm.captchasignup.$invalid" placeholder="请输入短信验证码" class="captchacode"/>
+      <span><button id="captcha" type="text" capcha-countdown >短信验证码</button></span>
+    </div>
+     <!-- 按钮 -->
+    <p class="getBack margin-0 text-center">
+      <button type="submit" class="ft-normal margin-t-2 button button-primary column {{resetMobileForm.$invalid || sendMsg == false ? 'button-disabled1' : ''}}" ng-click="resetMobile(user.mobile,user.captcha,user.picCaptcha)" my-click-once>确定</button>
+    </p>
+  </form>
+</div>

@@ -1,0 +1,18 @@
+{
+   "YEEPAY_ADDRESS":"https://hk.lanmaoly.com/bha-neo-app/lanmaotech/gateway",
+	"wechatRedirect": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx02dfe579709d2d95&redirect_uri=http%3A%2F%2Fdz.test321.hongcai.com%2F&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
+	"consume": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx02dfe579709d2d95&redirect_uri=http%3A%2F%2Fdz.test321.hongcai.com%2Fiou&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
+	"recharge": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx02dfe579709d2d95&redirect_uri=http%3A%2F%2Fdz.test321.hongcai.com%2F&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
+	"account": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx02dfe579709d2d95&redirect_uri=http%3A%2F%2Fdz.test321.hongcai.com%2Faccount&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
+	"rexin": "http://apitest.rexingo.com/index.php/api/index/blankNote?",
+	"wechatAppid": "wx02dfe579709d2d95",
+	"sysUpdateUrl": "http://m.test321.hongcai.com/sys-update.html",
+	"debug": true,
+	"test": true,
+	"domain":"http://m.test321.hongcai.com",
+	"base_file_url":"http://test321.hongcai.com/uploads/",
+	"wechat_id": "gh_34771f7f6e08",
+	"pay_company":"cgt",
+	"isTest": true,
+	"vue_domain": "http://vue.test321.hongcai.com"
+}

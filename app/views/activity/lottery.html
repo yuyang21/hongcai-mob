@@ -1,0 +1,185 @@
+<!-- 幸运大抽奖 -->
+<head>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,user-scalable=no,maximum-scale=1">
+  	<title>幸运大抽奖</title>
+</head>
+<div class="lottery padding-b-3 width-pull">
+	<div class="lottery-wrap">
+		<div class="draw-lottery">
+			<p class="text-center ft-1p3">
+				<!-- <span ng-if="isLogged">今日可抽奖次数：<span class="draw-count">{{drawCount}}</span>次</span> -->
+			</p>
+			<!-- 抽奖转盘 1, "当日加息"" ; 2, "现金奖励 ; 3, "加息券 ; 4, "现金券" ; 5, "特权本金" ; 6, "谢谢"-->
+			<div class="lottery-box" id="js-rect-luck-draw-con">
+				<div class="lottery-item js-item selecting" data-sort="1" data-prize-id="1">
+					<img src="images/lottery/one-day-rate.png" alt="">
+					<span class="item-mask"></span>
+				</div>
+				<div class="lottery-item js-item selecting" data-sort="2" data-prize-id="2">
+					<img src="images/lottery/cash.png" alt="">
+					<span class="item-mask"></span>
+				</div>
+				<div class="lottery-item js-item selecting" data-sort="3" data-prize-id="3">
+					<img src="images/lottery/rate-coupon.png" alt="">
+					<span class="item-mask"></span>
+				</div>
+				<div class="lottery-item js-item selecting" data-sort="8" data-prize-id="5">
+					<img src="images/lottery/privilege.png" alt="">
+					<span class="item-mask"></span>
+				</div>
+				<div class="lottery-item" ng-click="drawLottery();">
+					<img src="images/lottery/draw.png" alt="">
+				</div>
+				<div class="lottery-item js-item selecting" data-sort="4" data-prize-id="4">
+					<img src="images/lottery/cash-coupon.png" alt="">
+					<span class="item-mask"></span>
+				</div>
+				<div class="lottery-item js-item selecting" data-sort="7" data-prize-id="6">
+					<img src="images/lottery/cash.png" alt="">
+					<span class="item-mask"></span>
+				</div>
+				<div class="lottery-item js-item selecting" data-sort="6" data-prize-id="1">
+					<img src="images/lottery/one-day-rate.png" alt="">
+					<span class="item-mask"></span>
+				</div>
+				<div class="lottery-item js-item selecting" data-sort="5" data-prize-id="5">
+					<img src="images/lottery/privilege.png" alt="">
+					<span class="item-mask"></span>
+				</div>
+			</div>
+		</div>
+		<div class="lottery-other">
+			<p class="display-inb" ng-click="closeRuleBox();">活动规则</p>
+			<p class="display-inb" ng-click="downloadApp();">下载APP查看奖励</p>
+		</div>
+		<!-- 幸运用户 -->
+		<div class="lucky-users">
+			<img src="images/lottery/title-lucky-users.png" alt="" width="48%">
+			<div class="lucky-users-wrap">
+				<ul class="margin-b-0">
+					<li class="text-justify" ng-repeat="item in luckyUsers"><span>恭喜{{item.mobile}}</span>获得{{item.prizeName}}</li>
+				</ul>
+			</div>
+		</div>
+		<!-- 关于宏财 -->
+		<div class="about-hongcai">
+			<img src="images/lottery/title-about-hongcai.png" alt="" width="48%">
+			<div class="about-content">
+				<!-- 国资背景 -->
+				<div class="about-background">
+					<ul>
+						<li><i class="fa fa-check" aria-hidden="true"></i><span>2016年获国有金融机构亿元A轮融资</span></li>
+						<li><i class="fa fa-check" aria-hidden="true"></i><span>国有企业战略入股</span></li>
+						<li><i class="fa fa-check" aria-hidden="true"></i><span>新三板金控第一股入主</span></li>
+						<li><i class="fa fa-check" aria-hidden="true"></i><span>拥有博士高管团队的互联网金融平台</span></li>
+					</ul>
+				</div>
+				<!-- 银行存管 -->
+				<div class="bank-custody">
+					<ul>
+						<li><i class="fa fa-check" aria-hidden="true"></i><span>与海口联合农商银行正式签订银行存管</span></li>
+						<li><i class="fa fa-check" aria-hidden="true"></i><span>2016年宏财网成为北京网贷协会成员</span></li>
+						<li><i class="fa fa-check" aria-hidden="true"></i><span>首批对接海口联合农商银行资金存管系统</span></li>
+					</ul>
+				</div>
+				<!-- 风险安全 -->
+				<div class="risk-safety">
+					<ul>
+						<li><i class="fa fa-check" aria-hidden="true"></i><span>十年风控实战经验，数百亿项目经验</span></li>
+						<li><i class="fa fa-check" aria-hidden="true"></i><span>金融生态圈优质资产，历史坏账率为0% </span></li>
+						<li><i class="fa fa-check" aria-hidden="true"></i><span>用户资金与平台资金严格隔离，所有资金来往经由海口联合农商银行</span></li>
+					</ul>
+					
+				</div>
+			</div>
+		</div>
+		<!-- 战略合作 -->
+		<div class="strategic-cooperation">
+			<img src="images/lottery/title-cooperation.png" alt="" width="48%" class="margin-b-3">
+			<ul>
+				<li class="one"></li>
+				<li class="two"></li>
+				<li class="three"></li>
+				<li class="four"></li>
+				<li class="five"></li>
+				<li class="six"></li>
+				<li class="seven"></li>
+				<li class="eight"></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- 中奖弹窗 -->
+<div class="share-page-breakWishLayer bg-grey0p8 showDrawBox">
+	<div class="draw-box">
+		<!-- 抽奖 获得奖励-->
+		<div class="receive-draw">
+			<img src="images/lottery/receive-draw-01.png" alt="恭喜您获得奖励!" width="55%" ng-hide="prizeList.prizeType == 6">
+			<div class="getPrize" ng-class="{'ft-1p1': prizeList.prizeType === 5 , 'ft-1p4': prizeList.prizeType !== 5}">
+				<p ng-show="prizeList.prizeType !== 6">{{prizeList.prizeValue}}</p>
+				<p  ng-class="{'margin-t-0p8': prizeList.prizeType === 6}">{{prizeList.prizeText}}</p>
+			</div>
+			<div class="prize-effect">{{prizeList.prizeCont.split('，')[0]}} <br> {{prizeList.prizeCont.split('，')[1]}}</div>
+			<img src="images/lottery/download-app.png" alt="下载APP查看奖励" width="42%" ng-click="downloadApp();">
+		</div>
+		<img src="images/lottery/close-drawBox.png" alt="关闭中奖弹窗" width="8%" ng-click="closeDrawBox();">
+	</div>
+</div>
+<!-- 活动规则 -->
+<div class="share-page-breakWishLayer bg-grey0p8 text-center" ng-show="showRuleBox">
+	<div class="rule-box">
+		<div class="rule-title">
+			<img src="images/lottery/rule-title.png" alt="活动规则" width="50%">
+			<img src="images/lottery/rule-title-portrait.png" alt="宏财宝宝" width="12%" class="hongcai-portrait">
+		</div>
+		<div class="rule-bg">
+			<div class="rule-content">
+				<p>1.每人每天拥有1次免费抽奖机会，下载宏财网App首次分享幸运大抽奖到第三方平台，可再获得1次免费抽奖机会；</p>
+				<p>2.抽中的当日加息奖励系统将自动为您使用，次日即可获得奖励，加息仅针对您当日宏财精选及宏财尊贵项目在投总资产有效，包含当日新增出借金额，不含出借的债权转让项目及已经成功转让的资产；</p>
+				<p>3.抽中的特权本金、返现、现金券及加息券奖励将直接发放至您的账户中，可在宏财网App内【我的】页面相应位置查看；</p>
+				<p>4.在法律规定范围内，宏财网保留本活动最终解释权；</p>
+				<p>5.如有更多相关问题，可致电详询 <br>
+					客服电话：400-990-7626 <br>
+					服务时间：工作日9:00-18:00
+				</p>
+			</div>
+		</div>
+	</div>
+	<img src="images/lottery/close-drawBox.png" alt="关闭弹窗" width="8%" ng-click="closeRuleBox();">
+</div>
+<!-- 注册弹窗 -->
+<div class="share-page-breakWishLayer bg-grey0p8 register-draw" ng-show="showRegister">
+	<div class="register-box">
+		<div class="register-list">
+			<div class="register-header position-re">
+				<img src="/images/lottery/hc-baby.png" width="12%" class="position-ab">
+				<img src="/images/lottery/register-header.png" class="display-bl margin-auto" width="90%">
+			</div>
+			<div class="sharing-content margin-t-2p5 clearfix">
+				<!-- 注册表单 -->
+				<form autocomplete="off" class="invite-form margin-0" name="registerForm" autocomplete="on" novalidate>
+					<div class="to-register overflow-hid">
+						<!-- 手机号码 -->
+						<input class="mobilesignup fl" name="mobile" ng-model="user.mobile" type="tel" placeholder="请输入您的手机号" required/>
+						<!-- 图形验证码 -->
+						<input name="picCaptcha" ng-model="user.picCaptcha" required type="tel" placeholder="请输入图形验证码" class="picCaptcha fl"/>
+						<img src="{{getPicCaptcha}}" id="checkCaptcha" class="captchacode fr" ng-click="refreshCode()">
+						<!-- 手机验证码 -->
+						<input name="captchasignup" ng-model="user.captcha" required="required" type="tel" placeholder="请输入手机验证码" class="mobileCaptcha fl"/>
+						<div class="mobilecode" id="lottery-mobilecode" ng-click="getMobileCapcha(user)">获取</div>
+					</div>
+					<!-- 立即注册按钮 -->
+					<!-- <button type="submit" class="register-invited-btn js-start-btn" ng-click="signUp(user)"></button> -->
+					<img src="../../images/lottery/register-draw-btn.png" alt="" class="register-invited-btn js-start-btn" ng-click="signUp(user)"/>
+				</form>
+				
+			</div>
+			<p class="text-center tip" id="act-tip">本活动仅针对新用户, 已经注册的用户请前往APP内参与!</p>
+		</div>
+	</div>
+	<img src="images/lottery/close-drawBox.png" alt="关闭中奖弹窗" class="close" width="10%" ng-click="closeRegisterBox()">
+</div>
+
+
+

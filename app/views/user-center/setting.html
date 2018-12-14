@@ -1,0 +1,145 @@
+<div class="setting bg-offWhite">
+  <div class="content-main">
+    <div class="padding-t-0p5">
+      <!-- <img src="/images/user-center/01.png" alt=""> -->
+      <i class="fa fa-key ft-orange ft-1p8" aria-hidden="true"></i>
+    </div>
+    <div>
+      <p>登录密码：</p>
+      <!-- <p>用于登录宏财网<span ng-click="checkPwdFlag=true"><a>修改></a></span></p> -->
+      <p>用于登录宏财网<span ui-sref="root.modifyPwd"><a>修改 ></a></span></p>
+    </div>
+  </div>
+  <div class="content-main">
+    <div class="padding-t-0p5">
+      <!-- <img src="/images/user-center/02.png" alt=""> -->
+      <i class="fa fa-mobile ft-orange ft-2p5" aria-hidden="true"></i>
+    </div>
+    <div>
+      <p>手机号码：</p>
+      <p>{{handleMobileNum(user.mobile) || '无'}}
+        <span ng-show="userAuth.authStatus == 2" ng-click="toAnyState('root.userCenter.resetMobile');"><a>修改 ></a></span>
+        <!-- <span ng-show="userAuth.authStatus !== 2" ng-click="toRealNameAuth()"><a>修改 ></a></span> -->
+        <span ng-show="user.mobile == null"><i class="fa fa-check-circle-o"></i>&nbsp;未绑定</span>
+      </p>
+    </div>
+  </div>
+  <div class="content-main">
+    <div class="padding-t-0p5">
+      <!-- <img src="/images/user-center/03.png" alt=""> -->
+      <i class="fa fa-lock ft-orange ft-2" aria-hidden="true"></i>
+    </div>
+    <div>
+      <p>银行存管账户：</p>
+      <p>保证您的资金安全
+        <span ng-show="userAuth.authStatus === 2"><i class="fa fa-check-circle-o ft-green"></i>&nbsp;已开通</span>
+        <span ng-click="toRealNameAuth()" ng-show="userAuth.authStatus !== 2"><i class="fa fa-check-circle-o ft-grey4"></i>&nbsp;未开通<small class="ft-orange">(立即开通)</small></span>
+      </p>
+    </div>
+  </div>
+  <div class="content-main">
+    <div class="padding-t-0p5">
+      <!-- <img src="/images/user-center/03.png" alt=""> -->
+      <i class="fa fa-credit-card ft-orange" aria-hidden="true"></i>
+    </div>
+    <div>
+      <p>我的银行卡：</p>
+      <p>用于充值和提现
+        <span ng-click="bindBankcard()" ng-show="bankcard.status == 'VERIFY_NOT' || !bankcard"> <a>去绑定 ></a></span>
+        <span ng-show="bankcard.status == 'VERIFING'"> 绑定中(尾号{{bankcard.cardNo}})</span>
+        <span ng-show="bankcard.status == 'INIT'"> 解绑中(尾号{{bankcard.cardNo}})</span>
+        <span ng-show="bankcard.status == 'VERIFIED'" ng-click="toAnyState('root.userCenter.bankcard');"><a class="ft-blue">{{bankcard.openBank}}(尾号{{bankcard.cardNo}}) ></a></span>
+      </p>
+    </div>
+  </div>
+  <div class="content-main">
+    <div class="padding-t-0p5">
+      <!-- <img src="/images/user-center/04.png" alt=""> -->
+      <i class="fa fa-unlock-alt ft-orange ft-2" aria-hidden="true"></i>
+    </div>
+    <div>
+      <p>自动投标权限：</p>
+      <p>避免余额资金闲置
+        <span><a class="ft-blue" ng-show="autoTenders.status === 1 || autoTenders.status === 0" ng-click="toAutoTender();">&nbsp;已开启 ></a></span>
+        <span><a class="ft-blue" ng-show="autoTenders.status !== 1 && autoTenders.status !== 0" ng-click="toAutoTender();">&nbsp;立即开启 ></a></span>
+      </p>
+    </div>
+  </div>
+  <div class="content-main">
+    <div class="padding-t-0p5">
+      <!-- <img src="/images/user-center/04.png" alt=""> -->
+      <i class="fa fa-wpforms ft-orange ft-1p8" aria-hidden="true"></i>
+    </div>
+    <div>
+      <p>风险测评：</p>
+      <p>{{ isQuestionnaire == -1 ? '帮助您了解自己的风险承受能力' : msgRisk }}
+        <!-- <span>您的投资风格为：稳健型</span> -->
+        <!-- <span><a class="ft-blue" ng-show="isQuestionnaire !== -1">&nbsp;已测评 ></a></span> -->
+        <span><a class="ft-blue" ui-sref="root.userCenter.questionnaire">&nbsp;去测评 ></a></span>
+      </p>
+    </div>
+  </div>
+  <div class="content-main">
+    <div class="padding-t-0p5">
+      <i class="fa fa-pencil-square-o ft-orange ft-1p8" aria-hidden="true"></i>
+    </div>
+    <div>
+      <p>意见反馈：</p>
+      <p>以便我们更好地为您服务 
+        <span><a class="ft-blue" ng-click="toComment();showMask = true;">&nbsp;去反馈 ></a></span>
+      </p>
+    </div>
+  </div>
+  <!-- <div class="contain-last">
+    <div>
+      <img src="/images/user-center/05.png" alt="" class="margin-r-0p5">
+    </div>
+    <div>
+      <p>我的邀请码<span>{{voucher.inviteCode}}</span>
+      </p>
+    </div>
+  </div> -->
+  <div  class="contain-last bg-red3 text-center ft-white ft-1p8 padding-t-1 padding-b-1" ng-click="toLogout()">
+    <p>安全退出</p>
+  </div>
+</div>
+
+<!-- 开通自动投标权限蒙层 -->
+<!-- <div ng-show="checkAutoFlag" class="project-mask">
+  <div class="bg-white email-mask project-mask-inner">
+    <p class="margin-b-0 text-center">
+      您还未开通自动投标权限，确定去开通？
+    </p>
+    <p class="project-mask-btn2">
+      <span ng-click="checkAutoFlag=false">取消</span>
+      <span ng-click="toAuthAutoTransfer()">确定</span></p>
+  </div>
+</div> -->
+
+<!-- 意见反馈弹窗 -->
+<div class="comments rec-showmoney share-page-breakWishLayer bg-grey6" ng-show="showMask">
+  <div class="rec-act-rule1 bg-white margin-l-2 margin-r-2 margin-t-3 border-ra-0p5">
+    <div class="rec-act-rule-title">
+      <span class="ft-1p6 display-inb">意见反馈</span> <span class="closeRule fr" ng-click="closeRule(); "></span>
+    </div>
+    <div class=" rec-act-rule-btm margin-l-1 margin-r-1 ft-1p5 margin-t-0p5">
+      <form name="commentsForm">
+        <div class="comment-main">
+          <div class="description">
+            <span class="fl">尊敬的用户 :</span><span class="fr">为了给您更好的服务，请详细描述您的问题或建议，我们将及时跟进解决，不断优化产品！</span>
+          </div>
+          <div class="complaints">
+            <textarea class="textarea" rows="5" cols="6" ng-model="user.textarea" placeholder = "你想吐槽的原因："  ng-focused auto-focus required></textarea>
+          </div>
+          <p class="tips ft-666 text-center margin-b-0">请您留下联系方式，我们将第一时间帮你解决</p>
+          <div class="btns">
+            <input class="mobile" ng-model="user.mob" type="number" placeholder="手机号 ( 选填 )">
+            <button type="submit" ng-disabled="commentsForm.$invalid || busy" class="button-primary button {{commentsForm.$invalid ? 'button-disabled1' : ''}}" ng-click="releaseComm(user)">提交</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+

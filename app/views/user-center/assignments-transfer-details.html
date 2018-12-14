@@ -1,0 +1,49 @@
+<!-- 债券转让操作页 -->
+<div class="assignments-trans ft-666" auto-height>
+	<div class="padding-l-1p5 padding-r-1p5 bg-white">
+		<div class="transferable bg-white padding-t-1p2 padding-b-1p2">
+			<span>可转金额（元）：</span><span class="ft-Arial ft-orange2 ft-1p7">{{creditRight.transferableAmount || 0 | number: 2}}</span>
+		</div>
+	</div>
+	<div class="transfer bg-offWhite">
+		<form name="transferForm" class="margin-b-1p3">
+			<div class="transfer-amount padding-l-1p5 padding-r-1p5 padding-t-2p3 bg-white position-re">
+				<div class="test" ng-show="transferErrMsg">
+			    {{transferErrMsg}}
+				</div>
+				<span>转让金额（元）</span>
+				<input class="margin-b-1p3 ft-1p7 ft-grey7 ft-Arial" type="number" name="transAmount" placeholder="请输入转让金额" ng-model="transferAmount" ng-disabled="creditRight.transferableAmount === 0" ng-focus="earningErrMsg=undefined">
+			</div>
+			<div class="transfer-annual bg-white padding-l-1p5 padding-r-1p5 margin-b-1p3  bg-white border-grey-bottom  position-re">
+				<div class="test" ng-show="earningErrMsg">
+			    {{earningErrMsg}}
+				</div>
+				<span class="">转让利率（%）</span>
+				<input class="ft-1p7 ft-grey7 margin-b-0 ft-Arial" id="transAnunal" type="number" name="transAnunal" placeholder="请输入转让利率" ng-model="transferPercent" ng-disabled="creditRight.transferableAmount === 0" blur-hide-msg ng-focus="transferErrMsg=undefined">
+				<p class="margin-b-0 ft-1p3">当前转让奖金预计 <span class="ft-1p3 ft-orange2 ft-Arial">{{transferAmount && transferPercent ? transferAmount * remainDay * (transferPercent - annualEarnings) / 36500 : 0  | number: 2}}</span>元 </p>
+			</div>
+			<div class="return bg-white border-grey-bottom border-grey-top padding-l-1p5 padding-r-1p5 padding-t-1p2 padding-b-1p2">
+				<span>预计回款（元）</span><span class="ft-Arial ft-orange2 ft-1p7 display-inb text-right return-amount">{{(transferAmount && transferPercent ? transferAmount + profit - counterFee - (transferAmount * remainDay * (transferPercent - annualEarnings) / 36500) - cashCoupon * (transferAmount / creditRight.amount) : 0) || 0 | number: 2}}</span>
+			</div>
+		</form>
+	</div>
+	<div class="question bg-white border-grey-bottom border-grey-top border-grey-bottom border-grey-top padding-l-1p5 padding-r-1p5 padding-t-1p2 padding-b-1p2  margin-b-5" ng-click="toAssignmentQr()">
+		<span>常见问题</span><span class="fr ft-2p8 margin-t--1"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+	</div>
+	<div class="transfer-btn">
+		<div class="text-center margin-b-1p3"><button class="ft-white ft-1p7 text-center" type="button" ng-class="{'btn-disabled': !transferAmount || !transferPercent|| earningErrMsg || transferErrMsg}"  ng-click="assignmentsTransfer(transferAmount, transferPercent);" ng-disabled="earningErrMsg || transferErrMsg" my-click-once>确认转让</button></div>
+		<p class="ft-1p2 text-center">转让表示您已阅读并同意 <a class="ft-blue49" ng-click="showAgreement();">《债权转让协议》</a></p>
+	</div>
+</div>
+<div class="alert-agreement" ng-show="isShowAgreement" ng-include src="'views/_assignment-agreement.html'">
+</div>
+<div class="mask" ng-show="isShowAgreement"></div>
+<div class="project-mask autotender-tip" ng-show="showAutoTenderTip">
+  <div class="project-mask-inner margin-t-20 text-center bg-white ft-black4 ft-1p6 padding-t-3 padding-b-3">
+      <small class="padding-l-1 padding-r-1 margin-b-3 ft-1p4 display-bl">当前已开启自动投标功能，可能导致债权转让的回款资金自动出借，强烈建议您禁用此功能后再进行转让操作。</small>
+      <div class="padding-l-2 padding-r-2 clearfix">
+        <button class="fl text-center bg-orange ft-white ft-normal" ng-click="goOnTransfer(transferAmount, transferPercent);" my-click-once>继续转让</button>
+        <button class="fr text-center ft-white ft-normal" ng-click="offAutoTenders()" my-click-once>立即禁用</button>
+      </div>
+  </div>
+</div>

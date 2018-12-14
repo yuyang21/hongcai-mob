@@ -1,0 +1,291 @@
+//我的奖金
+.cash-header {
+  overflow:hidden;
+  width: 100%;
+  background: url("/images/user-center/cash-coupon-header-min.png") no-repeat;
+  background-size: 100% 100%;
+  .header1{
+  	overflow:hidden;
+  	p{
+  		margin-bottom:0;
+  	}
+  	p:nth-child(1){
+  		font-size:1.6rem;
+  		margin-top:0.2rem;
+      @media (max-width:320px) {
+        font-size:1.4rem;
+        margin-top:0.2rem;
+      }
+  	}
+  	p:nth-child(2){
+  		font-size:1.4rem;
+      @media (max-width:320px) {
+        font-size:1.2rem;
+      }
+  	}
+  	.authent{
+  		background-color:#fd9256;
+  		border-radius:15px;
+  		padding:0.1rem 1rem;
+  		font-size:1.4rem;
+  		i{
+  			font-size: 1.4rem;
+  		}
+      @media (max-width:320px) {
+        font-size:1.2rem;
+        i{
+          font-size: 1.2rem;
+        }
+      }
+  	}
+  	.border-pull {
+	    width: 4.5rem;
+	    height: 4.5rem;
+	    border-radius: 2.3rem;
+      @media (max-width:320px) {
+        width: 3.5rem;
+        height: 3.5rem;
+      }
+		}
+    .rule-top{
+      font-size:1.5rem;
+      @media (max-width:320px) {
+        font-size:1.2rem;
+      }
+      @media (max-width:360px) {
+        font-size:1.4rem;
+      }
+    }
+  }
+  .header2{
+  	overflow:hidden;
+  	margin-bottom:0;
+  	margin-top:1.2rem;
+  	li{
+  		width:50%;
+  		box-sizing: border-box;
+  		p:nth-child(1){
+  			font-size:1.5rem;
+  		}
+  		p:nth-child(2){
+  			font-size:1.8rem;
+  		}
+      @media (max-width:320px) {
+        p:nth-child(1){
+          font-size:1.4rem;
+        }
+        p:nth-child(2){
+          font-size:1.6rem;
+        }
+      }
+  	}
+  	li:nth-child(1){
+  		border-right:1px solid #c63b0f;
+  	}
+  	p{
+  		margin-bottom:0;
+  	}
+  }
+}
+.cash-body{
+	background-color:#f2f2f2;
+	padding-bottom:5rem;
+	.cash-select{
+		overflow:hidden;
+		clear:both;
+		padding:0;
+		background-color:#fff;
+		color: #8b8b8b;
+    @media (max-width:320px) {
+      font-size:1.4rem;
+    }
+		li{
+			float:left;
+			width:50%;
+			box-sizing:border-box;
+			padding: 1rem 0;
+			//border-bottom: 1px solid #e6e5e4;
+		}
+		li.active{
+			color:#f87227;
+			border-bottom:2px solid #f87227;
+		}
+	}
+	.outer-panel {
+    padding-left: 2rem;
+  	padding-right: 2rem;
+    position: relative;
+    img:nth-child(1) {
+    	width: 100%;
+    }
+    .inner-panel-left {
+	    position: absolute;
+	    top: 0;
+	    bottom: 0;
+	    width: 26%;
+	    text-align: center;
+	    color: white;
+	    font-size: 1.6rem;
+    }
+    .inner-panel-center1 {
+	    position: absolute;
+	    top: 10px;
+	    bottom: 15px;
+	    right: 2.5rem;
+	    width: 58%;
+	    color: #8b8b8b;
+	    font-size: 1.4rem;
+	    text-align: left;
+	    .withdraw, .overdue{
+	    	color: #f86e5f;
+	    	border: 1px solid #f86e5f;
+	    	border-radius:8px;
+	    	padding: 0 0.5rem;
+		    position: absolute;
+    		bottom: 0;
+    		right: 1rem;
+        text-align: center;
+        width: 7.2rem;
+	    }
+      .overdue {
+        color: #999;
+        border: 1px solid #999;
+      }
+	    img.received{
+	    	width: 25%;
+	    	position: absolute;
+	    	bottom: 0;
+	    	right: 1rem;
+	    }
+	    .col-2{
+	    	display: inline-block;
+	    	width: 66%;
+	    }
+    }
+    @media (min-width:320px){
+      .top-margin{
+        margin-bottom: 0rem;
+        margin-top: 2rem;
+      }
+      .inner-panel-center1{
+        font-size: 1.2rem;
+        right: 1.4rem;
+    		width: 60%;
+    		top: 6px;
+        .withdraw, .overdue{
+          width: 6.5rem;
+        }
+      }
+      .inner-panel-left p.ft-4{
+        font-size: 3.2rem;
+      }
+    }
+    @media (min-width:360px){
+      .top-margin{
+        margin-bottom: 0.5rem;
+        margin-top: 2rem;
+      }
+      .inner-panel-center1{
+        font-size: 1.25rem;
+        .withdraw, .overdue{
+          width: 6.9rem;
+        }
+      }
+    }
+    @media (min-width:375px){
+      .top-margin{
+        margin-bottom: 0.5rem;
+        margin-top: 2.1rem;
+      }
+      .inner-panel-center1{
+        font-size: 1.39rem;
+        top: 10px;
+        .withdraw, .overdue{
+          width: 6.9rem;
+        }
+      }
+    }
+    @media (min-width:414px){
+      .top-margin{
+        margin-bottom: 0.5rem;
+        margin-top: 2.8rem;
+      }
+      .inner-panel-center1{
+        font-size: 1.5rem;
+        top: 10px;
+        .withdraw, .overdue{
+          width: 7.3rem;
+        }
+      }
+    }
+  }
+  .no-cash{
+  	p{
+  		margin-bottom:0;
+  	}
+  	p:nth-child(2),p:nth-child(3) {
+  		color:#595656;
+  		font-size:1.4rem;
+  		margin-top:1.5rem;
+  	}
+  }
+  .use-rule {
+    color: #595656;
+    font-size: 1.4rem;
+  }
+}
+.cash{
+  p.ident {
+    text-indent: 2em;
+  }
+  .rec-act-rule .rec-act-rule-title {
+	  height: 3.5em;
+	  line-height: 4em;
+	  color: #f54d1c;
+    font-size: 1.8rem;
+    font-weight: bold;
+    @media (max-width:320px){
+      font-size:1.6rem;
+    }
+	}
+	.rec-act-rule .rec-act-rule-btm .rec-rule-btn {
+	    background-color: #f54d1c;
+	    border-radius: 25px;
+	    border: none;
+      width: 43%;
+      height: 3rem;
+      display: block;
+      line-height: 3rem;
+      text-align: center;
+      margin: 2rem 29% 1em;
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: initial;
+      @media (max-width:320px){
+        padding-left: 2rem;
+      }
+	}
+	.rule{
+		color: #8b8b8b;
+		line-height:25px;
+    @media (max-width:320px){
+      font-size:1.4rem;
+    }
+	}
+	.rec-act-rule1 {
+    margin-top: 36% !important;
+    @media (max-width:320px){
+      margin-top: 30% !important;
+    }
+    @media (max-width:360px){
+      margin-top: 33% !important;
+    }
+    @media (min-width:414px){
+      margin-top: 50% !important;
+    }
+	}
+}
+
+
+
+

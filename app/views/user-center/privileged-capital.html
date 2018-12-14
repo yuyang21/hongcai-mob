@@ -1,0 +1,54 @@
+<div class="privileged-capital bg-offwhite" bg-auto>
+	<div class="capital-header ft-white ">
+	    <ul class="clearfix">
+	    	<li>
+	    		<p class="ft-1p3 margin-b-1">当前累计特权本金(元)
+               <i class="fa fa-question-circle ft-1p5" aria-hidden="true" ng-click="showRules = true"></i>
+            </p>
+	    		<p class="ft-Arial ft-2p2 margin-b-0 letter-spacing">{{privilegedCapital.amount | number : 0 || 0}}</p>
+	    		<p class="fr bg-white line"></p>
+	    	</li>
+	    	<li>
+	    		<p class="ft-1p3 margin-b-1">累计奖励(元)</p>
+	    		<p class="ft-Arial ft-2p2 margin-b-0">{{privilegedCapital.profit | number:2 || 0}}</p>
+	    	</li>
+	    </ul>
+   </div>
+   <div class="capital-list padding-l-2 padding-r-2 bg-offwhite" ng-if="!showLoadingToast && details && details.length > 0">
+   		<ul>
+   			<li ng-repeat=" detail in details">
+   				<div class="ft-white display-inbl left ft-1p8">{{detail.amount | number : 0}}<span class="ft-1p7">元</span></div>
+   				<div class="display-inbl right">
+   					<!-- <img src="/images/user-center/cash-coupon01.png" width="100%"> -->
+   					<p class="ft-Arial ft-999 ft-1p6">{{detail.createTime | date: 'yyyy-MM-dd'}}</p>
+   					<p class="ft-999">{{detail.description}}</p>
+   					<p class="ft-999 ft-1p3">有效期至<span>{{detail.dueTime | date: 'yyyy-MM-dd'}}</span></p>
+   				</div>
+   			</li>
+   		</ul>
+         <div class="text-center" ng-show="totalPage > page">
+            <p><i class="fa fa-list-ul ft-orange"></i>&nbsp;<a class="ft-666" ng-click="loadMore();">查看更多</a></p>
+         </div>
+   </div>
+   <div class="capital-list padding-l-2 padding-r-2 bg-offwhite" ng-if="!showLoadingToast && details && details.length <= 0">
+         <img src="/images/user-center/cash-coupon03.png" alt="" class="margin-auto display-bl">
+         <p class="ft-666 text-center margin-t-1">暂无特权本金噢~</p>
+   </div>
+</div>
+<div class="cash">
+	<!-- 公用的弹框蒙层 -->
+	<div class="rec-showmoney share-page-breakWishLayer position-ab width-100 height-100 position-re bg-grey0p5" ng-show="showRules == true" ng-init="showRules = false">
+	  <!-- 活动详情  弹出来需要去掉X号 -->
+	  <section class="rec-act-rule rec-act-rule1 bg-white margin-l-1 margin-r-1 border-ra-0p5">
+	    <div class="rec-act-rule-title">
+	      <p class="margin-l-1 padding-l-1  margin-b-0">特权本金小百科：</p>
+	    </div>
+	    <div class=" rec-act-rule-btm margin-l-1 margin-r-1 ft-1p5 margin-t-0p5">
+	        <div class="rule padding-r-1 padding-l-1 padding-b-1p5">
+	          <p class="margin-t-0 margin-b-0 ident">特权本金是平台奖励给用户的虚拟本金，不可提现或用于出借；其产生的奖励按8%年化利率每日计息、次日显示昨日奖励；特权本金产生的奖励进入用户账户余额，可用于出借或提现。</p>
+	          <button class="rec-rule-btn button" ng-click="showRules = false">关闭页面</button>
+	        </div>
+	    </div>
+	  </section>
+	</div>
+</div>

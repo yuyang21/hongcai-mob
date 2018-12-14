@@ -1,0 +1,32 @@
+<div class="credits-overview bg-offWhite overflow-hid clearfix" bg-auto>
+	<ul class="overview bf-white">
+		<li class="position-re">
+			<canvas id="huanxing" width="320" height="250" draw-circle></canvas>
+			<div class="position-ab amount">
+				{{investStat.selection + investStat.hornor + investStat.assignment | number:2}}元
+			</div>
+		</li>
+		<li class="overview-items">
+			<p><span class="yuan yuan1"></span>宏财精选<span class="amount1"><span class="ft-1p4">{{investStat.selection | number:2}}</span>元</span></p>
+			<p><span class="yuan yuan2"></span>宏财尊贵<span class="amount1"><span class="ft-1p4">{{investStat.hornor | number:2}}</span>元</span></p>
+			<p><span class="yuan yuan3"></span>债权转让<span class="amount1"><span class="ft-1p4">{{investStat.assignment | number:2}}</span>元</span></p>
+		</li>
+	</ul>
+	<div class="tab-wrap padding-t-1p2">
+		<ul>
+			<li ui-sref="root.userCenter.credits({tab:0})">
+				<span>宏财精选</span><i class="fa fa-angle-right ft-2"></i>
+			</li>
+			<li ui-sref="root.userCenter.credits({tab:1})">
+				<span>宏财尊贵</span><i class="fa fa-angle-right ft-2"></i>
+			</li>
+			<li ui-sref="root.userCenter.credits({tab:2})">
+				<span>债权转让</span><i class="fa fa-angle-right ft-2"></i>
+			</li>
+			<li class="border-none" ui-sref="root.userCenter.credits({tab:3})" ng-show="showOther">
+				<span>其他</span><i class="fa fa-angle-right ft-2"></i>
+			</li>
+		</ul>
+	</div>
+
+</div>

@@ -1,0 +1,30 @@
+<!-- 转让记录 -->
+<div class="investor-orders" auto-height>
+  <table>
+    <div class="thead bg-white {{assignmentOrders.length >0 ? 'padding-lr-1p5': ''}}">
+        <ul>
+          <li>成交时间</li>
+          <li>受让人</li>
+          <li>受让金额(元)</li>
+        </ul>
+    </div>
+    <tbody>
+      <!-- 有投资 -->
+      <tr ng-repeat="order in assignmentOrders | limitTo : initLimit" ng-show="assignmentOrders.length >0 ">
+        <td class="ft-Arial">{{order.createTime | date: "yyyy-MM-dd"}}</td>
+        <td class="ft-Arial">{{order.userName}}</td>
+        <td class="ft-Arial">{{order.orderAmount| number : 0 || 0}}</td>
+      </tr>
+      <!-- 没投资 -->
+      <tr class="text-center auto-height" ng-show="assignmentOrders.length <=0 ">
+        <td colspan="3" class="bg-greyf8">
+          <p class="ft-666 ft-1p4">暂无记录</p>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+  <div class="text-center" ng-show="assignmentOrders.length > initLimit" ng-click="loadMore();">
+    <p><i class="fa fa-list-ul ft-orange"></i>&nbsp;<a class="ft-black">查看更多转让记录</a></p>
+  </div>
+</div>

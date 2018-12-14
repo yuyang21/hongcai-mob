@@ -1,0 +1,24 @@
+<div class="weui_dialog_alert" id="dialog2" ng-show="alert">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog" >
+        <div class="weui_dialog_hd"><strong class="weui_dialog_title">{{alert.title || '提示'}}</strong></div>
+        <div class="weui_dialog_bd">{{alert.msg || '未知错误'}}</div>
+        <div class="weui_dialog_ft">
+            <a href="javascript:;" class="weui_btn_dialog primary" ng-click ="alert.confirm();">确定</a>
+        </div>
+    </div>
+</div>
+
+<!--BEGIN dialog1-->
+<div class="weui_dialog_confirm" id="dialog1" ng-show="confirm">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog">
+        <div class="weui_dialog_hd"><strong class="weui_dialog_title">{{confirm.title || '提示'}}</strong></div>
+        <div class="weui_dialog_bd">{{confirm.msg || '出问题了'}}<br></div>
+        <div class="weui_dialog_ft">
+            <a href="javascript:;" class="weui_btn_dialog default" ng-click="confirm.cancel()">取消</a>
+            <a href="javascript:;" class="weui_btn_dialog primary" ng-click="confirm.confirm()">确定</a>
+        </div>
+    </div>
+</div>
+<!--END dialog1-->

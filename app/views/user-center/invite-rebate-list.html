@@ -1,0 +1,21 @@
+<!-- 我的邀请好友列表 -->
+<!-- 不考虑邀请人数为0的情况 -->
+<div class="invite-rebate-list bg-white padding-b-5">
+	<div class="list-title bg-white padding-l-1p5 padding-r-1p5">
+		<ul class="border-grey-bottom margin-b-0">
+			<li><p>好友</p><p>状态</p></li>
+		</ul>
+	</div>
+	<div class="rebate-list">
+		<ul>
+			<li ng-repeat="item in datas">
+				<p class="ft-Arail">{{item.user.mobile}}</p>
+				<p ng-if="item.investAmount <= 0">未出借</p>
+				<p ng-if="item.investAmount > 0">已出借</p>
+			</li>
+		</ul>
+		<div class="text-center" ng-show="page < loadMoreData">
+            <p><i class="fa fa-list-ul ft-orange"></i>&nbsp;<a class="ft-666" ng-click="loadMuch();">查看更多</a></p>
+       </div>
+	</div>
+</div>

@@ -1,0 +1,102 @@
+<!-- 项目列表页 在下面的div class="main-list-temp"上面添加ng-repeat即可  start list   ui-sref="root.project-detail"-->
+<div class="main-list">
+  <div id ="main-list-title" class="bg-white">
+    <div class="display-inb padding-l-1p5"  ng-repeat="tab in tabs"><a class="margin-b-0 ft-666 margin-auto " ng-class="{'title-border': tabParam === $index}" ng-click="switchTab($index)">{{tab.title}}</a></div>
+  </div>
+  <section ng-if="tabParam === 0" ng-class="{'padding-b-5': pageCount <= page}">
+    <div class="main-list-temp clear" ng-repeat="item in projectDatas" ng-click="toDetail(item)">
+      <div class="title ft-666">
+        <span class="title-text" ng-show="widthFlag===0 && item.name.length <= 12">{{item.name}}</span>
+        <span class="title-text" ng-show="widthFlag===0 && item.name.length > 12">{{item.name | limitTo:13}}...</span>
+        <span class="title-text" ng-show="widthFlag===1 || widthFlag===2">{{item.name}}</span>
+        <span ng-show="item.status === 6" class="title-status-orange status">预发布</span>
+        <span ng-show="item.status === 11" class="title-status-orange status">预约中</span>
+        <span ng-show="item.status === 7" class="title-status-orange status">融资中</span>
+        <span ng-show="item.status === 9" class="title-status-grey status">还款中</span>
+        <span ng-show="item.status === 8" class="title-status-grey status">融资成功</span>
+        <span ng-show="item.status === 10" class="title-status-grey status">已完成</span>  
+        </span>
+      </div>
+       <div class="pro-info">
+        <ul>
+          <li class=" ft-ccc"><span class="ft-2p5 margin-r-0p3 ft-Arial" ng-class="{'ft-orange2':item.status === 7 || item.status === 6 ,'ft-grey7':item.status !== 6 || item.status !== 7 }">{{item.annualEarnings || 0.00 | number: 2}}</span>%</li>
+          <li class=" ft-ccc"><span class="ft-1p8 margin-r-0p3 ft-Arial" ng-class="{'ft-black4':item.status === 7 || item.status === 6 ,'ft-grey7':item.status !== 6 || item.status !== 7 }">{{item.projectDays || 0}}</span>天</li>
+          <li class=" ft-ccc"><span class="ft-1p8 margin-r-0p3 ft-Arial" ng-class="{'ft-black4':item.status === 7 || item.status === 6 ,'ft-grey7':item.status !== 6 || item.status !== 7 }">{{item.amount || 0 | currency:"":0}}</span>元</li>
+        </ul>
+        <ul class="padding-t-0 margin-b-0 ft-grey7">
+          <li>年化利率</li>
+          <li class="border-none">期限</li>
+          <li>可出借金额</li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center bg-white" ng-show="pageCount > page">
+      <p class="padding-b-7 padding-t-3"><i class="fa fa-list-ul ft-orange"></i>&nbsp;<a class="ft-black" ng-click="loadMore(getProjectList);">查看更多</a></p>
+    </div>
+  </section>
+  <section ng-if="tabParam === 1" ng-class="{'padding-b-7': pageCount <= page}">
+    <div class="main-list-temp clear" ng-repeat="item in projectDatas" ng-click="toDetail(item)">
+      <div class="title ft-666">
+        <span class="title-text" ng-show="widthFlag===0 && item.name.length <= 12">{{item.name}}</span>
+        <span class="title-text" ng-show="widthFlag===0 && item.name.length > 12">{{item.name | limitTo:13}}...</span>
+        <span class="title-text" ng-show="widthFlag===1 || widthFlag===2">{{item.name}}</span>
+        <span ng-show="item.status === 6" class="title-status-orange status">预发布</span>
+        <span ng-show="item.status === 11" class="title-status-orange status">预约中</span>
+        <span ng-show="item.status === 7" class="title-status-orange status">融资中</span>
+        <span ng-show="item.status === 9" class="title-status-grey status">还款中</span>
+        <span ng-show="item.status === 8" class="title-status-grey status">融资成功</span>
+        <span ng-show="item.status === 10" class="title-status-grey status">已完成</span>  
+        </span>
+      </div>
+       <div class="pro-info">
+        <ul>
+          <li class=" ft-ccc"><span class="ft-2p5 margin-r-0p3 ft-Arial" ng-class="{'ft-orange2':item.status === 7 || item.status === 6 ,'ft-grey7':item.status !== 6 || item.status !== 7 }">{{item.annualEarnings || 0.00 | number: 2}}</span>%</li>
+          <li class=" ft-ccc"><span class="ft-1p8 margin-r-0p3 ft-Arial" ng-class="{'ft-black4':item.status === 7 || item.status === 6 ,'ft-grey7':item.status !== 6 || item.status !== 7 }">{{item.projectDays || 0}}</span>天</li>
+          <li class=" ft-ccc"><span class="ft-1p8 margin-r-0p3 ft-Arial" ng-class="{'ft-black4':item.status === 7 || item.status === 6 ,'ft-grey7':item.status !== 6 || item.status !== 7 }">{{item.amount || 0 | currency:"":0}}</span>元</li>
+        </ul>
+        <ul class="padding-t-0 margin-b-0 ft-grey7">
+          <li>年化利率</li>
+          <li class="border-none">期限</li>
+          <li>可出借金额</li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center bg-white" ng-show="pageCount > page">
+      <p class="padding-b-7 padding-t-3"><i class="fa fa-list-ul ft-orange"></i>&nbsp;<a class="ft-black" ng-click="loadMore(getProjectList);">查看更多</a></p>
+    </div>
+  </section>
+  <section  ng-if="tabParam === 2" ng-class="{'padding-b-5': pageCount0 <= page}">
+    <div class="main-list-temp clear" ng-class="{'discount': item.type === 1}" ng-repeat="item in assignments" ng-click="toDetail(item)">
+      <div class="title ft-666">
+        <span class="title-text" ng-show="widthFlag===0 && item.name.length <= 12"><span class="zhuan">转</span><span class="display-inb fl margin-t--0p2">{{item.name}}</span></span>
+        <span class="title-text" ng-show="widthFlag===0 && item.name.length > 12"><span class="zhuan">转</span><span class="display-inb fl margin-t--0p2">{{item.name | limitTo:13}}...</span></span>
+        <span class="title-text" ng-show="widthFlag===1 || widthFlag===2"><span class="zhuan">转</span><span class="display-inb fl margin-t--0p2">{{item.name}}</span></span>
+        <span ng-show="item.status === 1" class="title-status-orange status">转让中</span>
+        <span ng-show="item.status === 2" class="title-status-orange status">撤销中</span>
+        <!-- <span ng-show="item.status === 3" class="title-status-grey status">已撤销</span> -->
+        <span ng-show="item.status === 4 || (item.status ==3 && item.soldStock != 0)" class="title-status-grey status">已转让</span>
+        <span ng-show="item.status === 5" class="title-status-grey status">冻结中</span>
+        </span>
+      </div>
+       <div class="pro-info">
+        <ul>
+          <li class=" ft-ccc"><span class="ft-2p5 margin-r-0p3 ft-Arial" ng-class= "{'ft-orange2':item.status === 1,'ft-grey7':item.status !== 1}">{{item.type === 0 ? item.annualEarnings : item.originalAnnualEarnings || 0.00 | number:2}}</span>%</li>
+          <li class=" ft-ccc" ng-if="item.type === 1"><span class="ft-1p8 margin-r-0p3 ft-Arial" ng-class= "{'ft-black4':item.status === 1,'ft-grey6':item.status !== 1}">{{item.discountScale || 0.0 | number:1}}</span>%</li>
+          <li class=" ft-ccc"><span class="ft-1p8 margin-r-0p3 ft-Arial"  ng-class= "{'ft-black4':item.status === 1,'ft-grey6':item.status !== 1}">{{item.remainDay || 0}}</span>天</li>
+          <li class=" ft-ccc"><span class="ft-1p8 margin-r-0p3 ft-Arial" ng-class= "{'ft-black4':item.status === 1,'ft-grey6':item.status !== 1}">{{(item.status ==3 && item.soldStock != 0) ? 0 : item.currentStock * 100 | currency:"":0 }}</span>元</li>
+        </ul>
+        <ul class="padding-t-0 margin-b-0 ft-grey7">
+          <li>年化利率</li>
+          <li ng-if="item.type === 1">折让比例</li>
+          <li class="border-none">剩余期限</li>
+          <li>可出借金额</li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center bg-white" ng-show="pageCount0 > page">
+      <p class="padding-b-7 padding-t-3"><i class="fa fa-list-ul ft-orange"></i>&nbsp;<a class="ft-black" ng-click="loadMore(getAssignmentList);">查看更多</a></p>
+    </div>
+  </section>
+  <!--ending repeat-->
+</div>
+

@@ -1,0 +1,85 @@
+<!-- 债权转让项目详情页面 -->
+<div class="assignments-detail">
+  <div class="header">
+    <ul>
+      <li>
+        <p>{{assignment.type === 0 ? assignment.annualEarnings : assignment.originalAnnualEarnings || 0 | number : 2}}<span class="ft-2">%</span></p>
+        <p class="margin-t-0">年化利率</p>
+      </li>
+      <li>
+        <p>{{assignment.amount || 0 | number: 0}}<span class="ft-1p3">元</span></p>
+        <p>转让金额</p>
+      </li>
+      <li>
+        <p>{{assignment.remainDay || 0 }}<span class="ft-1p3">天</span></p>
+        <p>项目期限</p>
+      </li>
+    </ul>
+  </div>
+  <div class="content margin-b-1p2 border-grey-bottom">
+    <div class="column" ui-sref="root.project-detail({number : projectNumber})">
+      <span class="txt-left fl">原项目详情 </span>
+      <div class="txt-right fr">
+        <i class="fa fa-angle-right angle-down"></i>
+      </div>
+    </div>
+    <div class="column" ng-click="toOrderList()">
+      <span class="txt-left fl">转让记录</span>
+      <div class="txt-right fr">
+        <span><i class="fa fa-angle-right angle-down"></i></span>
+      </div>
+    </div>
+    <a class="column border-none" ng-show="isLogged && userAuth.authStatus !== 2">
+      <span class="txt-left fl padding-t-0p2">账户余额：<i class="ft-orange2 ft-normal1 ft-Arial">{{account.balance || 0 | number:2}}</i> 元</span>
+      <div class="txt-right fr" ng-click="toRealNameAuth()">
+        <span><b class="ft-normal">开通 </b></span>
+      </div>
+    </a>
+    <a class="column border-none" ng-show="isLogged && userAuth.authStatus === 2">
+      <span class="txt-left fl padding-t-0p2">账户余额：<i class="ft-orange2 ft-normal1 ft-Arial">{{account.balance || 0 | number:2}}</i> 元</span>
+      <div class="txt-right fr" ng-click="toRecharge()">
+        <span><b class="ft-normal">充值 </b></span>
+      </div>
+    </a>
+    <a class="column border-none" ng-show="!isLogged">
+      <span class="txt-left fl padding-t-0p2">您的账号未登录，请先登录</span>
+      <div class="txt-right fr" ng-click="toLogin()">
+        <span><b class="ft-normal">登录 </b></span>
+      </div>
+    </a>
+  </div>
+  <div class="content2 border-grey-top">
+     <!-- 剩余可投 -->
+    <ul class="">
+      <li>
+        <p>剩余可出借(元)</p>
+        <p class="ft-Arial">{{(assignment.status === 3 && assignment.soldStock !== 0) ? 0 : assignment.currentStock * 100 | number: 0}}</p>
+      </li>
+      <li>
+        <p>预计利息(元)</p>
+        <p class="ft-Arial">{{assignmentInvestAmount * assignment.remainDay * assignment.annualEarnings / 36500 || 0 | number: 2 }}</p>
+      </li>
+    </ul>
+    <!-- input输入框 -->
+    <div class="invest">
+      <!-- <div ng-click="modInvestAmout(-100,$event)" class="plus grey-status"><hr></div> -->
+      <input id="invest-input" class="invest-input" type="number" ng-model="assignmentInvestAmount" placeholder="请输入认购金额"  ng-disabled="assignment.status !==1 || userAuth.authStatus !== 2">
+      <!-- <div ng-click="modInvestAmout(100,$event)" class="add orange-status"><hr><hr></div> -->
+    </div>
+    <!-- 实际支付金额 -->
+    <div class="payMoney" ng-init="showMessage = false">
+      <p class="margin-b-0 ft-orange text-center ft-1p3"><span>您需要实际支付<b class="ft-normal ft-Arial">{{realPayAmount || 0 | number:2}}</b>元&nbsp;&nbsp;</span><i class="fa fa-question-circle ft-orange2 ft-16 margin-l-10" aria-hidden="true" ng-click="showMessage = !showMessage;"></i></p>
+      <p class="payMessage ft-grey999 ft-1p3 ft-Arial" ng-if="showMessage && exProfit.toFixed(2) > 0">您需先行垫付出借人该笔债权当期已产生利息{{exProfit || 0 | number:2}}元，该部分资金会在下个还款日归还给您。</p>
+      <p class="payMessage ft-grey999 ft-1p3 ft-Arial" ng-if="showMessage && exProfit.toFixed(2) < 0">该笔债权当期已产生利息{{-exProfit || 0 | number:2}}元。</p>
+    </div>
+    <!-- 状态按钮 -->
+    <div class="invest-btn margin-t-1p3 margin-b-2">
+      <button id="invest-btn1" class="button button-primary" type="button" ng-click="toInvest(assignment.number, assignmentInvestAmount);" ng-if="!msg && assignment.status === 1 && userAuth.authStatus === 2 && isLogged && assignmentInvestAmount >=100" ng-disabled="clicked">立即认购</button>
+      <button class="button btn-disabled" ng-if="(assignment.status ===1 && userAuth.authStatus === 2 && isLogged && !assignmentInvestAmount ) || (assignment.status ===1 && userAuth.authStatus === 2 && isLogged && msg)">立即认购</button>
+      <button class="button btn-disabled" ng-if="assignment.status === 5  && isLogged && userAuth.authStatus === 2">冻结中</button>
+      <button class="button btn-disabled" ng-if="(assignment.status === 4 || (assignment.status === 3 && assignment.soldStock !== 0)) && isLogged && userAuth.authStatus === 2">已转让</button>
+      <button class="button button-primary" type="button" ng-if="isLogged && userAuth.authStatus !== 2" ng-click="toRealNameAuth()">开通银行存管账户</button>
+      <button class="button button-primary" type="button" ng-if="!isLogged" ng-click="toLogin()">立即登录</button>
+    </div>
+  </div>
+</div>

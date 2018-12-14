@@ -1,0 +1,1454 @@
+// 投资页轮播
+.slide-banner {
+  margin: 0 auto;
+  max-width: 560px;
+  max-height: 17rem;
+  .bd{
+    z-index:0;
+    li {
+      a{
+        img{
+          vertical-align:top;
+          width:100%;
+        }
+      }
+    }
+  }
+  .hd {
+    top: 83%;
+    left: 38%;
+    li{
+      display:inline-block;
+      width:8px;
+      height:8px;
+     -webkit-border-radius:5px;
+     -moz-border-radius:5px;
+     border-radius:5px;
+     background-color: black;
+     opacity: .25;
+     text-indent:-9999px;
+     overflow:hidden;
+     margin:0 6px;
+     }
+     li.on{
+       background:#fff;
+       opacity: .75;
+     }
+  }
+
+  .slide{
+    position: relative;
+    /*max-width: 640px;*/
+    overflow: hidden;
+    margin: 0 auto;
+    ul{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 17rem;
+    }
+    li{
+      list-style: none;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 17rem;
+      img{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 17rem;
+        border: none;
+      }
+    }
+    /* 解决js阻塞页面显示首屏 */
+    li:first-child{
+      z-index: 1;
+    }
+    .dot{
+      position: absolute;
+      top: 82%;
+      width: 100%;
+      text-align: center;
+      z-index: 5;
+      font-size: 0;
+      @media(min-width:411px){
+        top: 75%;
+      }
+      span{
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 5px;
+        background-color: #000;
+        opacity: .25;
+        text-indent: -9999px;
+        overflow: hidden;
+        margin: 0 6px;
+      }
+      .cur{
+        background-color: #fff;
+        opacity: .75;
+      }
+    }
+  }
+  .slide:after{
+    content: '';
+    display: block;
+    width: 100%;
+    padding-top: 50%;
+  }
+}
+
+
+.main {
+  .gap {
+    height: 1.6rem;
+    background-color: #efeef4;
+  }
+  // 首页的关于我们li列表
+  .about-list{
+    ul{
+      margin-bottom: 1.2rem;
+      li{
+        height: 6rem;
+        width: 25%;
+        margin-bottom: 0;
+        box-sizing: border-box;
+        img {
+          margin-top: .7rem
+        }
+        p {
+          color: #716b66;
+        }
+      }
+    }
+  }
+  //项目展示
+  .project-name {
+    p {
+      margin-bottom: 3rem;
+    }
+
+  }
+  // 进度条
+  .pro-info3 {
+    width: 100%;
+    padding: 0 2rem 0 3rem;
+    overflow: auto;
+    .join-in{
+      display:inline-block;
+      width:10%;
+      float:left;
+      margin-top: .1rem;
+      margin-left:0.5rem;
+      color:#b7b6b6;
+      font-size:1.2rem
+    }
+    @media(min-width:320px){
+      padding: 0 2rem 0 4rem;
+    }
+    @media(min-width:375px){
+      padding: 0 5rem 0 6.5rem;
+    }
+    @media(min-width:411px){
+      padding: 0 5.5rem 0 7rem;
+    }
+    .process {
+      position: relative;
+      margin: 1rem 0 2rem;
+      width: 85%;
+      height: 1px;
+      background-color: #b7b6b6;
+      border-radius: 3px;
+      -webkit-border-radius: 3px;
+      display:inline-block;
+      float:left;
+    }
+    .process .progress-bar {
+      width: 12%;
+      border-radius: 3px;
+      -webkit-border-radius: 3px;
+      //background-color: #fd8f3f;
+    }
+    .process .processing {
+      position: absolute;
+      top: -16px;
+      left: 3px;
+      color: #000;
+      font-size: 0.5rem;
+    }
+    .type-img {
+      height: 1px;
+    }
+  }
+  hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  .main-tab1 li {
+    width: 1/2*100%;
+    // border-left: 0.1rem solid #fd8f3f;
+  }
+  .main-tab1 li:nth-child(1) {
+    &.active{color:#fff !important;}
+  }
+  .main-tab1 li:nth-child(3) {
+    // width: 1/2*100%;
+    border-left: 0.1rem solid #fd8f3f;
+  }
+  .main-tab1 li:nth-child(2) {
+    border-left: 0.1rem solid #fd8f3f;
+    &.active{color:#fff !important;}
+  }
+  .main-tab2 {
+    // border-right: 0.1rem solid #ddd;
+    font-family: "微软雅黑";
+    li:nth-child(1) {
+      width: 40%;
+      color: #ff705d;
+      text-align: right;
+      //font-size: 1.4rem;
+      &.active {
+        color: #ff705d;
+        background-color: #fff;
+        font-weight: bold;
+        font-size: 1.6rem;
+      }
+    }
+    li:nth-child(2) {
+      width: 20%;
+      color: #ff705d;
+      text-align: center;
+      &.active {
+        color: #ff705d;
+        background-color: #fff;
+        font-weight: bold;
+        font-size: 1.6rem;
+      }
+    }
+    li:nth-child(3) {
+      width: 40%;
+      color: rgba(255, 112, 93, 0.5);
+      text-align: left;
+      &.active {
+        color: #ff705d;
+        background-color: #fff;
+        font-weight: bold;
+        font-size: 1.6rem;
+      }
+    }
+  }
+  .mainsubtab1 {
+    font-family: "微软雅黑";
+    li:nth-child(1) {
+      width: 40%;
+    }
+    li:nth-child(2) {
+      width: 20%;
+      color: #47c6f5;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.6rem;
+      &.active {
+        color: #ff705d;
+        background-color: #fff;
+        font-weight: bold;
+        font-size: 1.6rem;
+      }
+    }
+    li:nth-child(3) {
+      width: 40%;
+      color: rgba(255, 112, 93, 0.5);
+      text-align: left;
+      &.active {
+        color: #ff705d;
+        background-color: #fff;
+        font-weight: bold;
+        font-size: 1.6rem;
+      }
+    }
+  }
+  .mainsubtab2 {
+    font-family: "微软雅黑";
+    li:nth-child(1) {
+      width: 40%;
+      color: rgba(255, 112, 93, 0.5);
+      text-align: right;
+    }
+    li:nth-child(2) {
+      width: 20%;
+      color: #ff705d;
+      text-align: center;
+      &.active {
+        color: #ff705d;
+        background-color: #fff;
+        font-weight: bold;
+        font-size: 1.6rem;
+      }
+    }
+    li:nth-child(3) {
+      width: 40%;
+      color: rgba(255, 112, 93, 0.5);
+      text-align: left;
+      &.active {
+        color: #47c6f5;
+        background-color: #fff;
+        font-weight: bold;
+        font-size: 1.6rem;
+      }
+    }
+  }
+  .mainsubtab3 {
+    font-family: "微软雅黑";
+    li:nth-child(1) {
+      width: 40%;
+      color: rgba(255, 112, 93, 0.5);
+      text-align: right;
+    }
+    li:nth-child(2) {
+      width: 20%;
+      color: #ff705d;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.6rem;
+      &.active {
+        color: #ff705d;
+        background-color: #fff;
+        font-weight: bold;
+        font-size: 1.6rem;
+      }
+    }
+    li:nth-child(3) {
+      width: 40%;
+    }
+  }
+  .mainblue {
+    border: 0.1rem solid #47c6f5;
+    li {
+      width: 1/2*100%;
+      // border: 0.1rem solid #ddd;
+      border-left: 0.1rem solid #47c6f5;
+      color: #000;
+      &.active {
+        color: #fff;
+        background-color: #47c6f5;
+        border-top: 0.2rem solid #47c6f5;
+        // box-shadow: 0rem -0.1rem 0.8rem #ddd;
+      }
+    }
+  }
+  .mainred {
+    border: 0.1rem solid #ff705d;
+    li {
+      width: 1/2*100%;
+      // border: 0.1rem solid #ddd;
+      // border-left: 0.1rem solid #ff705d;
+      color: #000;
+      &.active {
+        color: #fff !important;
+        background-color: #ff705d;
+        // border-top: 0.2rem solid #ff705d;
+        // box-shadow: 0rem -0.1rem 0.8rem #ddd;
+      }
+    }
+  }
+  .mainorange1 {
+    border: 0.1rem solid #fd8f3f;
+    li {
+      width: 1/2*100%;
+      // border: 0.1rem solid #ddd;
+      border-left: 0.1rem solid #fd8f3f;
+      color: #000;
+      &.active {
+        color: #fff !important;
+        background-color: #fd8f3f;
+        // box-shadow: 0rem -0.1rem 0.8rem #ddd;
+      }
+    }
+    li:nth-child(1) {
+      border-right: 0.1rem solid #fd8f3f;
+    }
+  }
+  .maingreen {
+    border: 0.1rem solid #3cc3cc;
+    li {
+      width: 1/2*100%;
+      // border: 0.1rem solid #ddd;
+      border-left: 0.1rem solid #3cc3cc;
+      color: #000;
+      &.active {
+        color: #fff;
+        background-color: #3cc3cc;
+        border-top: 0.2rem solid #3cc3cc;
+        // box-shadow: 0rem -0.1rem 0.8rem #ddd;
+      }
+    }
+  }
+}
+@media (min-width:320px) {
+    .main{
+      .about-list {
+        ul{
+          margin-bottom: 1.2rem;
+          li{
+            height: 6rem;
+            img {
+              margin-top: .6rem
+            }
+          }
+        }
+      }
+      .project-name {
+        .details{
+          font-size: 1.3rem;
+          margin-top: 3px;
+        }
+      }
+      .project-show {
+        .project-profit {
+          font-size: 3.8rem;
+        }
+        .benefits {
+          font-size: 1.2rem;
+          margin-top: -3px;
+        }
+        .project-limit {
+          .project-amounts,.project-date{
+            margin-top: 1rem;
+            p:nth-child(1){
+              font-size: 1rem;
+            }
+          }
+          .project-amounts {
+            margin-right: 7rem;
+            margin-left: -1rem;
+            margin-top: 1.5rem;
+            span{
+              height:3rem;
+              border-right: 1px solid #f5f2f2;
+              top: 16px;
+              right: -43px;
+            }
+          }
+        }
+      }
+    }
+ }
+ @media (min-width:360px) {
+    .main{
+      .about-list {
+        ul{
+          margin-bottom: 1.2rem;
+          li{
+            height: 6rem;
+            img {
+              margin-top: .7rem
+            }
+            p {
+              margin-top: -.2rem;
+            }
+          }
+        }
+      }
+      .project-name {
+        font-size: 1.45rem;
+        .details {
+          font-size: 1.4rem
+        }
+      }
+      .project-show {
+        .project-profit {
+          font-size: 4.2rem;
+        }
+        .benefits {
+          font-size: 1.3rem;
+          margin-top: -3px;
+        }
+      }
+    }
+ }
+ @media (min-width:375px) {
+    .main{
+      .about-list {
+        ul{
+          margin-bottom: 1.2rem;
+          li{
+            height: 6rem;
+            img {
+              margin-top: .7rem;
+            }
+            p {
+              margin-top: -0.3rem;
+            }
+          }
+        }
+      }
+      .project-name {
+        font-size: 1.48rem;
+        .details {
+          font-size: 1.4rem
+        }
+      }
+      .project-show {
+        .project-profit {
+          font-size: 4.3rem;
+        }
+        .benefits {
+          font-size: 1.3rem;
+          margin-top: 0px;
+        }
+      }
+    }
+ }
+ @media (min-width:411px) {
+    .main{
+      .about-list {
+        ul{
+          margin-bottom: 1.3rem;
+          li{
+            height: 6rem;
+            img {
+              margin-top: .7rem
+            }
+            p {
+              margin-top: -0.4rem;
+            }
+          }
+        }
+      }
+      .project-name {
+        font-size: 1.5rem;
+        .details {
+          font-size: 1.4rem
+        }
+      }
+      .project-show {
+        .project-profit {
+          font-size: 5rem;
+        }
+        .project-limit {
+          .project-amounts,.project-date{
+            margin-top: 1rem;
+            p:nth-child(1){
+              font-size: 1rem;
+            }
+          }
+          .project-amounts {
+            margin-right: 8rem;
+            margin-left: -1rem;
+            margin-top: 1.5rem;
+            span{
+              height:3rem;
+              border-right: 1px solid #f5f2f2;
+              top: 16px;
+              right: -50px;
+            }
+          }
+        }
+      }
+    }
+ }
+.main-list, .account-userInfo{
+  background-color:#f5f5f5;
+ .main-list-temp {
+    width: 100%;
+    background-color: white;
+    overflow: hidden;
+    border-top: #ddd 1px solid;
+    border-bottom: #ddd 1px solid;
+    margin-bottom:1.3rem;
+    padding: 0 1rem;
+    .title {
+      width: 100%;
+      box-sizing: border-box;
+      overflow: auto;
+      border-bottom: 1px solid #eee;
+      .zhuan {
+        display: inline-block;
+        float: left;
+        width: 1.6rem;
+        height: 1.6rem;
+        line-height: 1.6rem;
+        border-radius: 50%;
+        text-align: center;
+        background-color: #FA683E;
+        color: #fff;
+        font-size: 1.2rem;
+        margin-right: .1rem;
+        margin-top: .37rem;
+      }
+      .height-line {
+        border-left: 4px solid #fd8f3f;
+        display: block;
+        height: 20px;
+        width: 5px;
+        float: left;
+        margin-top: 10px;
+      }
+      img {
+        width: 30px;
+        height: 30px;
+        margin-top: 5px;
+        vertical-align: middle;
+        float: left;
+      }
+      .title-text {
+        font-size: 1.5rem;
+        float: left;
+        padding-top: .9rem;
+        //line-height: 1;
+        padding-bottom: .8rem;
+        display: block;
+      }
+      .title-status-orange {
+        background-color: #fd8f3f;
+        text-align: center;
+      }
+      .title-status-green {
+        background-color: #40a03e;
+      }
+      .title-status-grey {
+        text-align: center;
+        background-color: #b7b7b7;
+      }
+    }
+    .pro-info {
+      width: 100%;
+      overflow: hidden;
+      //padding-top: 1rem;
+      ul:first-child {
+        margin-bottom: 0rem;
+        padding-top: 1.5rem;
+      }
+      ul:last-child {
+        margin-top: -1.5rem;
+        font-size: 1.22rem;
+        height: 4rem;
+      }
+      ul li {
+        width: 32.3%;
+        list-style: none;
+        line-height: 3.5rem;
+        //float: left;
+        display: inline-block;
+        text-align: center;
+        font-size: 1.2rem;
+
+      }
+      ul li:nth-child(1) {
+        margin-top: 0.3rem;
+        margin-bottom: 0.3rem;
+        width: 33.5%;
+        p:nth-child(1) {
+          margin-bottom: 0.5rem;
+          line-height: 4rem;
+          font-size:2.5rem;
+          padding-left:2.5rem;
+        }
+        p:nth-child(2) {
+          margin-bottom: 0;
+          font-size: 1.4rem;
+          color: #9f9d9e;
+          text-align: left;
+          padding-left: 2.5rem;
+          margin-top: -1rem;
+          @media ( max-width : 375px ) {
+            font-size: 1.4rem;
+          }
+        }
+      }
+      ul li:nth-child(2) {
+        // border-left: #eee 1px solid;
+        // border-right: #eee 1px solid;
+        box-sizing: border-box;
+        width: 32%;
+        p{
+          text-align:left;
+          font-size: 2rem;
+          color:#9f9e9d;
+          margin-bottom: -0.1rem;
+          @media ( max-width : 375px ) {
+            font-size:1.4rem;
+          }
+          span{
+            font-size:1.6rem;
+            //color:#45484f;
+            line-height:3.5rem;
+            @media ( max-width : 375px ) {
+              font-size:1.8rem;
+            }
+            @media ( max-width : 360px ) {
+              font-size:1.8rem;
+            }
+            @media ( max-width : 320px ) {
+              font-size:1.8rem;
+            }
+          }
+        }
+        p:nth-child(1) {
+          padding-top:0rem;
+        }
+      }
+      ul li:nth-child(3) {
+        width: 30%;
+        span{
+          //color: #45484f;
+          font-size: 1.8rem;
+          display: inline-block;
+          //margin-left: 2rem;
+        }
+      }
+      .pro-info2 {
+        width: 100%;
+        padding: 0 2.5rem;
+        overflow: auto;
+        .join-in{
+          display:inline-block;
+          width:10%;
+          float:left;
+          //margin-top: 1rem;
+          margin-left:0.5rem;
+          color:#9f9d9e;
+          font-size:1.4rem
+        }
+        .process {
+          position: relative;
+          margin: 1rem 0 2rem;
+          width: 85%;
+          height: .1rem;
+          background-color: #c6c6c6;
+          border-radius: 3px;
+          -webkit-border-radius: 3px;
+          display:inline-block;
+          float:left;
+        }
+        .process .progress-bar {
+          width: 12%;
+          border-radius: 3px;
+          -webkit-border-radius: 3px;
+          //background-color: #fd8f3f;
+        }
+        .process .processing {
+          position: absolute;
+          top: -16px;
+          left: 3px;
+          color: #000;
+          font-size: 0.5rem;
+        }
+        .type-img {
+          height: 0.1rem;
+        }
+        // .info1 {
+        //   font-size: 1.4rem;
+        //   .left,
+        //   .right {
+        //     span:nth-child(1) {
+        //       color: #7a7a7a;
+        //     }
+        //     span:nth-child(2) {
+        //       color: #fd8f3f;
+        //     }
+        //   }
+        //   .left{
+        //     width: 60%;
+        //   }
+        //   .right{
+        //     width: 40%;
+        //   }
+        // }
+      }
+    }
+    .operation-btn {
+      width: 100%;
+      overflow: auto;
+      border-top: #e0dede 1px solid;
+      padding: 1rem 2rem;
+      margin-top: 1rem;
+      button {
+        width: 100%;
+        margin-bottom: 0;
+        font-family: "微软雅黑";
+      }
+      .button-grey{
+        color: #fff;
+        background-color: #c6c6c6;
+        border-color: #c6c6c6;
+      }
+    }
+    .status{
+      width: 6.4rem;
+      margin-top: 1.2rem;
+      //padding: 0 6px;
+      height: 17px;
+      line-height: 18px;
+      font-size: 1.2rem;
+      color: #fefefe;
+      border-radius: 1rem;
+      display: block;
+      float: right;
+    }
+    //倒计时
+    .count-down{
+      color: #fd8f3f;
+      display: inline-block;
+      font-size: 1.4rem;
+      position:relative;
+      bottom:0.7rem;
+      left: 19rem;
+      margin-top: 0.5rem;
+      @media (max-width: 375px) {
+        left:17rem;
+      }
+      @media (max-width: 360px) {
+        left:16.5rem;
+      }
+      @media (max-width: 320px) {
+        left:14.5rem;
+      }
+    }
+  }
+  .main-list-temp.discount {
+    .pro-info {
+      ul {
+        li:last-child {
+          width: 33%;
+        }
+        li:nth-child(1) {
+          width: 25.5%;
+        }
+        li:nth-child(2) {
+          width: 19%;
+        }
+        li:nth-child(3) {
+          width: 17%;
+        }
+      }
+    }
+  }
+}
+
+.main-hongjinbao {
+  width: 100%;
+  color: white;
+  font-size: 1.8rem;
+  margin-top: -1.5rem;
+  ul li {
+    width: 33%;
+    display: inline-block;
+    float: left;
+    background-color: #67E3EA;
+    border-right: 0.1rem solid white;
+    border-bottom: 0.1rem solid white;
+    padding-top: 1rem;
+    i {
+      background-color: white;
+      color: #67E3EA;
+      width: 2.5rem;
+      height: 2.5rem;
+      line-height: 2.5rem;
+      margin-bottom: 1rem;
+    }
+  }
+  .progress-hongjinbao {
+    background-color: #67E3EA;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    p {
+      margin-bottom: 1rem;
+      width: 100%;
+      span {
+        display: inline-block;
+        width: 50%;
+      }
+    }
+  }
+}
+
+.hongjinbao-list-detail {
+  border-top: 1rem solid #f2f2f2;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: black;
+  p {
+    height: 4.5rem;
+    line-height: 4.5rem;
+    width: 100%;
+    border-bottom: 0.1rem solid #f5f5f5;
+    margin-bottom: 0;
+    font-size: 1.6rem;
+    span:nth-child(1) {
+      display: inline-block;
+      width: 40%;
+      float: left;
+      text-align: left;
+    }
+    span:nth-child(2) {
+      display: inline-block;
+      width: 60%;
+      float: left;
+      text-align: right;
+    }
+  }
+}
+
+.detail-more {
+  border-top: 1rem solid #f2f2f2;
+  height: 5rem;
+  line-height: 4rem;
+  text-align: center;
+}
+
+.more-info {
+  p {
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+  }
+  pre {
+    // border-bottom: 0.1rem solid #f2f2f2;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    margin-bottom: 0;
+    text-align: justify;
+    white-space: initial;
+    width: 100%;
+    font-family: "微软雅黑";
+    p{
+      padding-top: 0 !important;
+    }
+  }
+}
+
+.left-tip {
+  height: 17.2rem;
+  line-height: 17.2rem;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.right-tip {
+  height: 17.2rem;
+  line-height: 17.2rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.left-tip,
+.right-tip:focus {
+  outline: none !important;
+  background-color: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fa-angle-right-tip:before {
+  font: normal normal normal 14px/1 FontAwesome;
+  content: "\f105";
+  font-size: 7rem;
+}
+
+.fa-angle-left-tip:before {
+  content: "\f104";
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 7rem;
+}
+
+.fa-tip-5x {
+  font-size: 5em;
+}
+
+.fa-tip {
+  display: inline-block;
+  //font: normal normal normal 14px/1 FontAwesome;
+  text-rendering: auto;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+}
+
+.left-arrow {
+  width: 1rem;
+  height: 1rem;
+  padding: 1rem;
+  display: inline-block;
+  border-left: 0.5rem solid #ff705d;
+  border-top: 0.5rem solid #ff705d;
+  transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  /* Internet Explorer */
+  -moz-transform: rotate(-45deg);
+  /* Firefox */
+  -webkit-transform: rotate(-45deg);
+  /* Safari 和 Chrome */
+  -o-transform: rotate(-45deg);
+  /* Opera */
+}
+
+.right-arrow {
+  width: 1rem;
+  height: 1rem;
+  padding: 1rem;
+  display: inline-block;
+  border-left: 0.5rem solid #ff705d;
+  border-top: 0.5rem solid #ff705d;
+  transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  /* Internet Explorer */
+  -moz-transform: rotate(135deg);
+  /* Firefox */
+  -webkit-transform: rotate(135deg);
+  /* Safari 和 Chrome */
+  -o-transform: rotate(135deg);
+  /* Opera */
+}
+div, p {
+    box-sizing: border-box;
+}
+
+#main-list-title {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1.4rem;
+  div {
+    width: 100/3%;
+  }
+  div:first-child+div {
+    padding-left: 0;
+  }
+  div:last-child {
+    padding-right: 1.5rem;
+    padding-left: 0;
+  }
+  a {
+    display: block;
+    text-align: center;
+    padding: 1.3rem 0;
+    font-size: 1.8rem;
+    box-sizing: border-box;
+    font-weight: normal;
+  }
+  a.title-border {
+    border-bottom: .2rem solid #fd8f3f;
+    box-sizing: border-box;
+    color: #fd8f3f !important;
+  }
+  a:hover {
+    color: #9F9DA9;
+  }
+}
+
+// 首页公告
+.huadong {
+  height:2.8rem;
+  padding: 0.5rem 1.5rem 0.5rem; 
+  border-bottom: 1px solid #eee; 
+  position:relative;
+  overflow: hidden;
+  .hdimg {
+    float:left;
+    width: 2rem;
+    height: 1.9rem;
+    display: inline-block;
+    background: url('/images/new-main/spirit-icon.png') no-repeat 0px .3rem;
+    background-size: 652%;
+    font-size: 1.3rem;
+  }
+  .notice_active {
+    width: 85%;
+    height: 2rem;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    li.notice_active_ch {
+      width:85%;
+      float: left;
+      color:#666;
+      font-size:1.2rem;
+      line-height: 2rem;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+      margin-left: .4rem;
+      overflow: hidden;
+    }
+  }
+  .gg_more {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.9rem;
+    background: url('/images/new-main/spirit-icon.png') no-repeat -2rem .3rem;
+    background-size: 780%;
+  }
+}
+
+.new-main-list {
+  background-color:#fff;
+  .risk-reminder {
+    background-color: #efeef4;
+    text-align: center;
+    padding: 1.2rem;
+    color: #999;
+    font-size: 1.2rem;
+  }
+  .main-list-temp {
+    width: 100%;
+    position: relative;
+    .orange-rate {
+      color: #ff7923;
+    }
+    .projectType0, .projectType1, .projectType2 {
+      position: absolute;
+      top: -1rem;
+      left: 1.5rem;
+      color: #fff;
+      font-size: 1.2rem;
+      width: 5rem;
+      height: 2rem;
+      text-align: center;
+      line-height: 2.4rem;
+    }
+    .projectType0 {
+      background: url('/images/new-main/spirit-icon.png') no-repeat -3.3rem -3.3rem;
+      background-size: 270%;
+    }
+    .projectType1 {
+      background: url('/images/new-main/spirit-icon.png') no-repeat -8.6rem -3.3rem;
+      background-size: 270%;
+    }
+    .projectType2 {
+      background: url('/images/new-main/spirit-icon.png') no-repeat -3.3rem -5.6rem;
+      background-size: 270%;
+    }
+    .new-title {
+      padding: 0rem 1.5rem 0rem;
+      overflow: hidden;
+      .toDetail {
+        padding-top: 2.2rem;
+        width: 86%;
+        @media ( max-width : 414px ) {
+          width: 86%;
+        }
+        @media ( max-width : 375px ) {
+          width: 84%;
+        }
+        @media ( max-width : 360px ) {
+          width: 84%;
+        }
+        @media ( max-width : 320px ) {
+          width: 82%;
+        }
+      }
+      .more-list {
+        float: right;
+        color: #f0c46c;
+        position: relative;
+        z-index: 9999;
+        display: inline-block;
+        width: 4rem;
+        height: 2rem;
+        text-align: right;
+        top: 2.5rem;
+      }
+      .title-text {
+        float: left;
+      }
+      .hot-project {
+        float: left;
+        display: inline-block;
+        width: 2.7rem;
+        height: 2rem;
+        background: url('/images/new-main/spirit-icon.png') no-repeat .2rem -3.5rem;
+        background-size: 500%;
+      }
+      .sold-out {
+        width: 26%;
+        float: right;
+        position: absolute;
+        top: -1.3rem;
+        right: 1.5rem;
+        z-index: 999;
+      }
+    }
+    .pro-info {
+      width: 100%;
+      overflow: hidden;
+      padding-top: 2.1rem; 
+      ul:first-child {
+        margin-bottom: 0rem;
+      }
+      ul:nth-child(2) {
+        margin-top: -1.5rem;
+        height: 3rem;
+      }
+      ul:nth-child(3) {
+        height: 3rem;
+        line-height: 3rem;
+      }
+      ul li {
+        width: 32.3%;
+        list-style: none;
+        line-height: 2.7rem;
+        display: inline-block;
+        text-align: center;
+        font-size: 1.2rem;
+      }
+      ul li:nth-child(1) {
+        margin-top: 0.3rem;
+        margin-bottom: 0.3rem;
+        width: 33.3%;
+        p:nth-child(1) {
+          margin-bottom: 0.5rem;
+          line-height: 4rem;
+          font-size:2.5rem;
+          padding-left:2.5rem;
+        }
+        p:nth-child(2) {
+          margin-bottom: 0;
+          font-size: 1.4rem;
+          color: #9f9d9e;
+          text-align: left;
+          padding-left: 2.5rem;
+          margin-top: -1rem;
+          @media ( max-width : 375px ) {
+            font-size: 1.4rem;
+          }
+        }
+      }
+      ul li:nth-child(2) {
+        box-sizing: border-box;
+        width: 33%;
+        @media(max-width: 360px) {
+          width: 32%;
+        }
+        p{
+          text-align:left;
+          font-size: 2rem;
+          color:#9f9e9d;
+          margin-bottom: -0.1rem;
+          @media ( max-width : 375px ) {
+            font-size:1.4rem;
+          }
+          @media(max-width: 320px) {
+            width: 24%;
+          }
+          span{
+            font-size:1.6rem;
+            line-height:3.5rem;
+            @media ( max-width : 375px ) {
+              font-size:1.8rem;
+            }
+            @media ( max-width : 360px ) {
+              font-size:1.8rem;
+            }
+            @media ( max-width : 320px ) {
+              font-size:1.8rem;
+            }
+          }
+        }
+        p:nth-child(1) {
+          padding-top:0rem;
+        }
+      }
+      ul li:nth-child(3) {
+        width: 31%;
+        @media(max-width: 360px) {
+          width: 31.5%;
+        }
+        span{
+          display: inline-block;
+        }
+        span:nth-child(2) {
+          transform: scale(0.83,0.83) !important;
+          -webkit-transform: scale(0.83,0.83) !important;
+        }
+      }
+      .medium-short, .steady-income, .mortgage-guarantee, .day-interest, .asset-quality {
+        width: 1.5rem;
+        height: 1.5rem;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .medium-short {
+        background: url('/images/new-main/spirit-icon.png') no-repeat -.1rem -1.38rem;
+        background-size: 800%;
+      }
+      .steady-income {
+        background: url('/images/new-main/spirit-icon.png') no-repeat -1.7rem -1.36rem;
+        background-size: 800%;
+      }
+      .mortgage-guarantee {
+        background: url('/images/new-main/spirit-icon.png') no-repeat -3.6rem -1.36rem;
+        background-size: 800%;
+      }
+      .day-interest {
+        background: url('/images/new-main/spirit-icon.png') no-repeat -5.2rem -1.36rem;
+        background-size: 800%;
+      }
+      .asset-quality {
+        background: url('/images/new-main/spirit-icon.png') no-repeat -6.7rem -1.36rem;
+        background-size: 800%;
+      }
+    }
+    //倒计时
+    .count-down{
+      color: #fd8f3f;
+      display: inline-block;
+      font-size: 1.4rem;
+      position:relative;
+      bottom:0.7rem;
+      left: 19rem;
+      margin-top: 0.5rem;
+      @media (max-width: 375px) {
+        left:17rem;
+      }
+      @media (max-width: 360px) {
+        left:16.5rem;
+      }
+      @media (max-width: 320px) {
+        left:14.5rem;
+      }
+    }
+  }
+  .scale-0p8 {
+    transform: scale(0.86,0.86);
+    -webkit-transform: scale(0.86,0.86);
+  }
+}
+
+//微信绑定成功页面
+.bind-status {
+  background: url('/images/bind-wechat/bind-status-bg.jpg') no-repeat 0 0;
+  background-size: 100% 100%;
+  .bind-success {
+    padding-top: 11rem;
+    .red-bag {
+      top: 4.5rem;
+      left: 34%;
+    }
+    .hc-baby {
+      margin-right: -17%;
+    }
+    .hc-baby-speek {
+      margin-top: 2rem;
+      margin-left: 23%;
+    }
+    p.bind-success-tip {
+      color: #f85a10;
+    }
+    p.bind-success-tip2 {
+      color: #6b4a41;
+      line-height: 24rem;
+    }
+    @media(min-width:320px) {
+      padding-top: 10rem;
+      p.bind-success-tip2 {
+        line-height: 15rem;
+      }
+    }
+    @media(min-width:360px) {
+      padding-top: 11.3rem;
+      p.bind-success-tip2 {
+        line-height: 18rem;
+      }
+    }
+    @media(min-width:375px) {
+      padding-top: 11.8rem;
+    }
+    @media(min-width:412px) {
+      padding-top: 10.5rem;
+    }
+    @media(min-width:414px) {
+      padding-top: 13rem;
+      p.bind-success-tip2 {
+        line-height: 24rem;
+      }
+    }
+  }
+  .binded {
+    padding-top: 7rem;
+    img:first-child {
+      margin-left: 22%;
+    }
+    img:nth-child(2) {
+      left: 27%;
+      top: 14rem;
+      @media(min-width: 360px) {
+        top: 16rem;
+      }
+      @media(min-width: 412px) {
+        top: 15.6rem;
+      }
+      @media(min-width: 414px) {
+        top: 18.5rem;
+      }
+    }
+    img:nth-child(3) {
+      margin: 12rem auto 0;
+      @media(min-width: 360px) {
+        margin-top: 15rem;
+      }
+      @media(min-width: 375px) {
+        margin-top: 16rem;
+      }
+      @media(min-width: 412px) {
+        margin-top: 15rem;
+      }
+      @media(min-width: 414px) {
+        margin-top: 19.5rem;
+      }
+    }
+    p {
+      color: #6b4a41;
+      margin-top: 1rem;
+    }
+  }
+}
+//绑定微信页
+.bind-wechat {
+  padding-top: 7rem;
+  .bind-form {
+    padding-bottom: 0 !important;
+    .to-bind {
+      input {
+        height: 56px;
+        padding: 20px 10px 0px;
+      }
+      input:focus {
+        border-color: #e94929;
+      }
+      .red-border {
+        border-bottom: 1px solid #e94929;
+      }
+      .pwd-eyes {
+        height: 56px;
+        line-height: 56px;
+        background: url('/images/bind-wechat/close-eye.png') no-repeat center 32px;
+        background-size: 50%;
+      }
+      .pwd-eyes.open-eye {
+        height: 56px;
+        line-height: 56px;
+        background: url('/images/bind-wechat/open-eye.png') no-repeat center 29px;
+        background-size: 50%;
+      }
+
+    }
+  }
+  .to-register {
+    color: #3eb1dd;
+  }
+}
+
+.body-box {
+  max-width: 640px;
+  width: 100%;
+  position: fixed;
+}
+

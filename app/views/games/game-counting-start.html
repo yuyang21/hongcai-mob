@@ -1,0 +1,284 @@
+<html class="no-js" lang="zh-cn">
+<!-- growing io -->
+<script type="text/javascript">
+  var _vds = _vds || [];
+  window._vds = _vds;
+  (function(){
+    _vds.push(['setAccountId', 'ac984f19ec2981ca']);
+    (function() {
+      var vds = document.createElement('script');
+      vds.type='text/javascript';
+      vds.async = true;
+      vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(vds, s);
+    })();
+  })();
+</script>
+<script type="text/javascript" src="/styles/un-min/jquery.min.js"></script>
+<script src="/styles/un-min/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="/styles/un-min/gameWechatUtils.js"></script>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1">
+  <title>谁是点钞王</title>
+  <link rel="stylesheet" href="/styles/un-min/game-common.css">
+	<script src="/styles/un-min/rem.js"></script>
+<style>
+	.bg-white {
+	  background-color: #fff;
+	}
+	.fr {
+	  float: right;
+	}
+	.text-center {
+	  text-align: center;
+	}
+	.game-start {
+		/*margin: 0 auto;*/
+		text-align: center;
+		/*position: relative;*/
+		width: 100%;
+	}
+	.game-counting-innner img {
+		margin: 0 auto;
+		vertical-align: top;
+	}
+	.game-counting-innner .logo {
+		margin: .25rem auto .06rem;
+	}
+	.bg-money {
+		background: url('/images/games/money.png') no-repeat center center;
+		width: 100%;
+		height: 5.1rem;
+		background-size: 96%;
+		margin: .2rem 0 0.1rem;
+    padding-top: 1.1rem;
+	}
+	.start-button {
+		background: url('/images/games/start-button.png') no-repeat center center;
+		width: 3.4rem;
+		height: 3.4rem;
+		background-size: contain;
+		padding-top: .8rem;
+	}
+	.rule-btn {
+		background: url('/images/games/btn-1.png') no-repeat center center;
+		width: 2.2rem;
+		height: .9rem;
+		background-size: contain;
+		line-height: .85rem;
+		font-weight: bold;
+		color: #ff2d3d;
+		font-size: .3rem;    
+		position: relative;
+    z-index: 9999;
+	}
+	#startHand {
+		background: url('/images/games/start-hand.png') no-repeat center center;
+		width: 3.6rem;
+		height: 4.1rem;
+		background-size: contain;
+		position: fixed;
+		bottom: 0px;
+    right: -.53rem;    
+    z-index: 2222;
+    pointer-events: none
+	}
+	.scaleHand {
+	  -moz-animation: scaleHand 1s alternate infinite;
+	  -webkit-animation: scaleHand 1s alternate infinite;
+	  animation: scaleHand 1s alternate infinite;
+	}
+	.game-counting {
+	  background: url('/images/games/guang.png') no-repeat center center;
+	  background-size: 100% 100%;
+  	background-color: #ff2421;
+	}
+	.game-counting-innner {
+	  background: url('/images/games/circle-white.png') no-repeat 0 0;
+	  background-size: 100% 100%;
+	}
+	@-moz-keyframes scaleHand {
+	  from { transform: scale(1); }
+	  to { transform: scale(1.2); }
+	}
+	@-webkit-keyframes scaleHand {
+	  from { transform: scale(1); }
+	  to { transform: scale(1.2); }
+	}
+	@keyframes scaleHand {
+	  from { transform: scale(1); }
+	  to { transform: scale(1.2); }
+	}
+	@-moz-keyframes flashingLight {
+	  0% { 
+	    background: url('/images/games/circle-white.png') no-repeat 0 0;
+	    background-size: 100% 100%
+	  }
+	  100% { 
+	    background: url('/images/games/circle-red.png') no-repeat 0 0;
+	    background-size: 100% 100%
+	  }
+	}
+	@-webkit-keyframes flashingLight {
+	  0% { 
+	    background: url('/images/games/circle-white.png') no-repeat 0 0;
+	    background-size: 100% 100%
+	  }
+	  100% { 
+	    background: url('/images/games/circle-red.png') no-repeat 0 0;
+	    background-size: 100% 100%
+	  }
+	}
+	@keyframes flashingLight{
+	  0% { 
+	    background: url('/images/games/circle-white.png') no-repeat 0 0;
+	    background-size: 100% 100%
+	  }
+	  100% { 
+	    background: url('/images/games/circle-red.png') no-repeat 0 0;
+	    background-size: 100% 100%
+	  }
+	}
+	@media (max-width: 320px) {
+  	.bg-money {
+  		height: 4.9rem;
+  	}
+  }
+</style>
+</head>
+<body>
+  <!-- 游戏开始页面 -->
+  <div class="game-start games-bg" id="games">
+		<div class="game-counting-wrap">
+      <div class="game-counting">
+        <div class="game-counting-innner">
+          <img src="/images/games/logo-hongcai.png" width="44%" class="logo">
+          <img src="/images/games/header-title.png" width="85%" class="title-img">
+          <div class="bg-money">
+          	<div class="start-button start">
+	          	<img src="/images/games/start-text.png" width="50%">
+	          </div>
+          </div>
+          <div class="rule-btn ruleBtn">游戏规则</div>
+        </div>
+      </div>
+    </div>
+    <div class="scaleHand" id="startHand"></div>
+  </div>
+  <!-- 活动规则弹窗 -->
+  <div class="mask-common" id="ruleBox" style="display: none">
+  	<div class="ruleBox">
+  		<img src="/images/games/rule-box.png" alt="" class="box">
+	  	<div class="rule-title">游戏规则</div>
+	  	<div class="contents">
+	  		<div class="rule-content">
+		  		<span class="num">①</span>
+		  		<span class="txt">遇到面值50元时，点击左手按钮；<img src="/images/games/rule-hand-left.png" alt=""  width="8%"></span>
+		  	</div>
+		  	<div class="rule-content">
+		  		<span class="num">②</span>
+		  		<span class="txt">遇到面值100元时，点击右手按钮；<img src="/images/games/rule-hand-right.png" alt=""  width="8%"></span>
+		  	</div>
+		  	<div class="rule-content">
+		  		<span class="num">③</span>
+		  		<span class="txt">注意！如选择错误的方向，<img src="/images/games/rule-count.png" alt=""  width="6%">倒计时将减少5秒哟！</span>
+		  	</div>
+		  	<div class="rule-content">
+		  		<span class="num">④</span>
+		  		<span class="txt">在规定30s倒计时结束后，<img src="/images/games/rule-clock.png" alt=""  width="8%">您将获得与正确数出金额相同的特权本金奖励！（有效期3天）</span>
+		  	</div>
+		  	<div class="rule-content">
+		  		<span class="num">⑤</span>
+		  		<span class="txt">每人有5次机会，邀请好友一起玩，可额外获得1次奖励机会，多邀多得！</span>
+		  	</div>
+	  	</div>
+	  </div>
+	  <img src="/images/games/rule-close.png" alt="" class="close-btn ruleBtn">
+	  <div class="rule-start-btn start">
+		<img src="/images/games/rule-btn.png" alt="">
+	  	<span>我知道了，开始游戏</span>
+	  </div>
+  </div>
+</body>
+<script type="text/javascript">
+$(function () {
+  function getCookie(c_name) {  
+    if (document.cookie.length > 0) {  
+      c_start = document.cookie.indexOf(c_name + "=");  
+      if (c_start != -1) {  
+        c_start = c_start + c_name.length + 1;  
+        c_end = document.cookie.indexOf(";", c_start);  
+        if (c_end == -1)  
+          c_end = document.cookie.length;  
+        return unescape(document.cookie.substring(c_start, c_end));  
+      }  
+    }  
+    return "";  
+  }
+	console.log('start-openid:' + getCookie('openid'))
+	var userCountingInfo = {
+		unUsedCount: 5, //剩余游戏次数
+		usedCount: 0, //是否首次进入游戏
+		// 参与游戏用户，游戏资格初始化
+	  countingKings: function () {
+	    var _this = this
+	    $.post('/hongcai/rest/activity/countingKings', {
+        openid: getCookie('openid'),
+        channelCode: getCookie('f')
+      }, function (res) {
+	      if (res && res.ret !== -1) {
+	      	// 获取用户游戏参与信息
+	        $.get('/hongcai/rest/activity/countingKings/' + getCookie('openid') + '/userCountingInfo', function (res, status) {
+			      if (res && res.ret !== -1) {
+			        _this.unUsedCount = res.count
+			        _this.usedCount = res.usedCount
+			      } else {
+			      	console.log('获取用户游戏参与信息接口报错')
+			      }
+			    })
+	      } else {
+	        console.log(res.msg);
+	      }
+	    })
+	  },
+	  goGameCounting: function () {
+	  	var _this = userCountingInfo
+	  	if (_this.unUsedCount > 0) {
+	  		location.href= location.origin + '/views/games/game-counting.html?act=' + getCookie('act') + '&f=' + getCookie('f')
+	  	} else {
+	  		location.href= location.origin + '/views/games/game-counting-share.html'
+	  	}
+	  },
+	  showRule: function () {
+	  	var $ruleBox = $('#ruleBox')
+			$('.ruleBtn').on('touchstart', function () {
+				if ($ruleBox.css("display") == 'none') {
+					$ruleBox.show()
+				} else {
+					$ruleBox.hide()
+				}
+			})
+	  },
+	  addClick: function () {
+	  	$('.start').on('touchstart', this.goGameCounting)
+	  	this.showRule()
+	  }
+	}
+	// getCookie('openid') ? userCountingInfo.countingKings() : null
+	userCountingInfo.addClick()
+	function getConfig () {
+		if (getCookie('openid')) {
+			userCountingInfo.countingKings()
+			clearTimeout(outTimer)
+		} else {
+			var outTimer = setTimeout(function () {
+			  getConfig()
+			}, 200)
+		}
+	}
+	getConfig()
+})
+</script>
+</html>

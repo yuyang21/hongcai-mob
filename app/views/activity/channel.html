@@ -1,0 +1,135 @@
+<!-- 渠道活动落地页 -->
+<div class="new-channel" id="activity">
+  <!-- 头部header -->
+  <div class="header">
+    <img src="/images/channel-landing/111-new.png" class="display-bl" width="100%">
+  </div>
+  <div class="sharing-content">
+    <!-- 注册表单 -->
+    <form autocomplete="off" class="invite-form margin-0" name="registerForm" autocomplete="on"  id="registerForm" novalidate>
+      <div class="to-register">
+        <!-- 手机号码 -->
+        <input id="mobilesignup" name="mobile" ng-model="user.mobile" type="tel" placeholder="请输入手机号" required/>
+        <!-- 图形验证码 -->
+        <input id="picCaptcha" name="picCaptcha" ng-model="user.picCaptcha" required type="text" placeholder="请输入图形验证码" class="picCaptcha"/>
+        <img src="{{getPicCaptcha}}" id="checkCaptcha" class="captchacode fr bg-white" ng-click="refreshCode()">
+        <!-- 手机验证码 -->
+        <input id="mobileCaptcha" name="captchasignup" ng-model="user.captcha" required="required" type="tel" placeholder="请输入短信验证码" class="mobileCaptcha"/>
+        <div id="mobilecode" capcha-countdown>获取</div>
+        <!-- 立即注册按钮 -->
+        <div class="invitedBtn" ng-click="signUp(user);"></div>
+      </div>
+    </form>
+  </div>
+  <!-- 增信文案 -->
+  <div class="Trust">
+    <div class="product">
+      <div class="title">项目特点</div>
+      <!-- <div class="info info1">
+        <img src="/images/channel-landing/2-money.png" alt="">
+        风控严格：依托耕耘十多年的金融生态圈，借款企业信息知根知底，还款有保障。
+      </div>
+      <div class="info info2">
+        <img src="/images/channel-landing/2-money.png" alt="">
+        平台稳健：上线三年多，始终零逾期，资金由银行存管，信息安全通过国家等保三级认证。
+      </div> -->
+      <div class="projectType">
+        <span class="text">期限：180天以内(含180天)</span>
+        <span class="text">期望年化利率：8%-10%</span>
+        <div class="projectName">精选项目</div>
+      </div>
+      <div class="description">由优质资产方推荐，经过宏财网严格风控程序层层筛选出的优质中短期金融资产。项目均有足额抵押物，灵活稳健，具有一定流动性。</div>
+      <div class="projectType">
+        <span class="text">期限：180天以上</span>
+        <span class="text">期望年化利率：10%-12%</span>
+        <div class="projectName">尊贵项目</div>
+      </div>
+      <div class="description">由优质资产方推荐，经过宏财网严格风控程序层层筛选出的优质中长期金融资产。宏财网对项目全程把控，回报丰厚。</div>
+      <ul class="projects">
+        <!-- <li class="fl">
+          <div class="jx">
+            <p>以90天汽车金融为主，期望年化利率 7.8%-9.8%</p>
+            <p>宏财精选项目</p>
+          </div>
+        </li>
+        <li class="fr">
+          <div class="zg">
+            <p>以180天以上小微产业金融为主，期望年化利率 10.3%-11%</p>
+            <p>宏财尊贵项目</p>
+          </div>
+        </li> -->
+
+        <p class="tips"><img src="/images/channel-landing/tips.png" alt="">会员还可按等级享受加息优惠</p>
+      </ul>
+    </div>
+    <div class="hongcai">
+      <div class="title">战略合作</div>
+      <ul class="abouts">
+        <li>
+          <img src="/images/channel-landing/4.png" alt="">
+          <p>海口银行</p>
+          <p>全程资金存管</p>
+        </li>
+        <li>
+          <img src="/images/channel-landing/1-new.png" alt="">
+          <p>法大大</p>
+          <p>合同电子签章</p>
+        </li>
+        <li>
+          <img src="/images/channel-landing/2-new.png" alt="">
+          <p>易宝支付</p>
+          <p>合作支付通道</p>
+        </li>
+        <li>
+          <img src="/images/channel-landing/3.png" alt="">
+          <p>鑫融基</p>
+          <p>优质资产推荐方</p>
+        </li>
+        <li>
+          <img src="/images/channel-landing/5.png" alt="">
+          <p>国信</p>
+          <p>优质资产推荐方</p>
+        </li>
+        <li>
+          <img src="/images/channel-landing/6.png" alt="">
+          <p>青桐</p>
+          <p>优质资产推荐方</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- <div class="Trust">
+    <img src="/images/channel-landing/product_01.png" width="90%">
+    <div class="products">
+      <img src="/images/channel-landing/product_02.png" alt="">
+      <img src="/images/channel-landing/product_03.png" alt="">
+      <img src="/images/channel-landing/product_04.png" alt="">
+      <img src="/images/channel-landing/product_05.png" alt="">
+    </div>
+    <img src="/images/channel-landing/abouts_01.png" class="margin-t-4" width="90%">
+    <div class="abouts">
+      <img src="/images/channel-landing/abouts_02.png" alt="">
+      <img src="/images/channel-landing/abouts_03.png" alt="">
+      <img src="/images/channel-landing/abouts_04.png" alt="">
+      <img src="/images/channel-landing/abouts_05.png" alt="">
+    </div>
+  </div> -->
+</div>
+<!-- 受邀成功弹窗 -->
+<div class="project-mask bg-grey6 channel-mask" auto-h id="successMask" ng-show="isSuccess">
+  <div class="successMask">
+    <img src="/images/channel-landing/register-01.png" alt="" width="60%">
+    <div class="successMask-middle">
+      <img src="/images/channel-landing/register-02.png" alt="" width="85%">
+      <span>966元现金券</span>
+      <span>8.2%+6%,90天专享项目</span>
+    </div>
+    <div class="successMask-content">
+      <p>1）新手专享项目：预期年化收益率8.2%+6%，<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;90天期限</p>
+      <p>2）新手礼包：966元现金券大礼包</p>
+      <p>请登录宏财网App立刻查收，祝您赚得盆满钵满哦！</p>
+    </div>
+    <!-- 立即查收按钮：点击按钮跳转至app下载页，iOS跳转至App Store，安卓跳至应用宝； -->
+    <img src="/images/channel-landing/register-05.png" alt="" width="85%" ng-click="successMask()" onClick="javascript:window.location.href='http://a.app.qq.com/o/simple.jsp?pkgname=com.hoolai.hongcai'">
+  </div>
+</div>

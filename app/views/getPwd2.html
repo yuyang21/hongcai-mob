@@ -1,0 +1,16 @@
+<div class="padding-l-1 padding-r-1 padding-t-1 text-center margin-b-7">
+  <p class="ft-2p5 ft-89 margin-b-1 margin-t-1">修改密码</p>
+  <form autocomplete="off" class="changePwd-form margin-0 padding-b-2 padding-t-1 ft-grey" name="changePwdMobileForm" autocomplete="on"  id="">
+    <div class="change-pwd">
+      <!-- 新密码 -->
+      <input id="newPassword1" name="newPassword1" ng-model="chg.newPassword1" type="password" placeholder="请输入新密码" required/>
+      <!-- 重复密码 -->
+      <input id="newPassword2" name="newPassword2" ng-model="chg.newPassword2" required type="password" placeholder="请重复新密码"/>
+    </div>
+     <!-- 完成注册按钮 -->
+    <p class="getBack margin-0 text-center">
+      <button ng-if="!changePwdMobileForm.$invalid" type="button" class="ft-normal margin-t-3 button button-primary column" ng-click="changePassword(chg)" >确认</button>
+      <button ng-if="changePwdMobileForm.$invalid" type="button" class="ft-normal margin-t-3 button column button-disabled1" >确认</button>
+    </p>
+  </form>
+</div>

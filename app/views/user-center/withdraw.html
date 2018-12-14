@@ -1,0 +1,60 @@
+<div class="withdraw bg-white margin-b-7">
+  <div class=" margin-0 padding-1 padding-t-3">
+  <!-- <hr class="hr-grey"> -->
+  <!-- <h6 class="text-center padding-t-0p5 padding-b-0p5 margin-0"><strong>提现</strong></h6> -->
+  <div class="with-bank">
+    <!-- 未绑定银行卡 simpleWithdraw.cardStatus !== 'VERIFIED'-->
+    <div ng-include src="'views/user-center/_bankcardless-hint.html'" ng-show="simpleWithdraw.cardStatus && simpleWithdraw.cardStatus !== 'VERIFIED'"></div>
+    <!-- 已经绑定银行卡 simpleWithdraw.cardStatus == 'VERIFIED'-->
+    <form class="margin-b-1p5 ft-1p5" name="withdrawForm" ng-show="simpleWithdraw.cardStatus && simpleWithdraw.cardStatus == 'VERIFIED'">
+      <div class="bank-span" ng-show="bankcard">
+        <span>{{bankcard.openBank}}：&nbsp;</span><span>{{bankcard.cardNo}}</span>
+      </div>
+      <label class="margin-t-1"><span>可用余额：&nbsp;</span><span><b class="ft-orange">{{ simpleWithdraw.account.balance | number:2}}&nbsp;</b>元</span></label>
+      <label><span>手续费：&nbsp;</span><span><b class="ft-orange">{{simpleWithdraw.withdrawFee}}.00&nbsp;</b>元<b class="ft-grey3" ng-show="simpleWithdraw.withdrawFee === 2">&nbsp;(存管银行收取)</b><b class="ft-grey3" ng-show="simpleWithdraw.withdrawFee !== 2">&nbsp;(该笔免费)</b></span></label>
+      <label><span>可提现金额：&nbsp;</span><span><b class="ft-orange">{{ availableCashRealNo | number:2}}&nbsp;</b>元</span></label>
+      <div class="hint text-center bg-red1 box-shadow margin-t-9" ng-show="withdrawForm.amount.$dirty && withdrawForm.amount.$error.pattern">
+        <span class="ft-white"><i class="fa fa-info">&nbsp;</i>请输入数字(最多精确到小数点后两位)</span>
+      </div>
+      <div class="hint text-center bg-red1 box-shadow margin-t-9" ng-show="simpleWithdraw.amountDraw > availableCashRealNo || simpleWithdraw.amountDraw<0.01">
+        <span class="ft-white"><i class="fa fa-info">&nbsp;</i>请输入一个介于 0.01 -- {{availableCashRealNo | number:2}}之间的值</span>
+      </div>
+      <div class="padding-l-2 padding-r-2">
+        <span style="width: 35%;display: inline-block;float: left;text-align: right;font-weight: normal;">输入金额：</span>
+        <input type="text" name="amount" class="u-full-width padding-t-1 padding-b-1 padding-l-1 padding-r-1 margin-t-1 placeholder_withdraw" min="1" max="{{availableCashRealNo }}" ng-model="simpleWithdraw.amountDraw" ng-pattern="/^[0-9]*(\.[0-9]{1,2})?$/" placeholder="{{placeholderTip}}" required ng-focus="footer();" ng-blur="footer()" ng-disabled="availableCashRealNo <= 0">
+      </div>
+      <div class="padding-l-2 padding-r-2">
+        <button type="submit" class="u-full-width button button-primary margin-t-0p5 {{withdrawForm.$invalid || simpleWithdraw.amountDraw>availableCashRealNo || simpleWithdraw.amountDraw < 0.01 ? 'button-disabled' : ' '}}" ng-disabled="withdrawForm.$invalid || simpleWithdraw.amountDraw>availableCashRealNo || simpleWithdraw.amountDraw<0.01" ng-click="toWithdraw(simpleWithdraw)" >
+          申请提现
+        </button>
+      </div>
+    </form>
+    <hr class="margin-0" ng-show="simpleWithdraw.cardStatus && simpleWithdraw.cardStatus == 'VERIFIED'">
+    <div class="ft-grey4 margin-t-0p5 padding-2" ng-show="simpleWithdraw.cardStatus && simpleWithdraw.cardStatus == 'VERIFIED'">
+      <h7>温馨提示：</h7>
+      <div class="margin-b-1 margin-t-1">
+        <span class="u-pull-left"><small>1.</small></span>
+        <p class="padding-l-1 margin-0" ng-if="payCompany === 'yeepay'"><small>目前提现是由银行存管机构平台收取2元每笔的提现费用。提现金额的最小额度为1元，即额度大于或等于1元。宏财网平台不收取任何提现费用；</small></p>
+        <p class="padding-l-1 margin-0" ng-if="payCompany === 'cgt'"><small>一般情况下，提现资金将会在当日或下个工作日到账(如遇双休日或法定节假日顺延)；</small></p>
+      </div>
+      <div class="margin-b-1">
+        <span class="u-pull-left"><small>2.</small></span>
+        <p class="padding-l-1 margin-0" ng-if="payCompany === 'yeepay'"><small>由于宏财网平台不接触出借人资金，出借人资金完全通过银行存管机构（易宝支付）来完成资金划拨。由于银行与存易宝支付之间的划拨需要(T+1)日，所以当天充值金额（未出借），需要次日才能提现；</small></p>
+        <p class="padding-l-1 margin-0" ng-if="payCompany === 'cgt'"><small>银行卡挂失，注销等状态异常导致提现失败，会在收到银行通知后解除该笔资金冻结，并在两个工作日内回到账户余额。</small></p>
+      </div>
+      <!-- <div class="margin-b-1">
+        <span class="u-pull-left"><small>3.</small></span>
+        <p class="padding-l-1 margin-0" ng-if="payCompany === 'yeepay'"><small>银行存管机构平台收到用户提现申请即对提现进行转账操作，由于不同银行处理速度不同，提现资金将会当天或下个工作日到账（如遇双休日或法定节假日顺延）。</small></p>
+        <p class="padding-l-1 margin-0" ng-if="payCompany === 'cgt'"><small>海口联合农商银行资金存管系统收到用户提现申请即对提现进行转账操作，由于不同银行处理速度不同，提现资金将会当天或下个工作日到账（如遇双休日或法定节假日顺延）。</small></p>
+      </div>
+      <div class="margin-b-1">
+        <span class="u-pull-left"><small>4.</small></span>
+        <p class="padding-l-1 margin-0"><small>如果用户迟迟未收到提现资金，可能为银行卡信息填写有误，银行做正在退票操作，预计会在7个工作日内完成退票，请用户耐心等候。用户还可以联系客服（400-990-7626），寻求帮助；</small></p>
+      </div>
+      <div>
+        <span class="u-pull-left"><small>5.</small></span>
+        <p class="padding-l-1 margin-0"><small>禁止洗钱、信用卡套现、虚假交易等行为，一经发现并确认，将终止该账户的使用；</small></p>
+      </div> -->
+    </div>
+  </div>
+</div>

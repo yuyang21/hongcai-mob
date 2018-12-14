@@ -1,0 +1,72 @@
+
+<!-- 新手标 -->
+<div ng-show = "newbieBiaoProject.status ===  6 || newbieBiaoProject.status === 7">
+  <div class="gap bg-white2"></div>
+  <div class="padding-b-2" ui-sref="root.project({number: newbieBiaoProject.number})">
+    <div class="margin-t-1p5 margin-l-1p5 project-name clearfix">
+      <p class="fl ft-black1 margin-b-0 ft-1p6 margin-r-1">{{newbieBiaoProject.name}}</p>
+      <span class="margin-r-2 fr ft-orange0 margin-t-0p4 details" ng-show="newbieBiaoProject.status ===  6">{{newbieBiaoProject._timeDown.hour }}:{{newbieBiaoProject._timeDown.min }}:{{ newbieBiaoProject._timeDown.seconds }}</span>
+      <span class="margin-r-2 fr ft-1p4 ft-black1 details" ng-show="newbieBiaoProject.status !== 6">详情<i class="fa fa-angle-right ft-black1 ft-1p8 margin-l-1"></i></span>
+    </div>
+    <div class="text-center margin-t-0p5 project-show">
+      <p class="ft-orange0 project-profit margin-b-0">8<span class="ft-1p6">%</span><span class="ft-3 add-rate ft-Arial">+{{newbieBiaoProject.annualEarnings-8 || 0  | number:2}}</span><span class="ft-1p5 add-rate">%</span></p>
+      <p class="ft-1p4 ft-grey6 benefits margin-b-0">年化利率</p>
+      <div class="project-limit">
+        <div class="project-amounts display-inb position-re">
+          <p class="ft-grey6 margin-t-1 ft-1p4 margin-b-0">项目金额(元)</p>
+          <p class="ft-orange0 ft-Arial">{{newbieBiaoProject.total || 0 | currency:"":0}}</p>
+          <span class="vertical-line position-ab"></span>
+        </div>
+        <div class="project-date display-inb">
+          <p class="ft-grey6 margin-t-1 ft-1p4 margin-b-0">投资期限</p>
+          <p class="ft-orange0 ft-Arial">{{newbieBiaoProject.projectDays || 0 }}天</p>
+        </div>
+      </div>
+    </div>
+    <div class="pro-info3">
+        <div class="process">
+          <div class="progress-bar bg-orange0" ng-class="{'bg-orange0':newbieBiaoProject.status === 7 || newbieBiaoProject.status === 6 ,'bg-grey5':newbieBiaoProject.status === 11 || newbieBiaoProject.status === 9 || newbieBiaoProject.status === 10}" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:{{(newbieBiaoProject.soldStock + newbieBiaoProject.occupancyStock) * newbieBiaoProject.increaseAmount / newbieBiaoProject.total * 100}}%;">
+            <div class="type-img"></div>
+          </div>
+        </div>
+        <div class="join-in ft-Arial">{{(newbieBiaoProject.soldStock + newbieBiaoProject.occupancyStock) * newbieBiaoProject.increaseAmount / newbieBiaoProject.total * 100 | number:2}}%</div>
+    </div>
+  </div>
+</div>
+<!-- 其他项目 -->
+<div>
+  <div class="gap bg-offWhite" ng-click="toActivate()"></div>
+  <div class="padding-b-2" ui-sref="root.project({number:recommends.number})">
+    <div class="margin-t-1p5 margin-l-1p5 project-name clearfix">
+      <p class="fl ft-black1 margin-b-0 ft-1p6" >{{recommends.name}}</p>
+      <p class="fr margin-r-2 ft-orange0 margin-t-0p4 margin-b-0 details" ng-show="recommends.status ===  6">
+        {{recommends._timeDown.hour }}:{{recommends._timeDown.min }}:{{ recommends._timeDown.seconds }}
+      </p>
+      <span class="margin-r-2 fr ft-1p4 ft-black1 details" ng-show="recommends.status !== 6">详情<i class="fa fa-angle-right ft-black1 ft-1p8 margin-l-1"></i></span>
+    </div>
+    <div class="text-center margin-t-0p5 project-show">
+      <p class="ft-orange0 project-profit margin-b-0 ft-Arial">{{recommends.annualEarnings || 0 | number:2}}<span class="ft-1p6">%</span></p>
+      <p class="ft-1p4 ft-grey6 benefits margin-b-0">年化利率</p>
+      <div class="project-limit">
+        <div class="project-amounts display-inb position-re">
+          <p class="ft-grey6 margin-t-1 ft-1p4 margin-b-0">项目金额(元)</p>
+          <p class="ft-orange0 ft-Arial">{{recommends.total || 0 | currency:"":0}}</p>
+          <span class="vertical-line position-ab"></span>
+        </div>
+        <div class="project-date display-inb">
+          <p class="ft-grey6 margin-t-1 ft-1p4 margin-b-0">投资期限</p>
+          <p class="ft-orange0 ft-Arial">{{recommends.projectDays || 0 }}天</p>
+        </div>
+      </div>
+    </div>
+    <div class="pro-info3">
+        <div class="process">
+          <div class="progress-bar bg-orange0" ng-class="{'bg-orange0':recommends.status === 7 || recommends.status === 6 ,'bg-grey5':recommends.status === 11 || recommends.status === 9 || recommends.status === 10}" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:{{(recommends.soldStock + recommends.occupancyStock) * recommends.increaseAmount / recommends.total * 100}}%;">
+            <div class="type-img"></div>
+          </div>
+        </div>
+        <div class="join-in">{{(recommends.soldStock + recommends.occupancyStock) * recommends.increaseAmount / recommends.total * 100 | number:2}}%</div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,220 @@
+/*点钞游戏页*/
+.game-counting-innner div {
+  height: auto;
+}
+.game-counting-wrap p, .game-counting-wrap div {
+  font-size: .3rem;
+  color: #fff;
+  font-weight: 500;
+}
+.game-counting-innner img.logo {
+  display: block;
+  margin: .04rem auto;
+}
+.game-counting-innner img.title-img {
+  margin-left: .4rem;
+}
+.display-inbl {
+  display: inline-block;
+}
+.display-bl {
+  display: block;
+}
+.margin {
+  margin: 0 auto;
+}
+span.count-tip {
+  font-size: .28rem;
+  position: absolute;
+}
+.times img, .count-down img {
+  margin: .2rem .1rem 0 .3rem;
+}
+.count-down img {
+  margin-left: .4rem;
+  margin-right: .12rem;
+}
+/* animation */
+ @keyframes gyrate {
+  0% {
+    transform: rotate(-30deg);
+  }
+  50% {
+  	transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(30deg);
+  }
+}
+@-moz-keyframes gyrate {
+  0% {
+    transform: rotate(-30deg);
+  }
+  50% {
+  	transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(30deg);
+  }
+}
+@-webkit-keyframes gyrate
+{
+  0% {
+    transform: rotate(-30deg);
+  }
+  50% {
+  	transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(30deg);
+  }
+}
+@-o-keyframes gyrate
+{
+  0% {
+    transform: rotate(-30deg);
+  }
+  50% {
+  	transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(30deg);
+  }
+}
+.count-down img.hourglass {
+  animation: gyrate .1s 0s infinite alternate;
+  -moz-animation: gyrate .1s 0s infinite alternate;
+  -webkit-animation: gyrate .1s 0s infinite alternate;
+  -o-animation: gyrate .1s 0s infinite alternate;
+} 
+.count-down .process-wrap {
+  position: relative;
+  margin-left: 2%;
+  width: 64%;
+  height: .58rem;
+  /*background: url('/images/games/process-bg.png') no-repeat center center;
+  background-size: 100%;*/
+}
+.count-down .process-wrap .process {
+  height: .2rem;
+  width: 96%;
+  background-color: #fff026;
+  border-radius: .15rem;
+  position: absolute;
+  top: 28%;
+  left: .04rem;
+}
+.count-down .process-wrap .count-tip {
+  right: .2rem;
+  top: -.3rem;
+  opacity: 1;
+  display: none;
+}
+.count-down div.display-inbl {
+  width: 83%;
+  height: .43rem;
+}
+.count .count-statistics {
+  margin: .2rem .2rem 0;
+  height: 1rem;
+  width: 100%;
+ /* background: url('/images/games/icon-money.png') no-repeat 38% center;
+  background-size: 23%;*/
+  text-align: center;
+  position: relative;
+}
+.count .count-statistics p {
+  margin: .25rem 0 0.4rem .2rem;
+  color: #fff026;
+}
+.count .count-statistics p span {
+  position: absolute;
+  color: #fff;
+  left: 2.35rem;
+  top: -.15rem;
+  display: none;
+}
+.count .count-statistics p #totalMoney {
+  color: #fff026;
+  font-size: .32rem;
+  font-weight: bold;
+}
+.count .count-statistics p span.icon-rule {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 83%;
+  width: .9rem;
+  padding: .07rem 0 .07rem .1rem;
+ /* background: url('/images/games/icon-rule.png') no-repeat 0 0;
+  background-size: 100% 100%;*/
+  font-size: .24rem;
+  color: #ff001a;
+  line-height: 1.2;
+  display: block;
+}
+.count .count-money img.box-top {
+  margin-bottom: -.19rem;
+}
+.count .count-money .money-list {
+  margin-top: -.33rem;
+  height: 4.311rem;
+  overflow: hidden;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+.count .count-money ul.slide-down, .count .count-money ul li img.out {
+  -webkit-transition: all .4s linear;
+  -moz-transition: all .4s linear;
+  -o-transition: all .4s linear;
+  -ms-transition: all .4s linear;    
+  transition: all .4s linear;
+  -webkit-transform: translateZ(0); 
+  -moz-transform: translateZ(0); 
+  -ms-transform: translateZ(0); 
+  -o-transform: translateZ(0); 
+  transform: translateZ(0);
+}
+.count .count-money ul li {
+  /*width: 100%;
+  float: left;*/
+  font-size: 0;
+  height: 1.437rem;
+}
+.count .count-money .btns {
+  position: absolute;
+  bottom: 1%;
+  width: 96%;
+  left: 2%;
+}
+.count .count-money .btns div {
+  width: 37%;
+  position: relative;
+  /*height: 1rem;*/
+  padding: 1.5rem .2rem .8rem;
+  /*z-index: 999;*/
+}
+.btns .btn-left img:first-child, .btns .btn-right img:first-child {
+  position: absolute;
+  top: -.6rem;
+}
+.btns .btn-left img:first-child {
+  left: 0.4rem;
+}
+.btns .btn-right img:first-child {
+  right: 0.4rem;
+}
+.btns .btn-left span, .btns .btn-right span {
+  position: absolute;
+  top: .7rem;
+  font-size: .42rem;
+  font-family: CTCuHeiSJ;
+}
+.btns .btn-left span {
+  left: .5rem;
+  color: #c8e5d0;
+}
+.btns .btn-right span {
+  right: .5rem;
+  color: #ffbdc5;
+}

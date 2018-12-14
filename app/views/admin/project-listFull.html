@@ -1,0 +1,85 @@
+<!-- 满标项目列表 -->
+<html class="no-js" lang="zh-cn">
+<script type="text/javascript" src="/styles/un-min/jquery.min.js"></script>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1">
+  <title>满标项目列表</title>
+  <script src="/styles/un-min/rem.js"></script>
+	<style>
+	 	body {
+	 		margin: 0;
+	 	}
+	 	table{
+	    width: 95%;
+	  	margin: 0 auto;
+	  	margin-top: .4rem;
+	    border-collapse: collapse;
+	    border: 1px solid #ddd;
+	    text-align: center;
+	    border-radius: .2rem;
+		}
+		thead{
+			color: #666;
+		}
+		thead th{
+			line-height: .7rem;
+			border: 1px solid #ddd;
+		}
+		tbody tr{
+			line-height: .7rem;
+		}
+		td{
+			border: 1px solid #ddd;
+		}
+		.blue{
+			color: #0B0AEF;
+		}
+		.noData{
+			padding-top: 4rem;
+			font-size: .3rem;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+  <div class="project-listFull">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>项目名称</th>
+					<th>资产推荐方</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+  </div>
+</body>
+<script type="text/javascript">
+  function goLoan (projectId) {
+		location.href= location.origin + '/views/admin/project-loan.html?projectId=' + projectId
+  }
+  function getProjects () {
+  	$.get('/hongcai/rest/erp/projects?maxDate=0&minDate=0&status=8&type=0&skip=0&max=1000', function (res, status) {
+		  if (res && res.ret !== -1) {
+		  	var list = res.list
+		  	if (list.length > 0) {
+		  		for (var i = 0; i < list.length; i++) {
+		  			if (list[i].projectAudit === null) {
+		  				$('tbody').append('<tr><td>' + list[i].project.name +'</td><td>' + list[i].project.parentEnterpriseName +'</td><td>待审批</td></tr>')
+		  			} else if (list[i].project.status === 8 && list[i].projectAudit !== null) {
+		  				$('tbody').append('<tr><td>' + list[i].project.name +'</td><td>' + list[i].project.parentEnterpriseName +'</td><td class="blue" onClick="goLoan('+ list[i].project.id +')">放款</td></tr>')
+		  			}
+		  		}
+		  	} else {
+		  		$('table').hide();
+		  		$('.project-listFull').append('<div class="noData">暂无满标项目</div>')
+		  	}
+		  }
+		 })
+  }
+	getProjects()
+</script>
+</html>

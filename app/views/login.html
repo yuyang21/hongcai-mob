@@ -1,0 +1,43 @@
+<div class="padding-l-1 padding-r-1 padding-t-1 text-center">
+  <p class="ft-2p5 ft-65 margin-b-1 margin-t-1">登录宏财账号</p>
+  <!-- 登录密码登录表单 -->
+  <form name="loginForm" id="loginForm" class="login-form ft-grey" autocomplete="on" ng-if="isPassward">
+    <div class="to-login">
+      <input id="username" name="username" required="required" type="tel" ng-model="user.mobile" placeholder="请输入手机号" required><br>
+      <input id="password" name="password" ng-model="user.password" required="required" type="password" placeholder="请输入登录密码" class="input-pwd" required/>
+      <span class="pwd-eyes"><i class="fa fa-eye-slash ft-9f" select-eyes></i></span>
+    </div>
+    <p><div ui-sref="root.getPwd1" class="ft-orange0 pull-right margin-t-0p5">忘记密码？</div></p>
+    <p class="login margin-0 text-center margin-t-2">
+      <button type="submit" class="button button-primary column ft-normal margin-t-1p5 margin-b-1p5 {{loginForm.$invalid ? 'button-disabled1' : ''}}" ng-click="toLogin(user)" ng-disabled="loginForm.$invalid || busy">立即登录</button>
+    </p>
+    <div class="change_link margin-0 text-center">
+      <span class="pull-left ft-9f" ng-show="!showBack"><input type="checkbox" checked>一周内自动登录</span>
+      <div ng-click="changeLogin();" class="ft-red1 pull-right ft-blue8 margin-b-0p5">验证码登录></div>
+    </div>
+    <div ui-sref="root.register2" class="ft-red1 pull-right ft-blue8 clear">立即注册></div>
+  </form>
+
+  <!-- 验证码登录表单 -->
+  <form name="mobileCaptchaForm" id="mobileCaptchaForm" class="mobileCaptcha-form login-form ft-grey" autocomplete="on" ng-if="!isPassward" novalidate>
+    <div class="to-login">
+      <!-- 手机号码 -->
+      <input id="mobilesignup" name="mobile" ng-model="user.mobile" type="tel" placeholder="请输入手机号" required/>
+      <!-- 图形验证码 -->
+      <input id="picCaptcha" name="picCaptcha" ng-model="user.picCaptcha" required type="text" placeholder="请输入图形验证码" class="captchacode"/>
+      <span>
+        <img ng-src="{{getPicCaptcha}}" id="checkCaptcha" class="pic-verify no-padding margin-t--13 margin-l-5" ng-click="refreshCode()" width="78" height="40">
+      </span>
+      <!-- 短信验证码 -->
+      <input id="captchasignup" name="captchasignup" ng-model="user.captcha" required="required" type="number" placeholder="请输入短信验证码" class="captchacode"/>
+      <span>
+        <button id="mess" capcha-countdown>短信验证码</button>
+      </span>
+    </div>
+    <p class="login margin-0 text-center margin-t-2">
+      <button type="submit" class="button button-primary column ft-normal margin-t-1p5 margin-b-1p5 {{mobileCaptchaForm.$invalid ? 'button-disabled1' : ''}}" ng-click="toMobileLogin(user)" ng-disabled="mobileCaptchaForm.$invalid || busy">立即登录</button>
+    </p>
+    <div ng-click="changeLogin();" class="ft-red1 pull-right ft-blue8 margin-b-0p5">登录密码登录></div>
+    <div ui-sref="root.register2" class="ft-red1 pull-right ft-blue8 clear">立即注册></div>
+  </form>
+</div>

@@ -1,0 +1,101 @@
+<!--债权管理-->
+<div class="assignments bg-white margin-b-5" auto-height>
+	<ul class="assignments-tab nav-ul bg-white overflow-hid margin-b-1 border-grey2-bottom">
+		<li class="column text-center margin-0 padding-t-1 padding-b-1" ng-class="{active: searchStatus===$index}" ng-repeat="tab in tabs track by $index" ng-click="switchTab($index)" my-click-once>{{tab.title}}</li>
+	</ul>
+	<div ng-if="searchStatus==0">
+    <div ng-repeat="item in transferablesList track by $index" class="border-grey-top">
+      <div class="assignment-item margin-b-1">
+        <div class=" padding-l-1p5 padding-r-1p5 padding-t-0p5 padding-b-1 overflow-hid bg-white">
+          <div class="border-greye-bottom overflow-hid padding-b-0p5 content-title">
+            <span class="u-pull-left border-left1" ng-show="widthFlag===0 && item.projectName.length <= 11">{{item.projectName}} </span>
+            <span class="u-pull-left border-left1" ng-show="widthFlag===0 && item.projectName.length > 11">{{item.projectName | limitTo:8}}... </span>
+            <span class="u-pull-left border-left1"  ng-show="widthFlag===1 || widthFlag===2">{{item.projectName}}</span>
+            <img class="fl" src="/images/user-center/rate-icon.png" alt="" width="9%" ng-show="item.couponProfit > 0">
+            <span class="u-pull-right ft-orange2 ft-1p3" ng-show="!item.canTransfer" ng-click="showRule(item.createTime)">&nbsp;暂不可转&nbsp;</span>  
+            <span class="u-pull-right ft-orange2 ft-1p3" ng-show="item.canTransfer" ng-click="goTransfer(item.number);">&nbsp;转让&nbsp;</span>
+          </div>
+        </div>
+        <div class="u-full-width padding-t-0p5 padding-b-1p5 padding-r-1 padding-l-0p5 overflow-hid bg-white border-grey2-bottom ">
+          <div class="assignment-item-info u-pull-left text-center ft-1p4 border-greye-right">
+            <strong class="ft-grey999 content-number">{{item.amount | number:2 || 0}}</strong>
+            <br>
+            <span class="ft-greyaaa padding-l-0p5">本(元)</span>
+          </div>
+          <div class="assignment-item-info u-pull-left text-center ft-1p4 border-greye-right">
+            <strong class="ft-grey999 content-number">{{item.profit - item.returnProfit | number:2 || 0}}</strong><strong class="ft-red0 ft-1p4" ng-show="item.couponProfit > 0">+{{item.couponProfit | number:2 || 0 }}</strong>
+            <br>
+            <span class="ft-greyaaa">息(元)</span>
+          </div>
+          <div class="assignment-item-info u-pull-right text-center ft-1p4">
+            <strong class="ft-grey999 content-number">{{item.repaymentDate | date : 'yyyy/MM/dd'}}</strong>
+            <br>
+            <span class="ft-greyaaa">到期日</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-md-offset-4 text-center ft-black6 margin-t-10" ng-if="transferablesList.length<=0">
+      <img src="images/user-center/deal-list.png" width="35%" ui-sref="root.userCenter.assignments-transfer-details({number:item.number})">
+      <p class="margin-t-2">暂无可转让项目</p>
+    </div>
+    <div class="text-center bg-white" ng-show="transferablesList.length>0 && !loading && page < transferableCounts" ng-click="loadAssignmentMore(searchStatus);">
+      <p class="margin-b-0 padding-t-3 padding-b-3"><i class="fa fa-list-ul ft-orange"></i>&nbsp;<a class="ft-black">查看更多</a></p>
+    </div>
+  </div>
+  <div ng-if="searchStatus==1 || searchStatus==2">
+    <div ng-repeat="data in assignmentsList track by $index" class="border-grey-top">
+      <div class="assignment-item margin-b-1" ui-sref ='root.userCenter.assignmentList-details({number:data.number})'>
+        <div class=" padding-l-1p5 padding-r-1p5 padding-t-0p5 padding-b-1 overflow-hid bg-white">
+          <div class="border-grey2-bottom overflow-hid padding-b-0p5 position-re content-title">
+            <span class="u-pull-left assignmentsZhuan text-center">转</span>
+            <span class="u-pull-left border-left1 border-none padding-l-0p2" ng-show="widthFlag===0 && data.name  .length <= 11">{{data.name | limitTo: 15 }}</span>
+            <span class="u-pull-left border-left1 border-none padding-l-0p2" ng-show="widthFlag===0 && data.name.length > 11">{{data.name | limitTo:8}}... </span>
+            <span class="u-pull-left border-left1 border-none padding-l-0p2"  ng-show="widthFlag===1 || widthFlag===2">{{data.name}}</span>
+          </div>
+        </div>
+        <div class="u-full-width padding-t-0p5 padding-b-1p5 padding-r-1 padding-l-0p5 overflow-hid bg-white border-grey2-bottom">
+          <div class="assignment-item-info u-pull-left text-center ft-1p4 border-greye-right">
+            <strong class="ft-grey999 content-number">{{data.amount || 0 | number: 2}}</strong>
+            <br>
+            <span class="ft-greyaaa padding-l-0p5">转让(元)</span>
+          </div>
+          <div class="assignment-item-info u-pull-left text-center ft-1p4 border-greye-right">
+            <strong class="ft-grey999 content-number">{{data.soldStock * 100 || 0 | number: 2}}</strong>
+            <br>
+            <span class="ft-greyaaa">已转(元)</span>
+          </div>
+          <div class="assignment-item-info u-pull-right text-center ft-1p4">
+            <strong class="ft-orange2 content-number">{{data.transferedIncome || 0 | number: 2}}</strong>
+            <br>
+            <span class="ft-greyaaa">收入(元)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-md-offset-4 text-center ft-black6 margin-t-10" ng-if="searchStatus==1 && assignmentsList.length<=0">
+      <img src="images/user-center/deal-list.png" width="35%">
+      <p class="margin-t-2">暂无转让中项目</p>
+    </div>
+    <div class="col-md-4 col-md-offset-4 text-center ft-black6 margin-t-10" ng-if="searchStatus==2 && assignmentsList.length<=0">
+      <img src="images/user-center/deal-list.png" width="35%">
+      <p class="margin-t-2">暂无已转让项目</p>
+    </div>
+    <div class="text-center bg-white" ng-show="assignmentsList.length>0 && !loading && index < totalPage" ng-click="loadAssignmentMore(searchStatus);">
+      <p class="margin-b-0 padding-t-3 padding-b-3"><i class="fa fa-list-ul ft-orange"></i>&nbsp;<a class="ft-black">查看更多</a></p>
+    </div>
+  </div>
+</div>
+<div class="assignments-modal">
+  <!-- 公用的弹框蒙层 -->
+  <div class="rec-showmoney share-page-breakWishLayer position-ab width-100 height-100 position-re bg-grey0p5" ng-show="modalMsg">
+    <!-- 活动详情  弹出来需要去掉X号 -->
+    <section class="rec-act-rule rec-act-rule1 bg-white margin-l-4 margin-r-4  border-ra-0p5" ng-show="modalMsg">
+      <div class="rule padding-t-2 padding-r-1 padding-l-1p8 padding-b-1p5 text-center">
+        <p class="margin-b-0">您该笔债权持有时间不足30日，</p>
+        <p class="margin-b-0 margin-l-p1 padding-b-2">{{createTime +  30*24*3600*1000 | date:'yyyy.MM.dd'}}日起可以进行转让</p>
+        <button class="rec-rule-btn button" ng-click="closeRule()">我知道了</button>
+      </div>
+    </section>
+  </div>
+</div>

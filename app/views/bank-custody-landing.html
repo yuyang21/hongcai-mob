@@ -1,0 +1,146 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1">
+  <title>银行存管介绍</title>
+  <style>
+    body {
+      max-width: 640px;
+      height: 100%;
+      margin: 0 auto;
+      font-size: 1.5em;
+      font-weight: 400;
+    }
+    html {
+      font-size: 62.5%;
+    }
+    .bank-custody-landing img {
+      width: 100%;
+      vertical-align: top;
+    }
+    .bank-custody-landing .count-down {
+      position: relative;
+    }
+    .bank-custody-landing .time {
+      position: absolute;
+      bottom: 15%;
+      left: 30%;
+      color: rgba(255,255,255,0.78);
+      font-size: 1.5rem;
+    }
+    .bank-custody-landing .countDown0, .bank-custody-landing .countDown {
+      display: inline-block;
+      width: 1.4rem;
+      height: 2rem;
+      /*line-height: 2rem;*/
+      vertical-align: middle;
+      text-align: center;
+      border-radius: 2px;
+      color: #000;
+      background-color: #39fba4;
+      background-image:-webkit-linear-gradient(to bottom right, #27e0f7, #39fba4); 
+      background-image:linear-gradient(to bottom right, #27e0f7, #39fba4);
+    }
+    .bank-custody-landing .toProcess {
+      position: relative;
+    }
+    .toProcess .newUser {
+      width: 25%;
+      height: 5.5rem;
+      position: absolute;
+      bottom: -2rem;
+      /*background: rgba(0,0,0,0.8);*/
+      left: 14%;
+    }
+    .toProcess .oldUser {
+      width: 25%;
+      height: 5.5rem;
+      position: absolute;
+      bottom: -2rem;
+      /*background: rgba(0,0,0,0.8);*/
+      right: 16%;
+    }
+    @media (min-width:320px) {
+    }
+    @media (min-width:360px) {
+    }
+    @media (min-width:375px) {
+    }
+    @media (min-width:411px) {
+    }
+  </style>
+</head>
+<!-- 开通银行资金存管系统落地页 -->
+<div class="bank-custody-landing">
+  <img src="/images/bank-deposits/bank-custody01.png">
+  <div class="count-down">
+    <img src="/images/bank-deposits/bank-custody02.png">
+    <div class="time" id="time">距离开始上线还有 <span class="countDown0" id="countDown0">1</span> <span class="countDown" id="countDown">0</span> 天</div>
+  </div>
+  <img src="/images/bank-deposits/bank-custody03.png">
+  <img src="/images/bank-deposits/bank-custody04.png">
+  <img src="/images/bank-deposits/bank-custody05.png">
+  <img src="/images/bank-deposits/bank-custody06.png">
+  <img src="/images/bank-deposits/bank-custody07.png">
+  <img src="/images/bank-deposits/bank-custody08.png">
+  <img src="/images/bank-deposits/bank-custody09.png">
+  <img src="/images/bank-deposits/bank-custody10.png">
+  <img src="/images/bank-deposits/bank-custody11.png">
+  <img src="/images/bank-deposits/bank-custody12.png">
+  <img src="/images/bank-deposits/bank-custody13.png">
+  <img src="/images/bank-deposits/bank-custody14.png">
+  <img src="/images/bank-deposits/bank-custody15.png">
+  <img src="/images/bank-deposits/bank-custody16.png">
+  <img src="/images/bank-deposits/bank-custody17.png">
+  <img src="/images/bank-deposits/bank-custody18.png">
+  <div class="toProcess">
+    <img src="/images/bank-deposits/bank-custody19.png">
+    <div class="newUser" onclick="newUserProcess();"></div>
+    <div class="oldUser" onclick="oldUserProcess();"></div>
+  </div>
+  <img src="/images/bank-deposits/bank-custody20.png">
+</div>
+<script>
+  function isWeixin(){
+    var ua = navigator.userAgent.toLowerCase();
+    return ua.match(/MicroMessenger/i)=="micromessenger";
+  }
+  function getTime() {
+    // var startDate = new Date('2017.06.26 21:00:00').getDate();
+    var startDate = new Date('2017/06/26 21:00').getDate();
+    var startTime = new Date('2017/06/26 21:00').getTime();
+    var onlineTime = new Date('2017/06/29 11:00').getTime();
+    var today = new Date().getDate();
+    var countDown = startDate - today;
+    if (countDown <=0) {
+      
+      countDown0 = 0;
+      countDown1 = 1;
+      if (onlineTime - new Date().getTime() >=0 && onlineTime - new Date().getTime() <= onlineTime - startTime) {
+        document.getElementById('time').innerHTML = '   正在上线中···';
+        document.getElementById('time').style.left = '40%';
+        return
+      }
+    }
+    if (countDown <10 && countDown >0) {
+      countDown1 = countDown1 + 1;
+      countDown0 = 0;
+    }
+    document.getElementById('countDown0').innerHTML = countDown0;
+    document.getElementById('countDown').innerHTML = countDown1;
+  }
+  getTime();
+  function newUserProcess() {
+    if (isWeixin()) {
+      window.location.href = "views/new-user-process.html";
+    }else {
+      window.location.href = "new-user-process.html";
+    }
+  }
+  function oldUserProcess() {
+    if (isWeixin()) {
+      window.location.href = "views/old-user-process.html";
+    }else {
+      window.location.href = "old-user-process.html";
+    }
+  }
+</script>

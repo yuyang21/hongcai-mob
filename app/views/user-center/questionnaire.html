@@ -1,0 +1,70 @@
+<!-- 风险测评 -->
+<div class="questionnaire" auto-height>
+  <form name="questionnaireForm"><br>
+    <h5 class="text-center ft-666">《出借人风险承受能力评估调查问卷》</h5>
+    <div class="question ft-666">
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;风险提示：网络出借可能获得比较高的出借收益，但也存在比较大的出借风险，请您根据自身的风险承受能力，审慎作出出借决定。</p>
+      <p>
+        尊敬的出借人： <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了便于您了解自身的风险承受能力，选择合适的出借标的和服务，请您填写以下风险承受能力评估问卷。下列问题可协助评估您对出借标的和服务的风险承受能力，请您根据自身情况认真选择。评估结果仅供参考，不构成出借建议。为了及时了解您的风险承受能力，我们建议您持续做好动态评估。我们承诺对您的所有个人资料保密。
+      </p>
+    </div>
+    <!-- 问题及答案 -->
+    <div class="question" ng-repeat="item in questionnaires">
+      <div class="title overflow-hid clearfix">
+        <span class="no fl">{{ $index + 1 || 1}}</span>
+        <span class="content fl">{{ item.title || '您的年龄是：'}}</span>
+      </div>
+      <div class="answers">
+        <div class="answer overflow-hid clearfix" ng-repeat="answer in item.answers" id="{{answer.id}}" ng-click="select(item.id,answer.id)">
+          <span class="unselected fl"></span>
+          <!-- <input type="radio" ng-model="item.id"  id="a{{answer.id}}" class="fl" required>  --><label class="fl" >{{ answer.answer || '30岁以下' }}</label>
+        </div>
+      </div>
+    </div>
+    <div class="question">
+      <p>在您考虑投资之前，应该先准备一笔可以随时动用且足以应对不时之需的备用金。（建议至少是您3个月家庭开支或3至6个月内的个人总支出。）</p>
+    </div>
+    <!-- 提交按钮 -->
+    <div class="position-re margin-t-5"> 
+      <div class="errMsg position-ab" ng-show="errMsg">
+        {{errMsg}}
+      </div>  
+      <button type="button" class="button button-primary submit-btn {{!questionnaireForm.$invalid ? 'button-disabled1' : ''}} "  ng-click="submitForm()">提交</button>
+    </div>
+    
+  </form>
+</div>
+<div class="questionBox share-page-breakWishLayer bg-grey0p5" ng-show="showMsk">
+  <div class="rec-act-rule bg-white margin-l-3 margin-r-3 border-ra-0p5 margin-t-10">
+    <div class=" rec-act-rule-btm margin-l-1 margin-r-1 ft-1p5">
+        <div class="rule padding-b-1p5 padding-t-1">
+          <p class="margin-t-0 margin-b-0 text-justify">尊敬的宏财用户，您的得分总计为 <u>{{score}}分</u>，您的风险测评结果为 <u>{{riskPreference}}</u>，下表是宏财网为您规划的出借上限，选择符合您风险承受能力的项目，理性出借（上限值仅供参考，不作为出借建议）：</p>
+          <ul class="table">
+            <li>
+              <p class="first ft-bold">项目风险等级</p>
+              <p>A</p>
+              <p>B</p>
+              <p>C</p>
+              <p>D</p>
+            </li>
+            <li>
+              <p class="first ft-bold">累计出借上限</p>
+              <p>{{riskInvestLimits.alimits >= 0 ? (riskInvestLimits.alimits / 10000) + '万元' : '不限'}}</p>
+              <p>{{riskInvestLimits.blimits >= 0 ? (riskInvestLimits.blimits / 10000) + '万元' : '不限'}}</p>
+              <p>{{riskInvestLimits.climits >= 0 ? (riskInvestLimits.climits / 10000) + '万元' : '不限'}}</p>
+              <p>{{riskInvestLimits.dlimits >= 0 ? (riskInvestLimits.dlimits / 10000) + '万元' : '不限'}}</p>
+            </li>
+            <li>
+              <p class="first ft-bold">可出借</p>
+              <p>{{riskInvestLimits.remainALimits >= 0 ? (riskInvestLimits.remainALimits / 10000) + '万元' : '不限'}}</p>
+              <p>{{riskInvestLimits.remainBLimits >= 0 ? (riskInvestLimits.remainBLimits / 10000) + '万元' : '不限'}}</p>
+              <p>{{riskInvestLimits.remainCLimits >= 0 ? (riskInvestLimits.remainCLimits / 10000) + '万元' : '不限'}}</p>
+              <p>{{riskInvestLimits.remainDLimits >= 0 ? (riskInvestLimits.remainDLimits / 10000) + '万元' : '不限'}}</p>
+            </li>
+          </ul>
+          <button class="question-btn padding-0" ng-click="closeMsk()">我知道了</button>
+        </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="credit bg-white margin-b-4" ng-init="toggle.activeTab=0;" auto-height>
+  <div class="u-full-width credit-head text-center ft-white">
+    <div class="text-center ft-white">
+      <div class="overflow-hid">
+        <ul class="colums">
+          <li class="text-center fl width-0p3 position-re ft-1p4">
+            <p class="margin-b-0 ft-1p6 ft-Arial ft-f3">{{creditStat.holdingAmount || 0  | number:2 }}</p>
+            <p class="margin-b-0 ft-1p4  ft-f3">待收本金(元)</p>
+            <i class="fl border-white-right position-ab right-0 line"></i>
+          </li>
+          <li class="text-center fl width-0p3 position-re ft-1p4">
+            <p class="margin-b-0 ft-1p6 ft-Arial ft-f3">{{ creditStat.totalProfit + creditStat.couponReturnProfit || 0  | number:2 }}</p>
+            <p class="margin-b-0  ft-f3">累计利息(元)</p>
+            <i class="fl border-white-right position-ab right-0 line"></i>
+          </li>
+          <li class="text-center fl width-0p3 ft-1p4">
+            <p class="margin-b-0 ft-1p6 Arial ft-f3">{{ creditStat.profit + creditStat.discountInterest + creditStat.couponProfit - creditStat.couponReturnProfit - creditStat.totalProfit || 0   | number:2 }}</p>
+            <p class="margin-b-0  ft-f3">待收利息(元)</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- <span class="ft-1p5">待收收益：</span><span class="ft-white ft-2p5  ft-Arial">{{account.waitingProfit || 0 | number: 2}}</span>&nbsp;元 -->
+  </div>
+  <ul class="account-tab1 nav-ul bg-white overflow-hid margin-b-1p3 border-grey2-bottom ft-666 ft-Arial">
+    <li class="column text-center margin-0 padding-t-1 padding-b-1" ng-class="{active: toggle.activeTab===$index}" ng-repeat="tab in tabs track by $index" ng-click="toggle.switchTab($index)" my-click-once>{{tab.title}}({{$index == 0 ? holdingCount : endProfitCount}})</li>
+  </ul>
+  <div class="tab-content u-full-width overflow-hid text-center" ng-class="{active: toggle.activeTab===$index}" ng-repeat="tab in tabs track by $index" ng-show=" creditsData && credits.length > 0">
+    <div ng-repeat="item in credits track by $index" ng-include src='"views/user-center/_credit-detail.html"'>
+    </div>
+    <div class="text-center bg-white ft-666" ng-show="!loading && totalPage > page ">
+      <p class="margin-b-0 padding-t-3 padding-b-3"><i class="fa fa-list-ul ft-orange"></i>&nbsp;<a ng-click="loadCreditMore();" class="ft-black">查看更多出借信息</a></p>
+    </div>
+  </div>
+  <div class="row text-center margin-t-5 padding-l-1 padding-r-1 ft-666" ng-show="creditsData && !loading && credits.length <= 0">
+    <img src="images/user-center/deal-list.png" width="35%">
+    <p class="padding-2-t margin-t-2">暂无数据...</p>
+    <button type="button" class="u-full-width ft-1p8 button button-primary" ui-sref="root.project-list">浏览出借产品</button>
+  </div>
+</div>

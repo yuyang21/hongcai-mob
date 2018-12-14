@@ -1,0 +1,37 @@
+<div class="padding-l-1 padding-r-1 padding-t-1 text-center margin-b-7">
+  <p class="ft-2p5 ft-65 margin-b-1 margin-t-1">注册宏财账号</p>
+  <form autocomplete="off" class="register-form margin-0 padding-b-2 padding-t-1 ft-grey" name="registerForm" autocomplete="on"  id="registerForm" novalidate>
+    <div class="to-register">
+      <!-- 手机号码 -->
+      <input id="mobilesignup" name="mobile" ng-model="user.mobile" type="tel" placeholder="请输入手机号" required/>
+      <!-- 图形验证码 -->
+      <input id="picCaptcha" name="picCaptcha" ng-model="user.picCaptcha" required type="text" placeholder="请输入图形验证码" class="captchacode"/>
+      <span><img ng-src="{{getPicCaptcha}}" id="checkCaptcha" class="pic-verify no-padding margin-t--13 margin-l-5" ng-click="refreshCode()" width="78" height="40"></span>
+      <!-- 短信验证码 -->
+      <input id="captchasignup" name="captchasignup" ng-model="user.captcha" required="required" type="number" placeholder="请输入短信验证码" class="captchacode"/>
+      <span>
+      <button id="mess" capcha-countdown>短信验证码</button></span>
+      <!-- 登录密码 -->
+      <input id="passwordsignup" name="password" ng-model="user.password" required type="password" placeholder="请输入登录密码" class="input-pwd" />
+      <span class="pwd-eyes"><i class="fa fa-eye-slash ft-9f text-right" select-eyes></i></span>
+      <!-- 邀请码 -->
+      <!-- <p class="margin-b-0 padding-t-1 ft-blue8 text-align clear" ng-click="investCode =!investCode;">邀请码<i class="fa fa-angle-double-down" aria-hidden="true"></i></p>
+      <input class="input-invitecode" name="invitationCode" type="text" placeholder="邀请人手机号码（选填）" style="border-radius:0;" ng-model="user.inviteCode" ng-if="investCode"/> -->
+    </div>
+    <!-- 完成注册按钮 -->
+    <p class="signin margin-0 text-center">
+      <button type="submit" class="ft-normal margin-t-2 button  column {{registerForm.$invalid ? 'button-disabled1' : 'button-primary'}}" ng-click="signUp(user)">完成注册</button>
+    </p>
+    <p class="margin-0 pull-left ft-small ft-9f">
+      <input id="isremind" type="checkbox" ng-click="checked()" checked />注册即表示您同意<a href="javascript:;" ng-click="toggle();" class="ft-blue8">注册服务协议</a>
+    </p>
+    <p class="change_link margin-0 pull-right ft-small">
+      <div capcha-countdown></div>
+      <div ui-sref="root.login" class="to_login ft-blue8 fr"> 登录>></div>
+    </p>
+  </form>
+</div>
+<div class="alert-agreement" ng-show="showRegistrationAgreement" ng-include src="'views/_registration-agreement.html'">
+</div>
+<div class="mask" ng-show="showRegistrationAgreement"></div>
+

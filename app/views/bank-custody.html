@@ -1,0 +1,48 @@
+<style>
+  .bank-custody img {
+    width: 100%;
+    vertical-align: top;
+  }
+  .bank-custody .toProcess {
+    position: relative;
+  }
+  .toProcess .newUser {
+    width: 76%;
+    height: 5.5rem;
+    line-height: 5.5rem;
+    position: absolute;
+    bottom: -2.5rem;
+    /*background: rgba(0,0,0,0.8);*/
+    background: url('/images/bank-deposits/custody-btn.png') no-repeat center center;
+    background-size: contain;
+    left: 12%;
+    color: #000;
+    text-align: center;
+  }
+</style>
+<!-- 开通银行资金存管系统落地页 -->
+<div class="bank-custody" ng-controller="ActivateCtrl">
+  <img src="/images/bank-deposits/custody01.png">
+  <img src="/images/bank-deposits/custody02.png">
+  <img src="/images/bank-deposits/custody03.png">
+  <img src="/images/bank-deposits/custody04.png">
+  <img src="/images/bank-deposits/custody05.png">
+  <img src="/images/bank-deposits/custody06.png">
+  <img src="/images/bank-deposits/custody07.png">
+  <img src="/images/bank-deposits/custody08.png">
+  <img src="/images/bank-deposits/custody09.png">
+  <img src="/images/bank-deposits/custody10.png">
+  <img src="/images/bank-deposits/custody11.png">
+  <img src="/images/bank-deposits/custody12.png">
+  <img src="/images/bank-deposits/custody13.png">
+  <img src="/images/bank-deposits/custody14.png">
+  <img src="/images/bank-deposits/custody15.png">
+  <img src="/images/bank-deposits/custody16.png">
+  <img src="/images/bank-deposits/custody17.png">
+  <img src="/images/bank-deposits/custody18.png">
+  <div class="toProcess">
+    <img src="/images/bank-deposits/custody19.png">
+    <div class="newUser" ng-click="toOpen();" ng-hide="isLogged && userAuth.active === true">开通银行存管账户</div>  
+  </div>
+  <img src="/images/bank-deposits/custody20.png" ng-hide="isLogged && userAuth.active === true">
+</div>

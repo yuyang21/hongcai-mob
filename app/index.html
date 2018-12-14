@@ -1,0 +1,254 @@
+<!doctype html>
+<html class="no-js" lang="zh-cn" xmlns:ng="http://angularjs.org" ng-app="p2pSiteMobApp">
+<!-- 百度统计 -->
+<!-- <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    hm.src = _bdhmProtocol + "hm.baidu.com/hm.js?6f5c59f1c6d58e6768671fc0254d72f2";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script> -->
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    var s2 = document.getElementsByTagName("script")[0];
+    s2.parentNode.insertBefore(bp, s2);
+})();
+</script>
+
+<script type="text/javascript">
+  var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261671116'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261671116' type='text/javascript'%3E%3C/script%3E"));
+  document.getElementById("cnzz_stat_icon_1261671116").style.display = "none";
+</script>
+
+<head>
+  <meta charset="utf-8">
+  <title ng-bind="headerTitle || '宏财网'"></title>
+  <base href="/">
+  <meta name="fragment" content="!">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1">
+  <meta name="renderer" content="webkit">
+  <meta name='apple-mobile-web-app-capable' content='yes' />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name='format-detection' content='telephone=no' />
+  <meta name='format-detection' content='email=no' />
+  <meta name="wap-font-scale" content="no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/famous-angular/dist/famous-angular.css" />
+  <link rel="stylesheet" href="bower_components/skeleton/css/skeleton.css" />
+  <link rel="stylesheet" href="bower_components/textAngular/dist/textAngular.css" />
+  <!-- endbower -->
+  <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/common.css">
+  <link rel="stylesheet" href="styles/login-register.css">
+  <link rel="stylesheet" href="styles/header-footer.css">
+  <link rel="stylesheet" href="styles/agreement.css">
+  <link rel="stylesheet" href="styles/project-details.css">
+  <link rel="stylesheet" href="styles/user-center.css">
+  <link rel="stylesheet" href="styles/account.css">
+  <link rel="stylesheet" href="styles/activity.css">
+  <link rel="stylesheet" href="styles/investment-project-detail.css">
+  <link rel="stylesheet" href="styles/cash-coupon.css">
+  <link rel="stylesheet" href="styles/activity-center.css">
+  <link rel="stylesheet" href="styles/assignments.css">
+  <link rel="stylesheet" href="styles/assignmentList-details.css">
+  <link rel="stylesheet" href="styles/assignments-detail.css">
+  <link rel="stylesheet" href="styles/privileged-capital.css">
+  <link rel="stylesheet" href="styles/recommend.css">
+  <link rel="stylesheet" href="styles/lottery.css">
+
+  <!-- endbuild -->
+  <link rel="stylesheet" href="styles/un-min/box-flex.css">
+  <!-- <link rel="stylesheet" href="styles/un-min/weui.min.css"> -->
+</head>
+<body class="bg-white padding-0" >
+
+
+  <div id="body-box">
+    <div class="padding-0">
+      <section ui-view="header"></section>
+      <section ui-view autoscroll="true"></section>
+      <section ui-view="footer"></section>
+      <section ui-view="landingPage"></section>
+    </div>
+
+  </div>
+  <div ng-include src='"views/loading-toast.html"' ng-show="showLoadingToast"></div>
+  <div ng-include src='"views/succcess-toast.html"' ng-show="showSuccessToast"></div>
+  <!-- 错误提示 -->
+  <div class="toast toast1 ng-cloak" ng-show="showErrorMsg" >
+    <p>{{msg}}</p>
+  </div>
+
+  <!-- build:js(.) scripts/vendor.js -->
+  <script src="bower_components/fastclick/lib/fastclick.js"></script>
+
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/es5-shim/es5-shim.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/famous-angular/dist/famous-angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/json3/lib/json3.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/underscore/underscore.js"></script>
+  <script src="bower_components/angular-inflector/dist/angular-inflector.min.js"></script>
+  <script src="bower_components/angular-restmod/dist/angular-restmod-bundle.min.js"></script>
+  <script src="bower_components/angular-md5/angular-md5.js"></script>
+  <script src="bower_components/angular-cookie/angular-cookie.js"></script>
+  <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+  <script src="bower_components/lodash/lodash.js"></script>
+  <script src="bower_components/restangular/dist/restangular.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/angular-strap/dist/angular-strap.js"></script>
+  <script src="bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
+  <script src="bower_components/rangy/rangy-core.js"></script>
+  <script src="bower_components/rangy/rangy-classapplier.js"></script>
+  <script src="bower_components/rangy/rangy-highlighter.js"></script>
+  <script src="bower_components/rangy/rangy-selectionsaverestore.js"></script>
+  <script src="bower_components/rangy/rangy-serializer.js"></script>
+  <script src="bower_components/rangy/rangy-textrange.js"></script>
+  <script src="bower_components/textAngular/dist/textAngular.js"></script>
+  <script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
+  <script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
+  <!-- endbower -->
+  <script src="bower_components/famous/dist/famous-global.js"></script>
+  <!-- <script src="bower_components/angular-cache/dist/angular-cache.js"></script> -->
+
+
+  <!-- <script src="bower_components/angular-cookies/angular-cookies.js"></script> -->
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <!-- tool -->
+  <!-- global -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/app_run.js"></script>
+  <script src="scripts/config.js"></script>
+
+  <!-- directives -->
+
+  <script src="scripts/directives/dropdown-menu.js"></script>
+  <script src="scripts/directives/ensure-unique.js"></script>
+  <script src="scripts/directives/real-mix-min-length.js"></script>
+  <script src="scripts/directives/ng-focus.js"></script>
+  <script src="scripts/directives/auto-focus.js"></script>
+  <script src="scripts/directives/my-click-once.js"></script>
+  <script src="scripts/directives/check-password.js"></script>
+  <script src="scripts/directives/ensure-mobile-exist.js"></script>
+  <script src="scripts/directives/ensure-captcha.js"></script>
+  <script src="scripts/directives/capcha-countdown.js"></script>
+  <script src="scripts/directives/select-eyes.js"></script>
+  <script src="scripts/directives/auto-height.js"></script>
+  <script src="scripts/directives/auto-h.js"></script>
+  <script src="scripts/directives/select-highlight.js"></script>
+  <script src="scripts/directives/draw-circle.js"></script>
+  <script src="scripts/directives/bg-auto.js"></script>
+  <!-- servies -->
+  
+  <script src="scripts/services/URLService.js"></script>
+  <script src="scripts/services/Utils.js"></script>
+  <script src="scripts/services/ProjectUtils.js"></script>
+  <script src="scripts/services/toCunGuanUtils.js"></script>
+  <script src="scripts/services/toCunGuanUtils.js"></script>
+  <script src="scripts/services/hongcai-login.js"></script>
+  <script src="scripts/services/funds-projects.js"></script>
+  <script src="scripts/services/session-service.js"></script>
+  <script src="scripts/services/user-service.js"></script>
+  <script src="scripts/services/DateUtils.js"></script>
+  <script src="scripts/services/DialogService.js"></script>
+  <script src="scripts/services/checkMobUtil.js"></script>
+  <script src="scripts/services/checkPicUtil.js"></script>
+  <script src="scripts/services/DialogService.js"></script>
+  <script src="scripts/services/URLService.js"></script>
+  <script src="scripts/services/checkPwdUtil.js"></script>
+  <script src="scripts/services/showFooter.js"></script>
+  <script src="scripts/services/screenWidthUtil.js"></script>
+  <script src="scripts/services/WechatShareUtils.js"></script>
+  <script src="scripts/services/InviteShareUtils.js"></script>
+
+  <!-- controller -->
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/demo.js"></script>
+  <script src="scripts/controllers/header-ctrl.js"></script>
+  <script src="scripts/controllers/login.js"></script>
+  <script src="scripts/controllers/bind-wechat.js"></script>
+  <script src="scripts/controllers/bindWechat-status.js"></script>
+  <script src="scripts/controllers/lottery-ctrl.js"></script>
+  <script src="scripts/controllers/project/project-detail.js"></script>
+  <script src="scripts/controllers/project/project-info.js"></script>
+  <script src="scripts/controllers/project/project-list.js"></script>
+  <script src="scripts/controllers/project/project-orders.js"></script>
+  
+  <script src="scripts/controllers/assignment/assignment-detail-ctrl.js"></script>
+  <script src="scripts/controllers/assignment/assignment-orders.js"></script>
+
+  <script src="scripts/controllers/register.js"></script>
+  <script src="scripts/controllers/register-yeepay.js"></script>
+  <script src="scripts/controllers/yeepay-callback.js"></script>
+  <script src="scripts/controllers/modify-pwd.js"></script>
+  <script src="scripts/controllers/activity-center.js"></script>
+  <script src="scripts/controllers/activity/new-year-novice-ctrl.js"></script>
+  <script src="scripts/controllers/activity/new-invite-ctrl.js"></script>
+  <script src="scripts/controllers/activity/reward-ctrl.js"></script>
+  <script src="scripts/controllers/activity/invite-ctrl.js"></script>
+  <script src="scripts/controllers/activity/invite-sharing-ctrl.js"></script>
+  <script src="scripts/controllers/activity/channel-ctrl.js"></script>
+  <script src="scripts/controllers/activity/exchange-cdkey.js"></script>
+  <script src="scripts/controllers/daily-lottery/daily-lottery-ctrl.js"></script>
+  <script src="scripts/controllers/activity/mothers-day.js"></script>
+
+  <script src="scripts/controllers/user-center/user-center.js"></script>
+  <script src="scripts/controllers/user-center/credits-overview.js"></script>
+  <script src="scripts/controllers/user-center/credit.js"></script>
+  <script src="scripts/controllers/user-center/credit-security-details.js"></script>
+  <script src="scripts/controllers/user-center/account.js"></script>
+  <script src="scripts/controllers/user-center/settings.js"></script>
+  <script src="scripts/controllers/user-center/resetMobile.js"></script>
+  <script src="scripts/controllers/user-center/recharge.js"></script>
+  <script src="scripts/controllers/user-center/withdraw.js"></script>
+  <script src="scripts/controllers/user-center/bankcard.js"></script>
+  <script src="scripts/controllers/user-center/message.js"></script>
+  <script src="scripts/controllers/user-center/web-site-notice.js"></script>
+  <script src="scripts/controllers/user-center/deal.js"></script>
+  <script src="scripts/controllers/user-center/rate-coupon.js"></script>
+  <script src="scripts/controllers/user-center/cash-coupon.js"></script>
+  <script src="scripts/controllers/user-center/invite-rebate.js"></script>
+  <script src="scripts/controllers/user-center/assignments-ctrl.js"></script>
+  <script src="scripts/controllers/user-center/assignments-transfer-details.js"></script>
+  <script src="scripts/controllers/user-center/assignmentList-details-ctrl.js"></script>
+  <script src="scripts/controllers/user-center/autotender.js"></script>
+  <script src="scripts/controllers/user-center/questionnaire.js"></script>
+  <script src="scripts/controllers/user-center/privileged-capital.js"></script>
+
+  <script src="scripts/modal/real-name-auth.js"></script>
+  <script src="scripts/modal/unfinished-order.js"></script>
+  <script src="scripts/modal/activate.js"></script>
+  <script src="scripts/modal/copy-link.js"></script>
+
+  <script src="scripts/jweixin-1.2.0.js"></script>
+  <script src="scripts/controllers/root-ctrl.js"></script>
+  <script src="scripts/controllers/get-pwd-back.js"></script>
+  <script src="scripts/jquery.gallery.js"></script>
+  <script src="scripts/swipeSlide.js"></script>
+  <script src="scripts/jQueryRotate.2.2.js"></script>
+  <script src="scripts/rect.luckdraw.js"></script>
+  <!-- endbuild -->
+
+  <script src="scripts/templates.min.js"></script>
+</body>
+
+</html>
+

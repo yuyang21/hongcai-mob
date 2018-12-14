@@ -1,0 +1,153 @@
+<!-- 我的账户 -->
+<div class="account-userInfo bg-accountcolor padding-b-7 ft-black5" auto-height>
+  <div class="bg-orange0">
+    <div class="text-center ft-white padding-l-0p5 padding-r-0p5 ">
+      <div class="margin-t-1p3 text-left margin-l-1 fl setting-icon" ui-sref="root.userCenter.setting"><!--<i class="fa fa-cog" aria-hidden="true"></i>--><img src="/images/user-center/setting.png" class="display-inb margin-t-0p6" width="40%"></div>
+        <div class="display-inb text-center">
+          <div class="display-inb clearfix">
+            <div class="border-pull margin-r-1 fl"><img ng-src="{{user.headImgUrl || userHeadImgUrl}}" alt="" class="border-pull avatar"></div>
+            <div class="fl user-name"><span class="ft-1p8">{{ user.nickName || (user.mobile || user.name) }}</span></div>
+          </div>
+        </div>
+        <div class="fr margin-r-1 margin-t-1p3 text-right">
+          <div class="message-icon" ui-sref="root.userCenter.messages"><!--<i class="fa fa-envelope-o" aria-hidden="true">--><img src="/images/user-center/envelope.png" width="35%" class="margin-t-0p2 display-inb"><p class="red-point outside-point" ng-if="(unReadMsgs + unReadNotices) > 0"></p><!-- </i> --></div>
+        </div>
+    </div>
+      <div class="text-center ft-white">
+        <p class="text-center margin-b-0 padding-t-1 ft-white ft-1p4">当前资产(元)</p>
+        <p class="text-center ft-2p5 margin-b-1 ft-1p6 ft-Arial">{{ account.tTotalAssets || 0 | number:2}}</strong></p>
+        <div class="overflow-hid">
+          <ul class="colums">
+            <li class="text-center fl width-0p5 position-re ft-1p4">
+              <p class="margin-b-0 ft-1p4  ft-f3">累计利息(元)</p>
+              <p class="margin-b-0 ft-1p6 ft-Arial ft-f3">{{account.receivedProfit || 0  | number:2 }}</p>
+              <i class="fl border-white-right position-ab right-0 line"></i>
+            </li>
+            <li class="text-center fl width-0p5 position-re ft-1p4">
+              <p class="margin-b-0  ft-f3">可用余额(元)</p>
+              <p class="margin-b-0 ft-1p6 ft-Arial ft-f3">{{ account.balance || 0  | number:2 }}</p>
+            </li>
+            <!-- <li class="text-center fl width-0p3 ft-1p4" ui-sref="root.userCenter.cash-coupon">
+              <p class="margin-b-0  ft-f3">未提奖金(元)</p>
+              <p class="margin-b-0 ft-1p6 Arial ft-f3">{{ unGotCash.unGotAmount || 0  }}</p>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+  </div>
+
+    <!-- 提现和充值 -->
+    <div class="margin-b-1 bg-white  clearfix border-grey-t border-grey-bottom user-choice" ng-if="userAuth.authStatus ===  2">
+      <div>
+        <div class="fl text-center ft-1p8 ft-orange width-half" ng-click="goWithdraw()">
+          <span class="user-choice">取现</span><span class="fr vertical-line border-grey-r1"></span>
+        </div>
+        <div class="fr text-center ft-1p8 ft-orange width-half" ng-click="toRecharge()"><span>充值</span></div>
+      </div>
+    </div>
+    <div class="margin-b-1 bg-white  clearfix border-grey-t border-grey-bottom user-choice0" ng-if="userAuth.authStatus !==  2">
+      <div class="text-center ft-orange ft-1p5" ng-if="userAuth.authStatus !== 2">未开通银行存管账户&nbsp;&nbsp;<span ng-click="toRealNameAuth()">去开通&nbsp;<i class="fa fa-angle-right ft-1p8"></i></span></div>
+    </div>
+   <!-- 热抢中的项目 -->
+   <!--   <div class="main-list-temp clear" ui-sref="root.project({number: recommends.data[0].number})">
+        <div class="title ft-666">
+          <span class="title-text display-inb margin-r-0p3" ng-if="recommends.data[0].name.length > 16">{{recommends.data[0].name || '无' | limitTo:16}}...</span>
+          <span class="title-text display-inb margin-r-0p3" ng-if="recommends.data[0].name.length <= 16">{{recommends.data[0].name || '无'}}</span>
+          <span class="display-inb ft-white text-center HOT">HOT</span>
+          <span class="u-pull-right ft-2p5 margin-t-0p3 ft-greyddd"><i class="fa fa-angle-right margin-t-0p4"></i></span>
+        </div>
+        <div class="pro-info">
+         <ul>
+           <li class=" ft-ccc"><span class="ft-2p8 margin-r-0p3 ft-Arial" ng-class= "{'ft-orange2':recommends.data[0].status === 7 || recommends.data[0].status === 6 ,'ft-grey7':recommends.data[0].status !== 6 || recommends.data[0].status !== 7 }">{{recommends.data[0].annualEarnings | number:2 || 0}}</span>%</li>
+           <li class=" ft-ccc"><span class="ft-1p8 margin-r-0p3 ft-Arial" ng-class= "{'ft-black4':recommends.data[0].status === 7 || recommends.data[0].status === 6 ,'ft-grey7':recommends.data[0].status !== 6 || recommends.data[0].status !== 7 }">{{recommends.data[0].currentStock * 100 || 0 | currency:"":0}}</span>元</li>
+           <li class=" ft-ccc"><span class="ft-1p8 margin-r-0p3 ft-Arial"  ng-class= "{'ft-black4':recommends.data[0].status === 7 || recommends.data[0].status === 6 ,'ft-grey7':recommends.data[0].status !== 6 || recommends.data[0].status !== 7 }">{{recommends.data[0].projectDays || 0}}</span>天</li>
+         </ul>
+         <ul class="padding-t-0 margin-b-0 ft-grey7">
+           <li>预期年化收益率</li>
+           <li class="border-none">可投金额</li>
+           <li>剩余期限</li>
+         </ul>
+       </div>
+     </div> -->
+    <!-- 投资记录和奖励列表 -->
+    <div class="user-center-list bg-white ft-1p6">
+      <ul class="clearfix border-grey-top margin-b-0">
+        <li class="fl" ui-sref="root.userCenter.credits-overview">
+          <img class="display-bl margin-auto padding-t-0p2" src="/images/user-center/investment-record.png" width="18%" alt="">
+          <p class="ft-1p5 ft-666 margin-b-0 ">我的出借</p>
+        </li>
+        <li class="fl border-grey-r border-grey-l" ng-click="showDownload = true;">
+          <img class="display-bl margin-auto" src="/images/user-center/user-assignment.png" width="18%" alt="">
+          <p class="ft-1p5 ft-666 margin-b-0 ">债权转让</p>  
+        </li>
+        <li class="fl" ui-sref="root.userCenter.deals">
+          <img class="display-bl margin-auto" src="/images/user-center/user-capital.png" width="18%" alt="">
+          <p class="ft-1p5 ft-666 margin-b-0 ">资金流水</p>
+        </li>
+      </ul>
+      <ul class="clearfix border-grey-t margin-b-0 border-grey-b">
+        <li class="fl" ui-sref="root.userCenter.invite-rebate">
+          <img class="display-bl margin-auto padding-t-0p3" src="/images/user-center/user-invite.png" width="18%" alt="">
+          <p class="ft-1p5 ft-666 margin-b-0">我的邀请</p>
+          
+          <!-- <sup class="green-sup">{{voucher.inviteNum || 0}}</sup> -->
+        </li>
+        <li class="fl border-grey-r border-grey-l" ui-sref="root.userCenter.cash-coupon">
+          <img class="display-bl margin-auto" src="/images/user-center/user-prize.png" width="18%" alt="">
+          <p class="ft-1p5 ft-666 margin-b-0 ">现金券<sup class="green-sup" ng-if="cashCouponStatis.unUsedCoupon > 0">{{cashCouponStatis.unUsedCoupon || 0}}</sup></p>
+          
+        </li>
+        <li class="fl" ui-sref="root.userCenter.privileged-capital">
+          <img class="display-bl margin-auto padding-t-0p5" src="/images/user-center/user-experience.png" width="18%" alt="">
+          <p class="ft-1p5 ft-666 margin-b-0 ">特权本金</p>
+          
+        </li>
+      </ul>
+      <ul class="clearfix border-grey-b margin-b-0">
+        <li class="fl" ng-click="goIncreaseRateCoupon(1);">
+          <img class="display-bl margin-auto padding-t-0p7" src="/images/user-center/user-rate-ticket.png" width="18%" alt="">
+          <p class="ft-1p5 ft-666 margin-b-0 ">加息券<sup class="green-sup" ng-if="couponStatis.unUsedCoupon > 0">{{couponStatis.unUsedCoupon || 0}}</sup></p>
+          
+        </li>
+        <li class="fl border-grey-r border-grey-l" ng-click="toHelpCenter()">
+          <img class="display-bl margin-auto" src="/images/user-center/help-center.png" width="18%" alt="">
+          <p class="ft-1p5 ft-666 margin-b-0 ">帮助中心</p>
+          <!-- <sup class="green-sup"></sup> -->
+        </li>
+        <li class="fl" ui-sref="root.userCenter.questionnaire" ng-show="showQuestionnaire">
+          <img class="display-bl margin-auto" src="/images/user-center/questionnaire.png" width="18%" alt="">
+          <p class="ft-1p5 ft-666 margin-b-0 ">风险测评</p>
+        </li>
+        <li class="fl" ng-click="goProjectListAuditLoan();" ng-show="!showQuestionnaire && isExamineUser">
+          <img class="display-bl margin-auto" src="/images/user-center/examine.png" width="18%" alt="">
+          <p class="ft-1p5 ft-666 margin-b-0 ">审核</p>
+        </li>
+        <li class="fl border-grey-r" ng-click="goProjectListFull();" ng-show="!showQuestionnaire && !isExamineUser && isLoanUser">
+          <img class="display-bl margin-auto" src="/images/user-center/loan.png" width="18%" alt="">
+          <p class="ft-1p5 ft-666 margin-b-0 ">放款</p>
+        </li>
+      </ul>
+      <ul class="clearfix border-grey-b margin-b-0">
+        <li class="fl border-grey-r" ng-click="goProjectListAuditLoan();" ng-show="showQuestionnaire && isExamineUser">
+          <img class="display-bl margin-auto" src="/images/user-center/examine.png" width="18%" alt="">
+          <p class="ft-1p5 ft-666 margin-b-0 ">审核</p>
+        </li>
+        <li class="fl border-grey-r" ng-click="goProjectListFull();" ng-show="(showQuestionnaire || isExamineUser) && isLoanUser">
+          <img class="display-bl margin-auto" src="/images/user-center/loan.png" width="18%" alt="">
+          <p class="ft-1p5 ft-666 margin-b-0 ">放款</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="project-mask bankcard-setting" ng-show="showDownload">
+    <div class="project-mask-inner margin-t-20 text-center bg-white ft-black4 ft-1p6 padding-t-3 padding-b-2">
+      <div>
+        <p class="margin-b-0">请在宏财app进行操作</p> <br>
+        <div class="padding-l-2 padding-r-2 padding-t-1 clearfix">
+          <button class="fr text-center bg-orange ft-white ft-1p8" ng-click="downloadApp();showDownload=false;">下载</button>
+          <button class="fl text-center bg-white ft-orange ft-1p8" ng-click="showDownload = false">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

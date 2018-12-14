@@ -1,0 +1,335 @@
+body, div, header, footer, nav, section, aside, article, dl, dt, dd, a, h1, h2, h3, h4,h5, h6, i, b, textarea, button, input, select, figure, figcaption {
+    max-width: 7.2rem;
+    height: 100%;
+    margin: 0 auto;
+    font-size: .24rem;
+    line-height: 1.6;
+    list-style: none;
+    font-style: normal;
+    text-decoration: none;
+    border: none;
+    color: #333;
+    font-weight: normal;
+    font-family: "Microsoft Yahei";
+    box-sizing: border-box;
+    -webkit-tap-highlight-color:transparent;
+    -webkit-font-smoothing: antialiased;
+    &:hover{
+        outline: none;
+    }
+}
+* {
+  padding: 0;
+  margin: 0;
+}
+div, a, p, img, span, ul, li {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select:none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+a {
+  text-decoration: none;
+}
+a:-webkit-any-link {
+  text-decoration: none;
+}
+a,button,input{
+  -webkit-tap-highlight-color:rgba(255,0,0,0);
+}
+input,button,select,textarea {
+  outline:none;
+  -webkit-appearance: none;
+}
+input[type="button"], input[type="submit"], input[type="search"], input[type="reset"] {
+  -webkit-appearance: none;
+}
+ 
+.clear:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.clear{
+    zoom:1;
+}
+
+.back_img{
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.margin{
+    margin: 0 auto;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}
+
+.ellipsis{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.paddingTop{
+    padding-top: 1.95rem;
+}
+
+@keyframes backOpacity{
+   0%   { opacity: 1 }
+   25%  { opacity: .5 }
+   50%  { opacity: 1 }
+   75%  { opacity: .5 }
+   100% { opacity: 1 }
+}
+
+.animation_opactiy{
+    animation: backOpacity 2s ease-in-out infinite;
+}
+/*错误提示样式*/
+.toast {
+  display: block;
+  position: fixed;
+  z-index: 99999999999;
+  width: 70%;
+  height: .8rem;
+  line-height: .8rem;
+  top: 50%;
+  left: 15%;
+  background-color: rgba(38,38,38,.9);
+  text-align: center;
+  border-radius: .2rem;
+  color: #FFF;
+  display: none;
+}
+/*游戏公用背景样式*/
+.game-counting-wrap {
+  background-color: #fff026;
+  padding: .2rem;
+  position: fixed;
+}
+.game-counting {
+  padding: .1rem;
+  border-radius: .1rem;
+}
+.game-counting-innner {
+  padding-top: .3rem;
+  animation: flashingLight 1s ease-in-out infinite;
+}
+/*公用蒙层*/
+.mask-common {
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  max-width: 640px;
+  margin: 0 auto;
+  background-color: rgba(0,0,0,0.6);
+  -webkit-overflow-scrolling: touch;
+  overflow-y: hidden !important;
+  display: none;
+}
+/*活动规则弹窗*/
+#ruleBox, #registerBox {
+  z-index: 99999;
+}
+.ruleBox {
+  /*background: url('/images/games/rule-box.png') no-repeat 0 0;
+  background-size: contain;*/
+  margin: 1.5rem .5rem 0.5rem;
+  padding: .387rem .2rem .5rem .5rem;
+  position: relative;
+  height: 5.5rem;
+  overflow: hidden;
+}
+.ruleBox .box {
+  width: 96%;
+  position: absolute;
+  z-index: 0;
+  left: 2%;
+  top: 0%;
+}
+.rule-title {
+  font-size: .25rem;
+  font-weight: 500;
+  color: #ff172f;
+  width: 40%;
+  height: .6rem;
+  line-height: .7rem;
+  text-align: center;
+  position: relative;
+  left: -.15rem;
+}
+.ruleBox .contents {
+  overflow: auto;
+  height: 3.6rem;
+  margin-top: .3rem;
+  position: relative;
+}
+.rule-content {
+  font-weight: 500;
+  height: auto;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: .25rem;
+}
+.rule-content .num {
+  display: inline-block;
+  width: 5%;
+  font-size: .2rem;
+  color: #333333;
+  margin-right: .1rem;
+  vertical-align: top;
+  margin-top: .03rem;
+}
+.rule-content:nth-child(3) .num {
+  margin-top: .06rem;
+}
+.rule-content .txt {
+  display: inline-block;
+  width: 85%;
+  font-size: .22rem;
+  color: #666;
+  text-align: justify;
+}
+.rule-content .txt img {
+  vertical-align: bottom;
+  margin-right: .05rem;
+}
+#ruleBox .close-btn {
+  width: .7rem;
+  height: .7rem;
+  /*background: url('/images/games/rule-close.png') no-repeat 0 0;
+  background-size: contain;*/
+  position: absolute;
+  top: 1.28rem;
+  right: .3rem;
+}
+.rule-start-btn {
+  /*background: url('/images/games/rule-btn.png') no-repeat 0 0;
+  background-size: contain;*/
+  /*width: 60%;*/
+  height: 1rem;
+  line-height: .95rem;
+  text-align: center;
+  font-size: .3rem;
+  font-weight: bold;
+  color: #ff2d3d;
+}
+.rule-start-btn img {
+  width: 60%;
+  position: absolute;
+  left: 20%;
+  z-index: 0;
+}
+.rule-start-btn span {
+  position: relative;
+}
+
+.noviceHand {
+  -moz-animation: noviceHand 1s alternate infinite;
+  -webkit-animation: noviceHand 1s alternate infinite;
+  animation: noviceHand 1s alternate infinite;
+  display: none;
+}
+    
+@-moz-keyframes noviceHand {
+  from { top: -.6rem; }
+  to { top: -.2rem; }
+}
+@-webkit-keyframes noviceHand {
+  from { top: -.6rem; }
+  to { top: -.2rem; }
+}
+@keyframes noviceHand {
+  from { top: -.6rem; }
+  to { top: -.2rem; }
+}
+
+/*开始游戏321倒计时*/
+#startGame {
+  -moz-animation: fideOut 1s alternate 4s forwards;
+  -webkit-animation: fideOut 1s alternate 4s forwards;
+  animation: fideOut 1s alternate 4s forwards;
+  opacity: 1;
+  /*display: none;*/
+}
+.startGame img {
+  display: block;
+  opacity: 0;
+  margin: 0 auto;
+  position: absolute;
+  top: 3.6rem;
+  left: 33%;
+}
+.startGame img.countDown3 {
+  -moz-animation: countDown 0.8s alternate;
+  -webkit-animation: countDown 0.8s alternate;
+  animation: countDown 0.8s alternate;
+}
+.startGame img.countDown2 {
+  left: 36%;
+  -moz-animation: countDown 0.8s alternate 1s;
+  -webkit-animation: countDown 0.8s alternate 1s;
+  animation: countDown 0.8s alternate 1s;
+}
+.startGame img.countDown1 {
+  left: 40%;
+  -moz-animation: countDown 0.8s alternate 2s;
+  -webkit-animation: countDown 0.8s alternate 2s;
+  animation: countDown 0.8s alternate 2s;
+}
+.startGame img.countDown0 {
+  top: 4rem;
+  left: 26%;
+  -moz-animation: countDown 0.8s alternate 3s;
+  -webkit-animation: countDown 0.8s alternate 3s;
+  animation: countDown 0.8s alternate 3s;
+}
+@-moz-keyframes countDown {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@-webkit-keyframes countDown {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes countDown {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@-moz-keyframes fideOut {
+  from { opacity: 1; }
+  to { opacity: 0; zIndex: 99}
+}
+@-webkit-keyframes fideOut {
+  from { opacity: 1; }
+  to { opacity: 0; zIndex: 99}
+}
+@keyframes fideOut {
+  from { opacity: 1; }
+  to { opacity: 0; zIndex: 99}
+}

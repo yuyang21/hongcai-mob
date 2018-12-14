@@ -1,0 +1,82 @@
+// 转让详情
+.assignmentList-details {
+  background-color:#ebebed;
+  .content{
+    overflow:hidden;
+    padding: 0 2rem;
+    background-color:#fff;
+    .column{
+      font-size: 1.5rem;
+      border-bottom: 0.1rem solid #eee;
+      padding:1.1rem 0rem;
+      background-color:#fff;
+      margin-left: 0;
+      .txt-left {   
+        color: #666666;
+      }
+      .txt-right {
+        color: #ff5400;
+        span:nth-child(2) {
+          position: relative;
+          bottom: 0.1rem;
+          padding-left: 3px;
+        }
+        .angle-down {
+          font-size: 1.9rem;
+          color: #bbb;
+        }
+      }
+    }
+    
+  }
+  .assignmentList {
+      overflow: hidden;
+      width: 100%;
+      color: #666;
+      .row {
+        overflow: hidden;
+        width: 100%;
+        padding: 1rem 7%;
+        font-size: 1.4rem; 
+        text-align: center;
+        .col-md-2 {
+          width: 28%;
+          float: left;
+        }
+        .col-md-4 {
+          width: 36%;
+          float: left;
+        }
+      }
+      .row:nth-child(even) {
+        background-color: #fff;
+      }
+      .row:nth-child(odd), .more {
+        background-color: #f8f9fb;
+      }
+  }
+  .cancelAssignment {
+    font-size: 1.4rem;
+    color: #fd8f3f;
+    padding: 3.5rem 3rem 3rem;
+    p {
+      width: 70%;
+      margin: 0 auto;
+    }
+    button {
+      color: #fdfdfd;
+      background-color: #fd8f3f;
+      width: 46%;
+      margin: 1.5rem;
+      margin-left: 26%;
+      font-weight: normal;
+      font-size: 1.4rem;
+      font-family: '微软雅黑';
+      border: 0.1rem solid #fd8f3f;
+      border-radius: 0.5rem;
+      height: 3rem;
+      line-height: 3rem;
+      padding: 0;
+    }
+  }
+}

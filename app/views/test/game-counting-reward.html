@@ -1,0 +1,159 @@
+<html>
+  <script type="text/javascript" src="/styles/un-min/jquery.min.js"></script>
+  <script src="/styles/un-min/jweixin-1.0.0.js"></script>
+  <script type="text/javascript" src="/styles/un-min/gameWechatUtils.js"></script>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name='format-detection' content='telephone=no' />
+    <meta name='format-detection' content='email=no' />
+    <!--去掉移动端input聚焦默认背景-->
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="wap-font-scale" content="no">
+    <title>谁是点钞王</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="/styles/un-min/game-common.css">
+    <script src="/styles/un-min/rem.js"></script>
+    <style type="text/css">
+    	.game-counting-innner img.title-img {
+    	  margin-left: .4rem;
+    	}
+    	.game-counting-innner .content {
+    		width: 100%;
+    		height: 4rem;
+    		line-height: 1.5;
+    		margin-top: .3rem;
+    		padding-top: 1.5rem;
+    		text-align: center;
+    		color: #ff2421;
+    		font-weight: 500;
+    		font-size: .4rem;
+    		background: url('/images/games/reward-2.png') no-repeat top center;
+    		background-size: 56% 100%;
+    	}
+        .game-counting {
+          background: url('/images/games/guang.png') no-repeat center center;
+          background-size: 100% 100%;
+          background-color: #ff2421;
+        }
+        .game-counting-innner {
+          background: url('/images/games/circle-white.png') no-repeat 0 0;
+          background-size: 100% 100%;
+        }
+        @-moz-keyframes flashingLight {
+          0% { 
+            background: url('/images/games/circle-white.png') no-repeat 0 0;
+            background-size: 100% 100%
+          }
+          100% { 
+            background: url('/images/games/circle-red.png') no-repeat 0 0;
+            background-size: 100% 100%
+          }
+        }
+        @-webkit-keyframes flashingLight {
+          0% { 
+            background: url('/images/games/circle-white.png') no-repeat 0 0;
+            background-size: 100% 100%
+          }
+          100% { 
+            background: url('/images/games/circle-red.png') no-repeat 0 0;
+            background-size: 100% 100%
+          }
+        }
+        @keyframes flashingLight{
+          0% { 
+            background: url('/images/games/circle-white.png') no-repeat 0 0;
+            background-size: 100% 100%
+          }
+          100% { 
+            background: url('/images/games/circle-red.png') no-repeat 0 0;
+            background-size: 100% 100%
+          }
+        }
+    	.game-counting-innner .tips {
+    		height: auto;
+    	}
+    	.game-counting-innner .content span {
+    		font-size: .26rem;
+    		margin-top: -.08rem;
+    		display: block;
+    	}
+    	.game-counting-innner .tips p {
+    		height: .5rem;
+    		line-height: .55rem;
+    		width: 25%;
+    		margin: .15rem auto .18rem;
+    		background-color: #fff026;
+    		color: #ff172f;
+    		font-size: .24rem;
+    		text-align: center;
+    		border-radius: .5rem;
+    	}
+    	.game-counting-innner .tips div {
+    		height: auto !important;
+    		line-height: 1.4;
+    		padding: 0 .4rem;
+    		font-size: .21rem;
+    		letter-spacing: 0.6px;
+    		color: #fff;
+    		text-align: justify;
+    	}
+    	.game-counting-innner .down-btn {
+    		width: 60%;
+    		height: 1rem;
+    		margin-top: .4rem;
+    		text-align: center;
+    		line-height: .9rem;
+    		background: url('/images/games/btn-download.png') no-repeat center center;
+    		background-size: 100%;
+    		font-size: .33rem;
+				font-weight: bold;
+				color: #ff2d3d;
+    	}
+    	@media(max-height: 480px) {
+    		.game-counting-innner .content {
+    			height: 3.3rem;
+    			padding-top: 1rem;
+    		}
+	    	.game-counting-innner .down-btn {
+	    		margin-top: 0rem;
+	    	}
+    	}
+    </style>
+  </head>
+  <body>
+  	<div class="game-counting-wrap">
+  	  <div class="game-counting">
+  	    <div class="game-counting-innner">
+  	      <img src="/images/games/header-title.png" width="72%" class="title-img">
+  	      <div class="content">
+  	      	<p>您已获得</p>
+  	      	<p class="principal">88888元</p>
+  						<span>特权本金</span>
+  	      </div>
+  	      <div class="tips">
+  	      	<p class="tip-title">温馨提示</p>
+  	      	<div>
+  	      		特权本金将按照8%年化收益率进行计息，次日即可产生收益，直接发放至您的可用余额，可用于提现或投资。收到特权本金后30天内如未开通银行存管，则奖励将自动失效。
+  	      	</div>
+  	      </div>
+  	      <div class="down-btn" onclick="javascript:window.location.href='http://a.app.qq.com/o/simple.jsp?pkgname=com.hoolai.hongcai'">下载App查看奖励</div>
+  	    </div>
+  	  </div>
+  	</div>
+  	<script type="text/javascript">
+  		// 从URL获取参数 principal
+  		function getQueryString(name) {
+  		    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+  		    var r = window.location.search.substr(1).match(reg);
+  		    if (r !== null) return unescape(r[2]); return 0;
+  		  }
+  		  var principalObj = document.getElementsByClassName('principal')[0],
+  		  		text = getQueryString("principal");
+  		  principalObj.innerHTML = text + '元';
+  	</script>
+  </body>
+</html>

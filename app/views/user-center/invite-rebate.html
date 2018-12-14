@@ -1,0 +1,56 @@
+<div class="ivt-rebate bg-white position-re" auto-height>
+  <div class="ivt-wrap" ng-click="toInvestList();">
+    <p class="margin-b-0 text-center ft-white ft-Arial count">{{inviteStat.totalNum || 0}}</p>
+    <div class="position-re circle-bg-wrap">
+      <div class="circle-bg">
+        <p class="margin-b-0 text-center ft-white ft-1p3">邀请好友(人)</p>
+      </div>
+    </div>
+    <ul class="margin-b-0">
+      <li class="margin-b-0">
+        <p class="ft-Arial ft-2p2 ft-white margin-t-0p5">{{inviteStat.realNameAuthNum || 0}}</p>
+        <p class="ft-white ft-1p3 margin-b-0p5">注册认证(人)</p>
+        <i class="line"></i>
+      </li>
+      <li class="margin-b-0">
+        <p class="ft-Arial ft-2p2 ft-white margin-t-0p5">{{inviteStat.investNum || 0}}</p>
+        <p class="ft-white ft-1p4 margin-b-0p5">首次出借成功(人)</p>
+      </li>
+    </ul>
+  </div>
+  <div class="ivt-tip-wrap padding-t-1p5 padding-b-1p5 bg-offWhite">
+    <div class="bg-white ivt-tip">
+      <p>成功邀请一位好友最高可获得<span class="color-change">1315元</span>现金奖励</p>
+      <p ng-click="showDownload = true" ng-show="deviceCode === 3 || deviceCode === 6 || deviceCode === 2 || deviceCode === 5">立即参与</p>
+      <p ui-sref="root.activity.inviteActivity" ng-show="!(deviceCode === 3 || deviceCode === 6 || deviceCode === 2 || deviceCode === 5)">立即参与</p>
+    </div>
+  </div>
+  <div class="ivt-rebate-share">
+    <div class="share-wrap">
+      <p class="ft-1p4 ft-666 share-head margin-b-0">分享到</p>
+      <div class="share-ways">
+        <img src="/images/invite/share-wechat.png" width="16%" height="16%" ng-click="showDownload = true">
+        <img src="/images/invite/share-qq.png" width="16%" height="16%" ng-click="showDownload = true">
+        <img src="/images/invite/share-link.png" width="16%" height="16%" ng-click="showDownload = true">
+      </div>
+      <div class="share-words">
+        <p class="ft-666 margin-b-0">微信好友</p>
+        <p class="ft-666 margin-b-0">QQ好友</p>
+        <p class="ft-666 margin-b-0">复制链接</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="project-mask bankcard-setting" ng-show="showDownload === true && (deviceCode === 3 || deviceCode === 6 || deviceCode === 2 || deviceCode === 5)" >
+  <div class="project-mask-inner margin-t-20 text-center bg-white ft-black4 ft-1p6 padding-t-3 padding-b-2">
+    <div>
+      <p class="margin-b-0">下载宏财网app</p>
+      <p class="margin-b-2">马上参与活动！</p>
+      <div class="padding-l-2 padding-r-2 padding-t-1 clearfix">
+        <button class="fr text-center bg-orange ft-white ft-1p8" ng-click="downloadApp();showDownload=false;">下载</button>
+        <button class="fl text-center bg-white ft-orange ft-1p8" ng-click="showDownload = false">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+

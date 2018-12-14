@@ -1,0 +1,76 @@
+<!-- 转让详情 -->
+<div class="assignmentList-details margin-b-5" ng-init="showAssignmentList=false;cancelAssignment=false">
+  <!-- 转让信息 -->
+  <div class="content border-grey-bottom">
+    <div class="column">
+      <div class="txt-left fl">转让金额</div>
+      <div class="txt-right fr">
+        <span>{{assignment.amount || 0 | number:2}}</span><span class="ft-grey7 ft-1p3">元</span>
+      </div>
+    </div>
+    <div class="column">
+      <div class="txt-left fl">转让利率</div>
+      <div class="txt-right fr">
+        <span>{{assignment.annualEarnings || 0 | number:2}}</span><span class="ft-grey7 ft-1p3">％</span>
+      </div>
+    </div>
+    <div class="column">
+      <div class="txt-left fl">已转让金额</div>
+      <div class="txt-right fr">
+        <span>{{assignment.soldStock * 100|| 0 | number:2}}</span><span class="ft-grey7 ft-1p3">元</span>
+      </div>
+    </div>
+    <div class="column border-none">
+      <div class="txt-left fl">转让收入</div>
+      <div class="txt-right fr">
+        <span>{{assignment.transferedIncome || 0 | number:2}}</span><span class="ft-grey7 ft-1p3">元</span>
+      </div>
+    </div>
+  </div>
+  <!-- 债权转让记录 -->
+  <div class="content border-grey-top margin-t-1p2 {{(assignment.status =='3' || assignment.status =='4') && !showAssignmentList?'border-grey-bottom':' '}}" ng-click="showAssignmentList = !showAssignmentList">
+    <div class="column {{assignment.status =='3' || assignment.status =='4' || showAssignmentList ?'border-none':' '}}">
+      <div class="txt-left fl">债权转让记录</div>
+      <div class="txt-right fr">
+        <i class="angle-down fa fa-angle-down" ng-if="!showAssignmentList"></i>
+        <i class="angle-down fa fa-angle-up" ng-if="showAssignmentList"></i>
+      </div>
+    </div>
+  </div>
+  <!-- 转让纪录 -->
+  <div class="assignmentList border-grey-bottom bg-white border-grey-top" ng-if="showAssignmentList">
+      <div class="ft-1p4 ft-666 text-center margin-t-2 margin-b-2" ng-show="assignmenrOrders.length <= 0">
+        <p class="margin-b-0">暂无转让纪录哦</p>
+      </div>
+      <div class="row" ng-show="assignmenrOrders.length > 0">
+        <div class="col-md-2">受 让 人</div>
+        <div class="col-md-4">转让本金(元)</div>
+        <div class="col-md-4">转让时间</div>
+      </div>
+      <div class="row" ng-repeat="item in assignmenrOrders | limitTo : initLimit">
+        <div class="col-md-2">{{item.userName || '某用户'}}</div>
+        <div class="col-md-4">{{item.orderAmount || 0 | number:2}}</div>
+        <div class="col-md-4">{{item.createTime || newDate() | date : 'yyyy-MM-dd'}}</div>
+      </div>
+      <div class="text-center more padding-t-1 padding-b-1" ng-show="assignmenrOrders.length > initLimit">
+        <p class="margin-b-0"><i class="fa fa-list-ul ft-orange"></i>&nbsp;<a class="ft-666" ng-click="loadMore();">查看更多转让信息</a></p>
+      </div>
+  </div>
+  <!-- 撤销转让 -->
+  <div ng-hide="assignment.status =='3' || assignment.status =='4'">
+    <div class="content border-grey-bottom" ng-click="cancelCreditAssignment();cancelAssignment=!cancelAssignment">
+      <div class="column border-none">
+        <div class="txt-left fl">撤销转让</div>
+        <div class="txt-right fr">
+          <i class="angle-down fa fa-angle-down" ng-if="!cancelAssignment"></i>
+          <i class="angle-down fa fa-angle-up" ng-if="cancelAssignment"></i>
+        </div>
+      </div>
+    </div>
+    <div class="cancelAssignment" ng-if="cancelAssignment">
+      <p ng-if="!msg">已转让债权金额{{data.soldStock * 100 || 0}}元，未转让债权金额{{data.currentStock * 100 || 0}}元，是否确认撤销？</p>
+      <p ng-if="msg">{{msg}}</p>
+      <button type="button"  ng-if="!msg" ng-click="deleteCreditAssignment()" mg-click-once>撤销转让</button>
+    </div>
+  </div> 
+</div>

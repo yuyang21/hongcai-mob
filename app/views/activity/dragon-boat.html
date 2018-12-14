@@ -1,0 +1,108 @@
+<head>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1">
+  	<title>浓情端午</title>
+	<style>
+		body {
+			max-width: 640px;
+			height: 100%;
+			margin: 0 auto;
+			font-size: 1.5em;
+			font-weight: 400;
+		}
+		html {
+		    font-size: 62.5%;
+		}
+		.dragon-boat {
+			background: #3d8ab6;
+		}
+		.dragon-boat img{
+			display: inline-block;
+			vertical-align: top;
+			width: 100%;
+		}
+		.dragon-boat .activityTime {
+			position: relative;
+		}
+		.dragon-boat .activityTime .time {
+			position: absolute;
+			top: 35%;
+			left: 34%;
+			color: #fff;
+			font-size: 1.2rem;
+		}
+		.dragon-boat .iosTip {
+			font-size: 1.2rem;
+		    color: rgba(255,255,255,.6);
+			text-align: center;
+			padding: 2rem 0;
+			background: #3d8ab6;
+		}
+		@media (min-width: 320px) {
+			.dragon-boat .activityTime .time {
+				transform: scale(.8);
+				-webkit-transform: scale(.8);
+				top: 33%;
+				left: 28%;
+			}
+		}
+		@media (min-width: 360px) {
+			.dragon-boat .activityTime .time {
+				transform: scale(.9);
+				-webkit-transform: scale(.9);
+				top: 34%;
+				left: 31%;
+			}
+		}
+		@media (min-width: 375px) {
+			.dragon-boat .activityTime .time {
+				top: 35%;
+				left: 32%;
+			}
+		}
+		@media (min-width: 414px) {
+			.dragon-boat .activityTime .time {
+				top: 36%;
+				left: 34%;
+			}
+		}
+	</style>
+</head>
+<!-- 端午节活动页 -->
+<div class="dragon-boat">
+    <img src="/images/dragon-boat/dragon-boat-01.png">
+    <div class="activityTime">
+    	<img src="/images/dragon-boat/dragon-boat-02.png">
+    	<div class="time">活动时间: 2017.5.22—2017.5.30</div>
+    </div>
+    <img src="/images/dragon-boat/dragon-boat-03.png">
+    <img src="/images/dragon-boat/dragon-boat-04.png">
+    <img src="/images/dragon-boat/dragon-boat-05.png">
+    <img src="/images/dragon-boat/dragon-boat-06.png">
+    <img src="/images/dragon-boat/dragon-boat-07.png">
+    <img src="/images/dragon-boat/dragon-boat-08.png">
+    <img src="/images/dragon-boat/dragon-boat-09.png">
+    <img src="/images/dragon-boat/dragon-boat-10.png">
+    <img src="/images/dragon-boat/dragon-boat-11.png">
+    <img src="/images/dragon-boat/dragon-boat-12.png">
+    <img src="/images/dragon-boat/dragon-boat-13.png">
+    <img src="/images/dragon-boat/dragon-boat-14.png">
+    <img src="/images/dragon-boat/dragon-boat-15.png">
+    <img src="/images/dragon-boat/dragon-boat-16.png">
+    <img src="/images/dragon-boat/dragon-boat-17.png">
+    <img src="/images/dragon-boat/dragon-boat-18.png">
+    <img src="/images/dragon-boat/dragon-boat-19.png">
+    <img src="/images/dragon-boat/dragon-boat-20.png">
+    <div class="iosTip" id="iosTip">该活动与设备生产商Apple Inc.公司无关</div>
+</div>
+<script type="text/javascript">
+	var u = navigator.userAgent;
+	var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+	var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+	if (isAndroid) {
+		document.getElementById("iosTip").style.display="none";
+	}else {
+		document.getElementById("iosTip").style.display="block";
+	}
+</script>
+

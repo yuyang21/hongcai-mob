@@ -1,0 +1,5 @@
+{
+  "YEEPAY_ADDRESS": "https://hk.lanmaoly.com/bha-neo-app/lanmaotech/gateway",
+  "base_file_url":"http://192.168.1.43:8100/uploads/",
+  "pay_company":"cgt"
+}

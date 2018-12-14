@@ -1,0 +1,943 @@
+<html>
+  <script type="text/javascript" src="/styles/un-min/jquery.min.js"></script>
+  <script src="/styles/un-min/jweixin-1.0.0.js"></script>
+  <script type="text/javascript" src="/styles/un-min/gameWechatUtils.js"></script>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name='format-detection' content='telephone=no' />
+    <meta name='format-detection' content='email=no' />
+    <!--去掉移动端input聚焦默认背景-->
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="wap-font-scale" content="no">
+    <title>谁是点钞王</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="/styles/un-min/game-common.css">
+    <link rel="stylesheet" type="text/css" href="/styles/un-min/game-counting.css">
+    <script src="/styles/un-min/rem.js"></script>
+    <style type="text/css">
+      .count .count-money .money-list {
+        position: relative;
+      }
+      .count .count-money .money-list ul {
+        top: -139.389rem;
+      }
+      #count-100, #count-50 {
+        touch-action: none
+      }
+      .count-down .process-wrap {
+        background: url('/images/games/process-bg.png') no-repeat center center;
+        background-size: 100%;
+      }
+      .count .count-statistics {
+        background: url('/images/games/icon-money.png') no-repeat 38% center;
+        background-size: 23%;
+      }
+      .count .count-statistics p span.icon-rule {
+        background: url('/images/games/icon-rule.png') no-repeat 0 0;
+        background-size: 100% 100%;
+      }
+      .input-focus {
+        transform: translateY(-2rem);
+        -webkit-transition:all .2s ease-out;
+        -moz-transition:all .2s ease-out;
+        -o-transition:all .2s ease-out;
+        -ms-transition:all .2s ease-out;    
+        transition:all .2s ease-out;
+      }
+      .game-counting {
+        background: url('/images/games/guang.png') no-repeat center center;
+        background-size: 100% 100%;
+        background-color: #ff2421;
+      }
+      .game-counting-innner {
+        background: url('/images/games/circle-white.png') no-repeat 0 0;
+        background-size: 100% 100%;
+      }
+      @-moz-keyframes flashingLight {
+        0% { 
+          background: url('/images/games/circle-white.png') no-repeat 0 0;
+          background-size: 100% 100%
+        }
+        100% { 
+          background: url('/images/games/circle-red.png') no-repeat 0 0;
+          background-size: 100% 100%
+        }
+      }
+      @-webkit-keyframes flashingLight {
+        0% { 
+          background: url('/images/games/circle-white.png') no-repeat 0 0;
+          background-size: 100% 100%
+        }
+        100% { 
+          background: url('/images/games/circle-red.png') no-repeat 0 0;
+          background-size: 100% 100%
+        }
+      }
+      @keyframes flashingLight{
+        0% { 
+          background: url('/images/games/circle-white.png') no-repeat 0 0;
+          background-size: 100% 100%
+        }
+        100% { 
+          background: url('/images/games/circle-red.png') no-repeat 0 0;
+          background-size: 100% 100%
+        }
+      }
+      /*注册弹窗*/
+      .registerBox {
+        background: url('/images/games/register-box.png') no-repeat 0 0;
+        background-size: contain;
+        margin: 1.5rem .5rem 0.5rem;
+        padding: .7rem .25rem .2rem;
+        position: relative;
+        height: 6rem;
+        overflow: hidden;
+      }
+      .rule-btn {
+        background: url('/images/games/btn-1.png') no-repeat center center;
+        width: 2.2rem;
+        height: .9rem;
+        background-size: contain;
+        line-height: .9rem;
+        font-weight: bold;
+        color: #ff2d3d;
+        font-size: .3rem;    
+        position: relative;
+        z-index: 9999;
+        text-align: center;
+        padding-right: .1rem;
+      }
+      .register-btns {
+        margin: .2rem .55rem;
+      }
+      .startAgin {
+        float: left;
+      }
+      .getPrize {
+        float: right;
+      }
+      .register-title {
+        height: auto;
+        display: initial;
+      }
+      .register-title img {
+        display: block;
+        text-align: center;
+        margin: 0 auto;
+      }
+      .rewardMoney {
+        background: url('/images/games/register-title2.png') no-repeat center center;
+        background-size: contain;
+        width: 100%;
+        height: .5rem;
+        margin: .15rem auto .15rem;
+      }
+      .totalMoney {
+        font-size: .32rem;
+        font-weight: bold;
+        color: #ff2d3d;
+        line-height: .6rem;
+        margin-left: 1rem;
+        width: 1.3rem;
+        display: inline-block;
+        line-height: .6rem;
+        text-align: center;
+      }
+      .to-register {
+        height: auto;
+        display: initial;
+      }
+      .to-register input {
+        border: none;
+        border-radius: 5px;
+        height: .8rem;
+        padding-left: .35rem;
+        background-color: #fff;
+        color: #999999;
+        margin-bottom: .22rem;
+        font-size: .24rem;
+        border: solid 1px #051c9b;
+      }
+      .to-register input::-webkit-input-placeholder { color: #999999 !important; line-height:normal!important;}
+      #mobilesignup, .mobilesignup {
+        width: 100%;
+      }
+      .picCaptcha, .mobileCaptcha {
+        width: 67%;
+      }
+      .captchacode, #mobilecode, .captchacode .mobilecode {
+        width: 30%;
+        height: .8rem;
+        border-radius: 5px;
+        float: right;
+        background: #fff;
+        border: solid 1px #051c9b;
+      }
+      #mobilecode, .mobilecode {
+        border: 1px solid #ff172f;
+        color: #fff;
+        background-color: #ff172f;
+        font-size: .3rem;
+        line-height: 2.6;
+        text-align: center;
+        font-weight: 500;
+      }
+      .register-tips {
+        font-size: .22rem;
+        font-weight: bold;
+        color: #ff172f;
+        text-align: center;
+      }
+      .errLong {
+        line-height: 1.5;
+      }
+      #mobilecode.countDown {
+        background: #fff;
+        border: 1px solid #fff;
+        color: #ff172f;
+      }
+      #voice {
+        position: absolute;
+        top: .7rem;
+        right: 0.3rem;
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="getAudio" preload="preload"><source src="/styles/un-min/get.mp3"></audio>
+    <audio id="warning" preload="preload"><source src="/styles/un-min/tip.mp3"></audio>
+    <div class="game-counting-wrap">
+      <div class="game-counting">
+        <div class="game-counting-innner">
+          <div id="voice">
+            <img src="/images/games/on.png" width="55%" class="position-ab" id="voice-on">
+            <img src="/images/games/off.png" width="55%" class="position-ab" id="voice-off" style="display: none;">
+          </div>
+          <img src="/images/games/header-title.png" width="70%" class="title-img">
+          <!-- 剩余次数 -->
+          <div class="times">
+            <img src="/images/games/hand-left.png" class="display-inbl" width="6%">
+            <p class="display-inbl">剩余游戏次数：<span id="gameCounts">0</span>次</p>
+          </div>
+          <!-- 倒计时 -->
+          <div class="count-down">
+            <img src="/images/games/count-down.png" class="display-inbl" width="4%" id="hourglass">
+            <div class="display-inbl">
+              <span class="left">倒计时:</span>
+              <div class="process-wrap left">
+                <span class="count-tip" id="sub">-5</span>
+                <div class="process" id="process-bar"></div>
+              </div>
+              <span class="left" id="time">30s</span>
+            </div>
+          </div>
+          <!-- 点钞 -->
+          <div class="count">
+            <div class="count-statistics">
+              <p class="display-inbl"><i id="totalMoney">0</i>元 
+                <span class="count-tip" id="add-100">+100</span>
+                <span class="count-tip" id="add-50">+50</span>
+                <span class="icon-rule showRule">活动<br>规则 </span>
+              </p>
+            </div>
+            <div class="count-money">
+              <img src="/images/games/box1.png" width="65%" class="margin display-bl box-top box-top">
+              <img src="/images/games/box2.png" width="61.5%" class="margin display-bl">
+              <!-- 钞票列表 -->
+              <div class="money-list">
+                <ul class="count-list">
+                </ul>
+              </div>
+              <!-- 点钞按钮 -->
+              <div class="btns clear">
+                <div class="display-inbl btn-left" id="count-50">
+                  <img src="/images/games/hand.png" width="28%" class="noviceHand hand-50">
+                  <span>50</span>
+                  <img src="/images/games/button-50.png" width="66%" style="float: left;">
+                </div>
+                <div class="display-inbl btn-right" id="count-100" style="float: right;">
+                  <img src="/images/games/hand.png" width="28%" class="noviceHand hand-100">
+                  <span>100</span>
+                  <img src="/images/games/button-100.png" class="right" width="66%">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 321游戏开始倒计时 -->
+    <div class="mask-common" id="startGame">
+      <div class="startGame">
+        <img src="/images/games/reload-3.png" width="30%" class="countDown3">
+        <img src="/images/games/reload-2.png" width="28%" class="countDown2">
+        <img src="/images/games/reload-1.png" width="16%" class="countDown1">
+        <img src="/images/games/reload-start.png" width="50%" class="countDown0">
+      </div>
+    </div>
+    <!-- 活动规则弹窗 -->
+    <div class="mask-common" id="ruleBox">
+      <div class="ruleBox">
+        <img src="/images/games/rule-box.png" alt="" class="box">
+        <div class="rule-title">游戏规则</div>
+        <div class="contents">
+          <div class="rule-content">
+            <span class="num">①</span>
+            <span class="txt">遇到面值50元时，点击左手按钮；<img src="/images/games/rule-hand-left.png" alt=""  width="8%"></span>
+          </div>
+          <div class="rule-content">
+            <span class="num">②</span>
+            <span class="txt">遇到面值100元时，点击右手按钮；<img src="/images/games/rule-hand-right.png" alt=""  width="8%"></span>
+          </div>
+          <div class="rule-content">
+            <span class="num">③</span>
+            <span class="txt">注意！如选择错误的方向，<img src="/images/games/rule-count.png" alt=""  width="6%">倒计时将减少5秒哟！</span>
+          </div>
+          <div class="rule-content">
+            <span class="num">④</span>
+            <span class="txt">在规定30s倒计时结束后，<img src="/images/games/rule-clock.png" alt=""  width="8%">您将获得与正确数出金额相同的特权本金奖励！（有效期3天）</span>
+          </div>
+          <div class="rule-content">
+            <span class="num">⑤</span>
+            <span class="txt">每人有5次机会，邀请好友一起玩，可额外获得1次奖励机会，多邀多得！</span>
+          </div>
+        </div>
+      </div>
+      <img src="/images/games/rule-close.png" alt="" class="close-btn showRule" id="closeBtn">
+      <div class="rule-start-btn" id="RuleStartGame">
+        <img src="/images/games/rule-btn.png" alt="">
+        <span>我知道了，开始游戏</span>
+      </div>
+    </div>
+    <!-- 注册弹窗 -->
+    <div class="mask-common" id="registerBox">
+      <div id="register">
+        <div class="registerBox">
+          <div class="register-title">
+            <img src="/images/games/register-title1.png" width="45%">
+            <div class="rewardMoney"><span class="totalMoney">0</span></div>
+          </div>
+          <!-- 注册表单 -->
+          <form autocomplete="off" class="invite-form" name="registerForm" id="registerForm" novalidate>
+            <div class="to-register">
+              <!-- 手机号码 -->
+              <input id="mobilesignup" name="mobile" type="number" placeholder="请输入手机号" required maxlength="11"/>
+              <!-- 图形验证码 -->
+              <input id="picCaptcha" name="picCaptcha" required type="number" placeholder="请输入图形验证码" class="picCaptcha" maxlength="4"/>
+              <img src="/hongcai/api/v1/siteUser/getPicCaptcha?" id="checkCaptcha" class="captchacode fr bg-white">
+              <!-- 手机验证码 -->
+              <input id="mobileCaptcha" name="captchasignup" required type="number" placeholder="请输入短信验证码" class="mobileCaptcha" maxlength="6"/>
+              <div id="mobilecode">获取</div>
+              <div class="register-tips">*每个账号只能领取一次奖励哦</div>
+            </div>
+          </form>
+        </div>
+        <div class="register-btns">
+          <div class="startAgin rule-btn" id="startAgin">再玩一次</div>
+          <div class="getPrize rule-btn" id="getPrize">立即领取</div>
+        </div>
+      </div>
+    </div>
+    <!-- 错误提示弹窗 -->
+    <div class="toast toast1" id="toast">
+      <p></p>
+    </div>
+  </body>
+  <script type="text/javascript">
+    $(function () {
+      /**
+       * 获取参数
+       */
+      function isAndroid(){
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        return /android/i.test(userAgent) && !/windows phone/i.test(userAgent);
+      }
+      function getQueryString(name) {  
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");  
+        var r = window.location.search.substr(1).match(reg);  
+        if (r != null) return unescape(r[2]); return null;  
+      }
+      function isIos(){
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        return /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+      }
+      function isWinPhone(){
+        return /windows phone/i.test(userAgent);
+      }
+      function isWeixin(){
+        var ua = navigator.userAgent.toLowerCase();
+        return ua.match(/MicroMessenger/i)=="micromessenger";
+      }
+      function getCookie(c_name) {  
+        if (document.cookie.length > 0) {  
+          c_start = document.cookie.indexOf(c_name + "=");  
+          if (c_start != -1) {  
+            c_start = c_start + c_name.length + 1;  
+            c_end = document.cookie.indexOf(";", c_start);  
+            if (c_end == -1)  
+              c_end = document.cookie.length;  
+            return unescape(document.cookie.substring(c_start, c_end));  
+          }  
+        }  
+        return "";  
+      }
+      var second = 30,
+          CountDownSecond = 60,
+          countTimer,
+          step = 0,
+          $processBar = $('#process-bar'),
+          $time = $('#time'),
+          $hourglass = $('#hourglass'),
+          countList = [],
+          $ruleBox = $('#ruleBox'),
+          $showRule = $('.showRule'),
+          $gameCounts = $('#gameCounts'),
+          $RuleStartGame = $('#RuleStartGame'),
+          $ReadyFlash = $('#startGame'),
+          $voice = $('#voice'),
+          percentWidth = 96, // 进度条初始化样式百分比数值
+          percentOneSecond = 3.2, // 一秒进度条递减值
+          countWrong = false, // 是否数错钞,
+          isPlay = true, // 是否静音
+          wrongSecond,
+          gameOver = false,
+          getAudio = document.getElementById('getAudio'),
+          warningAudio = document.getElementById('warning'),
+          receiveMoney = document.getElementsByClassName('totalMoney'),
+          scrollDirection = 0; // 钞票初始位置  钞票的初始位置公式： -1.439 * (接口拿到的钞票张数 - 3)
+      var countObj = {
+        gameCounts: 0,
+        gameTimes: 30,
+        firstEntry: true,
+        totalMoney: 0,
+        num: 0,
+        // 钱币加减 和 时间减少提示淡入淡出效果 
+        showTip: function (ele, inDuration, outDuration) {
+          $(ele).fadeIn(inDuration, function () {
+            $(ele).fadeOut(outDuration)
+          })
+        },
+
+        /*
+        ** 音效播放
+        */
+        playOrPaused: function(url) {
+          if (isPlay) {
+            var _this = this
+            var audio = new Audio();
+            audio.setAttribute('src', url);
+            if (audio.paused) {
+              // 暂停中
+              var playPromise = audio.play();
+              if (playPromise) {
+                playPromise.then(function() {
+                }).catch(function(error) {
+                  console.log(error)
+                });
+              }
+            }
+          }
+        },
+        /*
+        ** 音效播放,解决iOS下无法触发自动播放
+        */
+        forceSafariPlayAudio: function (obj) {
+          // isPlay ? obj.muted = false : obj.muted = true;
+          if (isPlay) {
+            if (window.WeixinJSBridge) {
+              WeixinJSBridge.invoke('getNetworkType', {}, function (e) {
+                obj.play();
+              }, false);
+            } else {
+              document.addEventListener("WeixinJSBridgeReady", function () {
+                WeixinJSBridge.invoke('getNetworkType', {}, function (e) {
+                  obj.play();
+                });
+              }, false);
+            }
+            obj.play();
+          }
+        },
+        /*
+        ** 倒计时沙漏 
+        */
+        hourglassAnimate: function (duration) {
+          $hourglass.addClass('hourglass')
+          var glassTimer = setTimeout(function() {
+            $hourglass.removeClass('hourglass')
+            clearTimeout(glassTimer)
+          }, duration)
+        },
+
+        /*
+         ** 倒计时进度条和时间效果
+         */
+        countDown: function () {
+          var _this = this
+          // 如果秒数还是大于0，则表示倒计时还没结束
+          if (second > 0) {
+            // 时间只剩10秒时
+            if (second <= 11) {
+              document.addEventListener("WeixinJSBridgeReady", _this.forceSafariPlayAudio(warningAudio), false);
+              _this.hourglassAnimate(second*1000-100)
+            }
+            // 判断是否点错，假设在28秒， countWrong === ture 表示点错钞
+            if (second === wrongSecond) { countWrong = true} else { countWrong = false}
+            if (countWrong) {
+              second >=5 ? second -= 5 : second = 0
+              percentWidth -= 16
+              
+            }else {
+              second -= .1
+              percentWidth -= .32
+            }
+            // 进度条递减
+            $processBar.animate({width: percentWidth + '%'}, {duration: 0});
+            var secondInt = Math.floor(second) > 0 ? Math.floor(second) : 0;
+            $time.html(secondInt + 's');
+            // 一秒后重复执行
+            countTimer = setTimeout(function () {
+              _this.countDown();
+            }, 100)
+          } else {
+            clearTimeout(countTimer)
+            $('#registerBox').show()
+            registerObj.playAgain($('#startAgin'))
+            _this.showRewardMoney(receiveMoney, _this.totalMoney, 0, 800, 0)
+            $('#registerBox .totalMoney').html(_this.totalMoney)
+            document.addEventListener("WeixinJSBridgeReady", _this.forceSafariPlayAudio(getAudio), false);
+          }
+        },
+        showRewardMoney: function(elem, endVal, startVal, duration, decimal) {  
+          //传入参数依次为 数字要变化的元素，最终显示数字，数字变化开始值，变化持续时间，小数点位数
+          var startTime = 0;
+          var dec = Math.pow(10, decimal);
+          var progress,value;
+          function startCount(timestamp) {
+            if(!startTime) startTime = timestamp;
+            progress = timestamp - startTime;
+            value = startVal + (endVal - startVal) * (progress / duration);
+            value = (value > endVal) ? endVal : value;
+            value = Math.floor(value*dec) / dec;
+            $(elem).html(value.toFixed(decimal));
+            progress < duration && requestAnimationFrame(startCount)
+          }
+          requestAnimationFrame(startCount)
+        },
+        // 点钞金额增加提示效果
+        showMoneyTip: function (clickEle, showEle) {
+          var _this = this
+          _this.showTip(showEle, 100, 400);
+        },
+        // 钞票配置
+        moneyConfig: function (count, type) {
+          var moneyHtml = ''
+          for (var i = 0; i < count.length; i++) {
+            if (count[i] === 50) {
+              moneyHtml += '<li><img src="../../images/games/50.png" class="display-bl margin" width="55%"></li>'
+            } else {
+              moneyHtml += '<li><img src="../../images/games/100.png" class="display-bl margin" width="55%"></li>'
+            }
+          }
+          $('.count-list').append(moneyHtml) //点钞调用
+        },
+        // 钞票滑出效果
+        countSlideDown: function () {
+          scrollDirection += 1.437
+          if (isAndroid()) {
+            // $('.count-list').stop().animate({'top':scrollDirection + 'rem'}, 400)
+            $('.count-list').css({'top':scrollDirection + 'rem'})
+          } else {
+            $('.count-list').addClass('slide-down')
+            $('.count-list').css('transform', 'translateY(' + scrollDirection + 'rem)')
+            document.querySelector('.count-list').style.webkitTransform = 'translateY(' + scrollDirection + 'rem)'
+          }
+        },
+        // 第一张钞票收起
+        firstMoneyOut: function (type, turn) { // type: 钞票类别
+          var step = 0;
+          if (turn > 1) {
+            if (type === 50) {
+              step -= 150;
+              if (isAndroid()) {
+                $($('.count-list li img')[turn]).animate({'margin-left':'-20rem', 'margin-top':'-10rem'}, 600)
+              }
+            } else {
+              step += 150
+              if (isAndroid()) {
+                $($('.count-list li img')[turn]).animate({'margin-right':'-20rem', 'margin-top':'-10rem'}, 600)
+              }
+            }
+            if (!isAndroid()) {
+              $($('.count-list li img')[turn]).addClass('out')
+              $($('.count-list li img')[turn]).css('transform', 'translateX(' + step + '%)')
+              document.querySelector('.count-list li img').style.webkitTransform = 'translateX(' + step + '%)'
+            }
+          }
+        },
+        /*
+         ** 点钞
+         */
+        countStart: function (clickEle, showEle, type) { // 点击元素， 显示的元素， 点击的按钮类型 50 ／ 100
+          var _this = countObj;
+          $(clickEle).unbind('touchend').on('touchend', function (event) {
+            event.preventDefault()
+            if (_this.num < 1 || second <= 0) {
+              return;
+            }
+            _this.firstMoneyOut(countList[_this.num], _this.num) // 钞票收起
+            _this.countSlideDown() // 出钞票列表
+            if (countList[_this.num] == type && type == 50) {
+              _this.playOrPaused('/styles/un-min/yes.mp3')
+              _this.showMoneyTip(clickEle, showEle);
+              _this.totalMoney += type
+              $('#totalMoney').html()
+            } else if (countList[_this.num] == type && type == 100){
+              _this.playOrPaused('/styles/un-min/yes.mp3')
+              _this.showMoneyTip(clickEle, showEle);
+              _this.totalMoney += type
+            } else {
+              _this.playOrPaused('/styles/un-min/no.mp3')
+              countWrong = true;
+              _this.showTip('#sub', 800, 1500)
+              wrongSecond = second
+            }
+            $('.hand-100').hide()
+            $('.hand-50').hide()
+            $('#totalMoney').html(_this.totalMoney)
+            _this.num --
+          })
+        },
+        showRule: function (showEle) {
+          var _this = this
+          _this.firstEntry ? $RuleStartGame.hide() : $('#closeBtn').show()
+          if (showEle.css("display") == 'none') {
+            showEle.show();
+          } else {
+            showEle.hide();
+          }
+        },
+        toggleRuleBox: function (clickEle, showEle) {
+          var _this = this
+          clickEle.on('touchend', function () {
+            _this.showRule(showEle)
+          })
+        },
+        // 开始游戏
+        RuleStartGame: function () {
+          var _this = countObj;
+          $('#closeBtn').show()
+          $('#registerBox').hide()
+          $ruleBox.hide();
+          $ReadyFlash.show();
+          _this.updateCount()
+          setTimeout(function () {
+            _this.countDown();
+            $showRule.css({zIndex: 99999})
+            $ReadyFlash.hide();
+            if (_this.firstEntry && countList[countList.length - 1] == '50') {
+              $('.hand-50').show()
+            } else if (_this.firstEntry && countList[countList.length - 1] == '100') {
+              $('.hand-100').show()
+            }
+          }, 4000)
+        },
+        // 判断是否首次进入游戏页
+        getGameState: function () {
+          var _this = this
+          $.get('/hongcai/rest/activity/countingKings/' + getCookie('openid') + '/userCountingInfo', function (res, status) {
+            if (res && res.ret !== -1) {
+              _this.gameCounts = res.count
+              res.usedCount <=0 ? _this.firstEntry = true : _this.firstEntry = false
+              if (_this.gameCounts <=0) {
+                window.location.href= location.origin + '/views/games/game-counting-share.html'
+                  return
+              } else {
+                _this.getCountList();
+                if (_this.firstEntry) {
+                  $ruleBox.show();
+                  $('#closeBtn').hide()
+                } else {
+                  $ruleBox.hide();
+                  $RuleStartGame.hide()
+                  _this.RuleStartGame()
+                }
+                $gameCounts.html(_this.gameCounts);
+              }
+            } else {
+              console.log('获取用户游戏参与信息接口报错')
+            }
+          })
+        },
+        //获取钞票列表
+        getCountList: function () {
+          var _this = this
+          $.get("/hongcai/rest/activity/countingKings", function (res, status) {
+            if (res && res.ret !== -1) {
+              countList = res.countingValues
+              countObj.moneyConfig(countList)
+              _this.num = countList.length -1
+              scrollDirection =  -1.437 * (countList.length - 3)
+              if (isAndroid()) {
+                $('.count-list').css({'top': scrollDirection + 'rem','position':'absolute'})
+              } else {
+                $('.count-list').css('transform', 'translateY(' + scrollDirection + 'rem)')
+                document.querySelector('.count-list').style.webkitTransform = 'translateY(' + scrollDirection + 'rem)'
+              }
+            } else {
+              console.log(res.msg);
+            }
+          })
+        },
+        //更新游戏剩余次数
+        updateCount: function () {
+          var _this = this
+          $.ajax({
+            url: '/hongcai/rest/activity/countingKings/userCountingInfo',
+            type: 'PUT',
+            success: function (res) {
+              console.log(res)
+              if (res && res.ret !== -1) {
+                _this.gameCounts = res.count
+                $gameCounts.html(res.count)
+              } else {
+                console.log(res.msg)
+              }
+            },
+            data: 'openid=' + getCookie('openid') + '&type=1'
+          })
+        },
+        startGameConfig: function () {
+          if (!getCookie('openid')) {
+            window.location.href = location.origin + '/views/games/game-counting-start.html'
+            return
+          }
+          this.getGameState()
+          this.toggleRuleBox($showRule, $ruleBox);
+          $RuleStartGame.on('touchend', this.RuleStartGame)
+          $('#totalMoney').html(0);
+          this.countStart('#count-100', '#add-100', 100)
+          this.countStart('#count-50', '#add-50', 50)
+        }
+      };
+      countObj.startGameConfig();
+
+      // 注册逻辑
+      var registerObj = {
+        canGetCaptch: true,
+        mobile: $('#mobilesignup'),
+        picCaptcha: $('#picCaptcha'),
+        mobileCaptcha: $('#mobileCaptcha'),
+        mobilecode: $('#mobilecode'),
+        /**
+         * 获取和后端对应的deviceCode
+         */
+        deviceCode: function () {
+          var deviceCode = 0;
+          if(isAndroid()){
+            deviceCode = 2;
+          }
+          if(isWeixin() && isAndroid()){
+            deviceCode = 3;
+          }
+          if(isIos()){
+            deviceCode = 5;
+          }
+          if(isWeixin() && isIos()){
+            deviceCode = 6;
+          }
+          return deviceCode;
+        },
+        // 错误提示
+        showToast: function (msg, errLong) {
+          errLong ? $('#toast').addClass('errLong') : $('#toast').removeClass('errLong')
+          $('#toast').html(msg).show()
+          setTimeout(function() {
+            $('#toast').html('').hide()
+          }, 2000)
+        },
+        // 获取图形验证码
+        refreshCode: function (clickEle) {
+          clickEle.on('touchend', function () {
+            var capchaCode = document.getElementById('checkCaptcha');
+            capchaCode.src = capchaCode.getAttribute("src") + '?code=' + Math.random();
+          })
+        },
+        // 短信验证码倒计时
+        countDown: function () {
+          var _this = this
+          // 如果秒数还是大于0，则表示倒计时还没结束
+          if (CountDownSecond > 0) {
+            // 倒计时不结束按钮不可点
+            _this.canGetCaptch = false
+            _this.mobilecode.html('')
+            _this.mobilecode.html(CountDownSecond + "s")
+            _this.mobilecode.addClass('countDown')
+            // 时间减一
+            CountDownSecond -= 1
+            // 一秒后重复执行
+            setTimeout(function() {
+              _this.countDown()
+            }, 1000)
+            // 否则，按钮重置为初始状态,可点击
+          } else {
+            _this.mobilecode.removeClass('countDown')
+            _this.mobilecode.html('重新发送')
+            CountDownSecond = 60
+            _this.canGetCaptch  = true
+          }
+        },
+        // 点击获取短信验证码
+        getCaptcha: function (clickEle) {
+          var _this = this
+          clickEle.on('touchend', function () {
+            console.log(_this.mobile.val())
+            if (!_this.canGetCaptch) {
+              return
+            }
+            if (!_this.mobile.val()) {
+              _this.showToast('请输入手机号！')
+              return
+            }
+            // 校验手机号
+            var mobilePattern = /^((13[0-9])|(15[^4,\D])|(18[0-9])|(17[03678])|(14[0-9]))\d{8}$/
+            if (!mobilePattern.test(_this.mobile.val())) {
+              _this.showToast('请输入正确的手机号！')
+              return
+            }
+            if (!_this.picCaptcha.val()) {
+              _this.showToast('请输入图形验证码！')
+              return
+            }
+            _this.canGetCaptch = false
+            $.post("/hongcai/rest/users/mobileCaptcha", {
+              mobile: _this.mobile.val(),
+              picCaptcha: _this.picCaptcha.val(),
+              type: 1,
+              business: 0,
+              device: _this.deviceCode()
+            }, function (res, status) {
+              setTimeout(function () {
+                _this.canGetCaptch = true
+              }, 1000)
+              console.log(res)
+              if (res.code || res.ret === -1) {
+                if (res.code === -1005) {
+                  _this.showToast('该活动只针对新用户哦，您已经注册过了，前往登录app参与其他活动吧！', 1)
+                } else {
+                  _this.showToast(res.msg)
+                }
+                return
+              }
+              _this.countDown()
+            })
+          })
+        },
+        // 注册
+        signUp: function (clickEle) {
+          var _this = this
+          clickEle.on('touchend', function () {
+            if (!_this.mobile.val() || !_this.picCaptcha.val() || !_this.mobileCaptcha.val()) {
+              return
+            }
+            $.post('/hongcai/rest/users/register', {
+              picCaptcha: _this.picCaptcha.val(),
+              mobile: _this.mobile.val(),
+              password: '',
+              captcha: _this.mobileCaptcha.val(),
+              channelCode: getCookie('f'),
+              act: getCookie('act'),
+              device: _this.deviceCode()
+            }, function (res) {
+              console.log(res)
+              setTimeout(function () {
+                _this.busy = false
+              }, 1000)
+              if (res.code || res.ret === -1) {
+                if (res.code === -1003) {
+                  _this.showToast('请输入正确的手机号！')
+                } else if (res.code === -1005) {
+                  _this.showToast('该活动只针对新用户哦，您已经注册过了，前往登录app参与其他活动吧！', 1)
+                } else {
+                  _this.showToast(res.msg)
+                }
+                return
+              }
+              console.log('注册成功')
+              _this.takeReward(countObj.totalMoney, res.id)
+            })
+          })
+        },
+        //发放特权本金
+        takeReward: function (rewardMoney, userId) {
+          if (rewardMoney <=0) {
+            window.location.href= location.origin + '/views/games/game-counting-reward.html?principal=' + rewardMoney
+            return
+          }
+          $.post('/hongcai/rest/activity/countingKings/takeReward', {
+            'openid': getCookie('openid'),
+            userId: userId,
+            amount: rewardMoney
+          }, function (res) {
+            if (res && res.ret !== -1) {
+              window.location.href= location.origin + '/views/games/game-counting-reward.html?principal=' + rewardMoney 
+            } else {  
+              console.log(res.msg)
+            }
+          })
+        },
+        playAgain: function (clickEle) {
+          var _this = this
+          setTimeout(function() {
+            clickEle.on('touchend', function () {
+              location.reload()
+            })
+          }, 1000)
+        },
+        windowChange: function (ele) {
+          var winHeight = $(window).height()
+          window.addEventListener('resize', function () {
+            if ($(window).height() < winHeight) {
+              isAndroid() ? ele.addClass('input-focus') : null
+            } else {
+              isAndroid() ? ele.removeClass('input-focus') : null
+            }
+          })
+        },
+        watchInput: function () {
+          $('#mobilesignup').bind('input propertychange', function() {
+            $(this).val($(this).val().replace(/\D/g, ''))
+            $(this).val($(this).val().length > 11 ? $(this).val().slice(0, 11) : $(this).val())
+          });
+          $('#mobileCaptcha').bind('input propertychange', function() {
+            $(this).val($(this).val().replace(/\D/g, ''))
+            $(this).val($(this).val().length > 6 ? $(this).val().slice(0, 6) : $(this).val())
+          });
+          $('#picCaptcha').bind('input propertychange', function() {
+            $(this).val($(this).val().replace(/[\W]/g, ''))
+            $(this).val($(this).val().length > 4 ? $(this).val().slice(0, 4) : $(this).val())
+          });
+        }
+      }
+      registerObj.refreshCode($('#checkCaptcha'))
+      registerObj.getCaptcha(registerObj.mobilecode)
+      registerObj.signUp($('#getPrize'))
+      registerObj.windowChange($('#register'))
+      registerObj.watchInput()
+      $voice.on('touchend', function () {
+        isPlay = !isPlay;
+        if (isPlay) {
+          $('#voice-off').css({'display': 'none'});
+          $('#voice-on').css({'display': 'block'});
+        } else {
+          $('#voice-off').css({'display': 'block'});
+          $('#voice-on').css({'display': 'none'});
+        }
+      })
+    })
+  </script>
+</html>

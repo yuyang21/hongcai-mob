@@ -1,0 +1,47 @@
+<div class="bg-yellow padding-l-1 padding-r-1 padding-t-2">
+    <div class="text-center">
+        <img src="/images/signup-1.png" width="30%">
+        <p class="ft-2 ft-orange margin-0"><strong>注册宏财网</strong></p>
+    </div>
+
+    <form class="register margin-0 padding-b-2 padding-t-2 ft-grey2" autocomplete="on">
+        <p class="margin-0 border-grey1 border-ra-0p5 margin-b-1p5">
+            <label for="usernamesignup" class="border-grey1-right" data-icon="u"><small>用户名</small></label>
+            <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="4-15位字符，以字母、中文开头"/>
+        </p>
+        <!-- <p class="margin-0 border-grey1 border-ra-0p5 margin-b-1">
+            <label for="emailsignup" class="youmail border-grey1-right" data-icon="e"><small> 邮箱</small></label>
+            <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="请输入邮箱"/>
+        </p> -->
+        <p class="margin-0 border-grey1 border-ra-0p5 margin-b-1p5">
+            <label for="passwordsignup" class="border-grey1-right" data-icon="p"><small>密码</small></label>
+            <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="6-22位字符，数字或字母组合"/>
+        </p>
+        <p class="margin-0 border-grey1 border-ra-0p5 margin-b-1p5">
+            <label for="mobilesignup" class="border-grey1-right" data-icon="m"><small>手机号码</small></label>
+            <input id="mobilesignup" name="mobilesignup" required="required" type="tel" placeholder="11位长度手机号码"/>
+        </p>
+        <p class="margin-0 border-grey1 border-ra-0p5 margin-b-1p5 u-pull-left" style="width: 65%;">
+            <label for="captchasignup" class=" border-grey1-right" data-icon="c" style="width: 39%;"><small>验证码</small></label>
+            <input id="captchasignup" name="captchasignup" required="required" type="text" placeholder="6位数字" style="width: 61%;"/>
+        </p>
+        <p class="margin-0 margin-b-1p5">
+            <a href="javascript:;" class="getCaptcha"><strong>获取验证码</strong></a>
+        </p>
+        <p id="invitationCode" class="margin-0 margin-b-1p5 clear">
+            <label><small>邀请码<br><span class="ft-grey1">(选填)</span></small></label>
+            <input class=" invitationCode" name="invitationCode" required="required" type="text" placeholder="11位长度手机号码"/>
+        </p>
+        <p class="clear margin-0 margin-b-0p5">
+            <input type="checkbox" checked><small>我已阅读并同意<a ui-sref="root.registration-agreement" target="_blank">《注册协议》</a></small>
+        </p>
+        <p class="signin margin-0 text-center">
+            <input type="submit" class="button button-primary column" value="注册"/>
+        </p>
+        <p class="change_link margin-0 text-center clear">
+            <small>已经注册过 ?
+                <a ui-sref="root.login" class="to_login"> 登录 </a>
+            </small>
+        </p>
+    </form>
+</div>

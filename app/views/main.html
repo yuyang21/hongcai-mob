@@ -1,0 +1,73 @@
+<div class="main overflow-hid margin-b-5 bg-white">
+  <!-- 轮播banner图 -->
+  <div id="slideBanner" class="slide-banner position-re overflow-hid">
+    <!-- <div class="bd position-re"> -->
+    <div class="slide position-re">
+      <ul ng-if="banners.length > 0">
+          <li class="position-re text-center" ng-repeat="banner in banners">
+            <a class="pic display-bl" ng-click="clickBanner(banner.linkUrl)")"><img ng-src="{{banner.imageUrl}}" /></a>
+          </li>
+      </ul>
+      <ul ng-if="!banners || banners.length <= 0">
+        <li class="position-re text-center">
+          <a class="pic display-bl" ui-sref="root.bank-custody-landing"><img src="/images/new/ad-cgt.jpg" /></a>
+        </li>
+        <li class="position-re text-center">
+          <a class="pic display-bl" ng-click="goAutoTender();"><img src="/images/new/ad-autotender.jpg" /></a>
+        </li>
+      </ul>
+      <!-- 注意：需要手动增减个数 -->
+      <div class="dot" ng-if="banners.length > 0">
+        <span ng-class="$index === 0 ? 'cur' : ''" ng-repeat="banner in banners">{{$index + 1}}</span>
+      </div>
+      <div class="dot" ng-if="!banners || banners.length <= 0">
+        <span class="cur">1</span>
+        <span>2</span>
+      </div>
+    </div>
+    <!-- <div class="hd position-ab"><ul></ul></div> -->
+  </div>
+
+  <!-- 公告 -->
+  <div class="huadong">
+    <div class="hdimg"></div>
+    <div class="notice_active fl">
+      <ul class="margin-b-0">
+        <li class="notice_active_ch" ng-repeat="item in notices" ng-click="go_detailMsg(item.id);">
+          <span ng-if="(widthFlag===1 || widthFlag===0) && item.title.length < 20">{{item.title}}</span>
+          <span ng-if="(widthFlag===1 || widthFlag===0) && item.title.length >= 20">{{item.title | limitTo:19}}...</span>
+          <span ng-if="widthFlag===2">{{item.title}}</span>
+        </li>
+      </ul>   
+    </div>
+    <div class="gg_more fr" ng-click="go_moreMsg();"></div>
+  </div>  
+
+  <!-- li列表 -->
+  <div class="about-list clearfix">
+    <ul class="cleafix overflow-hid margin-b-0">
+      <li class="fl text-center" ui-sref="root.activityCenter">
+        <img class="" src="/images/new-main/active-center.png" width="20%" alt="">
+        <p class="ft-1p3 margin-b-0">活动中心</p>
+      </li>
+      <li class="fl text-center" ng-click="toSafe()">
+        <img class="" src="/images/new-main/safe.png" width="17%" alt="">
+        <p class="ft-1p3 margin-b-0">安全保证</p>
+      </li>
+      <li class="fl text-center" ng-click="toDisclosure()">
+        <img class="" src="/images/new-main/disclosure.png" width="18%" alt="">
+        <p class="ft-1p3 margin-b-0">信息披露</p>
+      </li>
+      <li class="fl text-center" ng-click="toAbout()">
+        <img class="" src="/images/new-main/about.png" width="18%" alt="">
+        <p class="ft-1p3 margin-b-0">走进宏财</p>
+      </li>
+    </ul>
+  </div>
+  <!--新手标  -->
+  <!-- <div ng-include src='"views/main/_main-project-template.html"'></div> -->
+  <!-- 宏财精选、宏财尊贵、债权转让 -->
+  <div ng-include src='"views/main/_new-main-project-template.html"'></div>
+
+</div>
+

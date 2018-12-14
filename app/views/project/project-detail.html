@@ -1,0 +1,73 @@
+<!-- 项目详情页 -->
+<div class="funds-project bg-white margin-b-7" ng-init="showMessage = false;showMessage1 = false;" ng-click="blurUl($event);">
+  <div class="row current-detail-bg ft-white padding-t-2 padding-b-2">
+    <p class="text-center margin-b-1 title-block-pre">
+      <strong class="ft-1p6 ft-white ft-bold title-block">{{project.name}}</strong>
+      <!-- <span class="ft-1p5 bg-white ft-orange padding-l-1 padding-r-1 border-ra-20">{{projectStatusMap[project.status]}}</span> -->
+    </p>
+    <p class="margin-b-0 text-center">
+      <strong class="ft-4">{{project.annualEarnings}}%</strong>
+      <!-- <strong class="ft-3">- {{simpleFundsProject.product.maxRate |currency:"":1 || 0}}</strong>% -->
+    </p>
+    <div class="margin-0 text-center ft-1p8 position-re">年化利率
+      <a class="project_desp display-inbl position-ab" ng-click="showMessage1 = !showMessage1;" ng-show="project.repaymentType === 2"></a>
+      <p class="pro_des_date_tip ft-grey7 ft-1p4" ng-show="showMessage1">
+        <span>提示：此年化借利率不等同于收益率（因为借款人采用等额本息的还款方式每月返还本息），若想达到等同于此利率的收益，建议您开通自动投标循环出借。</span>
+      </p>
+    </div>
+  </div>
+  <div class="tab-arrow">
+    <table class="u-full-width margin-b-0" border-collapse="collapse">
+      <tbody>
+        <tr ng-show="project.category.code !== '0115'">
+          <td>计息日期</td>
+          <td>放款日开始计息</td>
+        </tr>
+        <tr>
+          <td>项目期限</td>
+          <td>
+            <span class="ft-orange">{{project.projectDays}}</span><span>天 </span>
+          </td>
+        </tr>
+        <tr>
+          <td>募集日期</td>
+          <td>{{project.releaseStartTime | date: 'yyyy-MM-dd'}} 至 {{project.releaseEndTime | date: 'yyyy-MM-dd'}}</td>
+        </tr>
+        <tr>
+          <td>还款方式</td>
+          <td class="position-re">
+            <span ng-class="{'ft-orange' : project.repaymentType === 2 }">{{repaymentTypeMap[project.repaymentType]}}</span>
+            <a class="project_desp display-inbl position-ab" ng-click="showMessage = !showMessage;"></a>
+            <p class="pro_des_date_tip ft-grey7 ft-1p4" ng-show="showMessage">
+              <span ng-if="project.repaymentType === 1">还款计算方式说明：假设借款金额为X，年利率为Y，借款期限为Z天，每月实际计息天数为N天，则：每月应还款利息计算公示：X*Y*N/365；应还总利息计算公式为：X*Y*Z/365；应还本金X。</span>
+              <span ng-if="project.repaymentType === 2">还款计算方式说明：假设借款金额为X，年利率为Y，借款期限为m期，则每期利率β=Y{{!project.cycleDays ? '/12' : '*X/365'}}，每期还款金额计算公式为：X*β*(1+β)<sup>m</sup>/ [(1+β)<sup>m</sup>-1]。</span>
+            </p>
+          </td>
+        </tr>
+        <tr ng-if="project.repaymentType === 2">
+          <td>还款周期</td>
+          <td>{{project.cycleDays ? project.cycleDays + '天' : '每月'}}</td>
+        </tr>
+        <tr>
+          <td>项目状态</td>
+          <td>{{projectStatusMap[project.status]}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+ <!--  <div class="padding-1">
+    <a ng-click="goMoreDetail(project)" class="fr ft-orange padding-l-2" my-click-once>更多详情&nbsp;></a>
+    <a href="javascript:;" ng-click="toggle();" class="ft-grey4 fr" style="text-decoration:underline;" my-click-once>协议范本</a>
+  </div> -->
+  <!-- 更多详情模块 -->
+  <div ng-include src="'views/project/project-detail-more.html'"></div>
+  <!-- 投资模块 -->
+  <p class="padding-t-1 padding-b-1 bg-orange ft-white text-center footer-pos colums margin-b-0 ft-2 normal-mid" ng-show="project.status ===7" ui-sref="root.project({number:project.number})">立即出借</p>
+  <p class="padding-t-1 padding-b-1 bg-grey5 ft-white text-center footer-pos colums margin-b-0 ft-2 normal-mid" ng-show="project.status ===6"> {{project._timeDown.hour }}时，{{project._timeDown.min }}分，{{ project._timeDown.seconds }}秒</p>
+  <p class="padding-t-1 padding-b-1 bg-orange ft-white text-center footer-pos colums margin-b-0 ft-2 normal-mid" ng-show="project.status ===11">{{projectStatusMap[11]}}</p>
+  <p class="padding-t-1 padding-b-1 bg-grey5 ft-white text-center footer-pos colums margin-b-0 ft-2 normal-mid" ng-show="[6,7,11].indexOf(project.status) === -1">{{projectStatusMap[project.status]}}</p>
+  <!-- <div ng-include src="'views/project/_project-investment.html'"></div> -->
+  <!-- 开通自动投标权限 -->
+  <!-- <div ng-include src="'views/user-center/auto-auto-transfer.html'" ng-show="authAutoTransferFlag"></div> -->
+</div>
+

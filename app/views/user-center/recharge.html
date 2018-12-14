@@ -1,0 +1,136 @@
+<div class="recharge margin-b-7 width-pull" ng-class="{'bg-offWhite': simpleWithdraw.cardStatus && simpleWithdraw.cardStatus === 'VERIFIED' }">
+  <!-- <div class=" margin-0 padding-1 padding-t-0">
+    <span class="pull-right" ui-sref="root.userCenter.setting">基本资料></span></div>
+    <hr class="hr-grey">
+    <h6 class="text-center padding-t-0p5 padding-b-0p5 margin-0"><strong>充值</strong></h6> 
+  <div> -->
+    <!-- 未绑定银行卡 simpleWithdraw.cardStatus !== 'VERIFIED'-->
+    <div class="padding-1 padding-t-3" ng-show="simpleWithdraw.cardStatus && simpleWithdraw.cardStatus !== 'VERIFIED'"><div ng-include src="'views/user-center/_bankcardless-hint.html'"></div></div>
+    <!-- 绑定银行卡 -->
+    <form class="margin-t-1 margin-b-0" name="rechargeForm" ng-show="simpleWithdraw.cardStatus && simpleWithdraw.cardStatus == 'VERIFIED'">
+      <div class="balance ft-black4 ft-1p6 bg-white">
+        {{bankcardErr}}账户余额 : <span class="account ft-Arial">{{ simpleWithdraw.account.balance | number:2}} </span>元
+      </div>
+      <div class="payment bg-white">
+        <div class="col-xs-3 pay-typeUCF" ng-class="{'pay-active':payment ==3}" ng-click="selectPay(3)"><span></span>先锋支付</div>
+        <div class="col-xs-3 pay-typeFU" ng-class="{'pay-active':payment ==4}" ng-click="selectPay(4)"><span></span>易宝支付</div>
+        <span class="bankLimit ft-1p2 fr line-h2" ng-click="showbankLimit($scope.showLimit);">支持银行</span>
+      </div>
+      <div class="bg-white">
+        <hr class="hr">
+      </div>
+      <div class="bg-white">
+        <div class="bankCard bg-white margin-auto">
+          <div class="cardName">{{simpleWithdraw.bankcard.openBank || '交通银行'}}</div>
+          <div class="cardNo">{{simpleWithdraw.bankcard.cardNo || '6222************1213'}}</div>
+          <!-- <div class="changeCard" ng-click="changeCard()">更换银行卡</div> -->
+        </div>
+      </div>
+     <!--  <div class="bank-span">
+        <span>{{simpleWithdraw.bankcard.openBank || '交通银行'}}：&nbsp;</span><span>{{simpleWithdraw.bankcard.cardNo || '6222************1213'}}</span><span ng-click="changeCard()">更换银行卡</span>
+      </div>
+      <label class="margin-t-1 padding-l-2">账户余额:&nbsp;<span class="ft-orange">{{ simpleWithdraw.account.balance | number:2}}</span>元<span class="ft-blue ft-1p2 fr margin-r-2 line-h2" ng-click="showbankLimit();">支持银行</span></label> -->
+      <div class="padding-t-3p5 bg-white">
+        <div class="hint text-center bg-red1 box-shadow" ng-if="rechargeForm.amount.$dirty && rechargeForm.amount.$error.pattern">
+        <span class="ft-white"><i class="fa fa-info">&nbsp;</i>请输入数字(最多精确到小数点后两位)</span>
+        </div>
+        <!-- <div class="hint text-center bg-red1 box-shadow" ng-if="rechargeForm.amount.$error.min && !rechargeForm.amount.$error.pattern && !rechargeForm.amount.$error.max"> -->
+        <div class="hint text-center bg-red1 box-shadow" ng-if="rechargeAmount < 3">
+          <span class="ft-white"><i class="fa fa-info">&nbsp;</i>充值金额不能小于3元</span>
+        </div>
+        <!-- <div class="hint text-center bg-red1 box-shadow" ng-if="rechargeForm.amount.$error.max && !rechargeForm.amount.$error.pattern"> -->
+        <div class="hint text-center bg-red1 box-shadow" ng-if="rechargeAmount > bankRemain">
+          <span class="ft-white"><i class="fa fa-info">&nbsp;</i>该卡本次最多充值{{bankRemain || 0}}元</span>
+        </div>
+        <div class="padding-l-2 padding-r-2">
+          <!-- ng-pattern="/^[0-9]*(\.[0-9]{1,2})?$/" -->
+          <input name="amount" type="number" class="input-amount u-full-width padding-1 margin-t-0p5" ng-model="rechargeAmount" ng-focus="footer();" ng-blur="footer()" required placeholder="该卡本次最多充值{{bankRemain ||0}}元">
+        </div>
+        <div class="padding-l-2 padding-r-2">
+          <button type="submit" class="u-full-width ft-1p6 button button-primary margin-t-0p5 {{rechargeForm.$invalid || busy || rechargeAmount < 3 || rechargeAmount > bankRemain ? 'button-disabled' : ''}}" ng-disabled="rechargeForm.$invalid || busy " ng-click="recharge(rechargeAmount);">立即充值</button>
+        </div>
+      </div>
+    </form>
+    <!-- <div class="bg-white">
+      <hr class="margin-0" ng-show="simpleWithdraw.cardStatus == 'VERIFIED'">
+    </div> -->
+    <div class="ft-grey4 padding-2 bg-white" ng-show="simpleWithdraw.cardStatus && simpleWithdraw.cardStatus == 'VERIFIED'">
+      <h7>温馨提示：</h7>
+      <div>
+        <span class="u-pull-left"><small>1.</small></span>
+        <p class="padding-l-1 margin-0"><small>您的账户资金将由海口联合农商银行资金存管系统进行存管；</small></p>
+      </div>
+      <div>
+        <span class="u-pull-left"><small>2.</small></span>
+        <p class="padding-l-1 margin-0"><small>首先请注意您是否开通网上银行等功能,可能存在充值超过限额（充值限额，是银行、第三方支付平台、和用户您自己设定的支付限额决定的，取三者最小值），以免造成充值不成功；</small></p>
+      </div>
+      <div>
+        <span class="u-pull-left"><small>3.</small></span>
+        <p class="padding-l-1 margin-0"><small>禁止洗钱、信用卡套现、虚假交易等行为，一经发现并确认，将终止该账户的使用；</small></p>
+      </div>
+      <div>
+        <span class="u-pull-left"><small>4.</small></span>
+        <p class="padding-l-1 margin-0"><small>如果充值金额没有及时到账，请联系客服，400-990-7626。</small></p>
+      </div>
+    </div>
+  </div>
+  <!-- 支持银行弹窗 -->
+  <div class="project-mask padding-2" ng-show="showLimit">
+    <div class="limit-bg bg-white margin-auto margin-t-5 padding-1">
+      <div class="title">
+        <p class="margin-b-0 fl diplay-inb ft-1p4 text-center ft-black2">支持银行</p><p class="margin-b-0 ft-1p4 fr display-inb ft-black2">单笔/单日/单月</p>
+      </div>
+      <div class="contain">
+        <ul class="display-bl margin-auto border-grey">
+          <li class="clearfix margin-b-0 padding-r-1 border-t-dashed" ng-class="{'border-none': $index == 0}" ng-repeat="card in bankCardList">
+            <img ng-src="{{card.src}}" class="fl margin-l-1 margin-r-1">
+            <div class="display-inb"><p class="margin-b-0 display-inb ft-1p4">{{card.bankName}}</p><p class="display-inb ft-1p3">{{card.singleLimit}}/{{card.dayLimit}}/{{card.monthLimit}}</p></div>
+          </li>
+        </ul>
+      </div>
+      <div class="get margin-auto margin-t-1p5" ng-click="showbankLimit($scope.showLimit);">
+        <p class="margin-b-0 bg-orange text-center ft-white">我知道了</p>
+      </div>
+    </div>
+  </div>
+  <!-- 更换银行卡弹窗 -->
+  <div class="project-mask bankcard-setting" ng-show="false">
+    <div class="project-mask-inner margin-t-20 text-center bg-white ft-black4 ft-1p6 padding-t-3 padding-b-3"  ng-show="showChange">
+      <!-- 账户总资产≤2元，可以自行解绑 -->
+      <div ng-if="account.tTotalAssets <= 2">
+        <p class="margin-b-0 padding-l-0p5">您的提现银行卡也将随之更换，是否继续？</p>
+        <div class="padding-l-2 padding-r-2 clearfix margin-t-2">
+          <button class="fl text-center bg-white ft-orange" ng-click="changeCard()">稍后再说</button>
+          <button class="fr text-center bg-orange ft-white" ng-click="unBindBankcard()">继续更换</button>
+        </div>
+      </div>
+      <!-- 账户资产＞2元，需要联系客服解绑 -->
+      <div ng-if="account.tTotalAssets > 2">
+        <p class="margin-b-0 padding-l-2 padding-r-2 text-justify">尊敬的用户，检测到您的账户总资产大于2元，为了您的资金安全，请联系客服进行人工解绑。客服热线：400-990-7626</p>
+        <div class="padding-l-2 padding-r-2 clearfix margin-t-2">
+          <button class="text-center bg-orange ft-white" ng-click="changeCard()">我知道了</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 银行卡维护弹窗 -->
+  <div class="project-mask bankcard-setting" ng-show="showChange">
+    <div class="project-mask-inner margin-t-20 text-center bg-white ft-black4 ft-1p6 padding-t-3 padding-b-3">
+      <p class="margin-b-0 padding-l-2 padding-r-2 text-justify">通道正在维护，建议您选用{{payment == 3 ?'富友' : '先锋'}}支付完成充值</p>
+      <div class="padding-l-2 padding-r-2 clearfix margin-t-2">
+        <button class="text-center bg-orange ft-white" ng-click="maintainCard()">我知道了</button>
+      </div>
+    </div>
+  </div>  
+</div>
+<!-- 充值限制 -->
+<div class="project-mask bankcard-setting" ng-show="rechargeTimeLimit" style="" ng-init="rechargeTimeLimit = false;">
+  <div class="project-mask-inner margin-t-20 text-center bg-white ft-black4 ft-1p6 padding-t-3 padding-b-1" style="">
+    <div>
+     <p class="margin-b-0 padding-l-2 padding-r-2 text-justify">尊敬的用户，23:55 — 00:05是充值系统维护期，请稍后操作。</p>
+      <div class="padding-l-2 padding-r-2 clearfix margin-t-2">
+        <button class="text-center bg-orange ft-white" ng-click="rechargeTimeLimit = false">我知道了</button>
+      </div>
+    </div><!-- end ngIf: account.tTotalAssets > 2 -->
+  </div>
+</div>

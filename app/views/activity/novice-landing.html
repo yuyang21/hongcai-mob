@@ -1,0 +1,146 @@
+<!-- 新手活动落地页 -->
+<div class="novice-landing">
+  <div class="position-re top-img">
+    <!-- <p class="deadline ft-1p2">2016年8月1日—2016年8月31日</p> -->
+  </div>
+  <!-- 注册拿现金部分 -->
+  <div class="part-one">
+    <div class="tittle ft-white">
+      <img src="/images/activity/tittle-bg.png" width="100%" class="display-bl padding-t-1">
+      <p class="text-center">688元现金 · 注册立拿</p>
+    </div>
+    <div class="cash-list margin-t-4">
+      <img src="/images/activity/cash-10.png" class="display-inb margin-l-1p5 margin-r-2" width="22%">
+      <img src="/images/activity/cash-35.png" class="display-inb margin-l-2 margin-r-2" width="22%">
+      <img src="/images/activity/cash-40.png" class="display-inb margin-l-2" width="22%">
+      <img src="/images/activity/cash-80.png" class="display-inb margin-l-1p5 margin-r-2 margin-t-3" width="22%">
+      <img src="/images/activity/cash-135.png" class="display-inb margin-l-2 margin-r-2" width="22%">
+      <img src="/images/activity/cash-388.png" class="display-inb margin-l-2" width="22%">
+    </div>
+    <div class="take-cash">
+      <img src="/images/activity/take-cash.png" class="display-bl margin-auto" width="58%" ng-click="goRegister()">
+    </div>
+    <div class="cash-rules ft-white padding-l-1 padding-r-1">
+      <p class="margin-b-0p5"><strong>活动规则：</strong><span class="rule-line fr"></span></p>
+      <p>1、活动期间，新用户注册即送688元现金。</p>
+      <p>2、用户投资满足相关条件时，可提取对应现金。</p>
+      <p>3、奖励详情及提现规则请在"我的账户——我的奖金"中查看。</p>
+    </div>
+  </div>
+  <!-- 注册领加息券部分 -->
+  <div class="part-next padding-t-3">
+    <div class="tittle ft-white">
+      <img src="/images/activity/tittle-bg.png" width="100%" class="display-bl padding-t-1">
+      <p class=" text-center">3%加息券 · 注册立领</p>
+    </div>
+    <div class="rate-example">
+      <div class="example-head">
+        <p class="ft-yellow0 margin-b-0  text-center"><strong class="margin-b-0">注册即获3%加息券一张，可用于投资宏金保项目</strong></p>
+      </div>
+      <div class="describe ft-white">
+        <p class="padding-t-0p5">举个栗子：</p>
+        <p>王先生在12月12日注册，使用获赠的加息券投资宏金保30天项目3万元，王先生本次投资将获得271.23元：</p>
+      </div>
+      <div class="show-rate margin-t-3 ft-white text-center">
+        <div class="new-packet">
+          <strong>原始收益</strong>
+          <p class="">30000×8%÷365×30=197.26元</p>
+        </div>
+        <img class="add" src="/images/activity/add1.png" alt="" width="6%">
+        <div class="new-packet">
+          <strong>加息收益</strong>
+          <p class="">30000×3%÷365×30=73.97元</p>
+        </div>
+        <img class="add" src="/images/activity/equal.png" alt="" width="6%">
+        <div class="new-packet">
+          <strong>全部收益</strong>
+          <p class="">197.26元+73.97元=271.23元</p>
+        </div>
+      </div>
+      <div><img src="/images/activity/invest1.png" class="display-bl margin-auto margin-t-1p5 margin-b-1" width="60%" ng-click="goRegister()"></div>
+      <div class="rate-rules ft-white padding-l-1">
+        <p><strong>活动规则：</strong><span class="rule-line fr"></span></p>
+        <p class="margin-t-1">1、注册立领3%加息券一张，有效期为15天；</p>
+        <p>2、加息券仅限投资宏金保项目，不可叠加使用；</p>
+        <p>3、加息券详细信息及使用规则请在“我的账户——我的加息券”中查看；</p>
+        <p>4、本活动最终解释权归宏财网所有，服务热线：</p>
+        <p>400-990-7626。</p>
+      </div>
+    </div>
+  </div>
+  <!-- 新手专享部分 -->
+  <div class="part-three ft-1p4 padding-t-3">
+    <div class="tittle ft-white">
+      <img src="/images/activity/tittle-bg.png" width="100%" class="display-bl padding-t-1">
+      <p class="text-center margin-b-0 ft-white">14%收益 · 新手专享</p>
+    </div>
+    <p class="ft-yellow0 ft-1p2 text-center margin-t-2 margin-b-2">用户首次投资后一周内均可参与，不限金额，不限次数！</p>
+    <div class="novice-project padding-l-1">
+      <div class="nvc-head">
+        <p class="fl margin-b-0 font-red44"><strong>新手标</strong></p>
+        <span class="font-red44 display-inb margin-l-0p5 padding-l-0p5 padding-r-0p5">{{newbieBiaoProject.minInvest || 0}}元起投，无投资上限</span>
+      </div>
+      <div class="nvc-detail">
+        <div class="detail-left fl">
+          <p class="margin-b-0 display-inb ft-1p2">
+            <span class="font-red4e ft-3 margin-r-0p5">{{newbieBiaoProject.annualEarnings}}</span>
+            <span class="display-inb width62 font-grey">年化利率 %</span>
+          </p>
+          <p class="ft-1p2 margin-b-0 font-grey">项目期限{{newbieBiaoProject.projectDays}}天，可投资金额{{newbieBiaoProjectInvestNum || 0}}元</p>
+        </div>
+        <div class="fl detail-right position-re">
+          <div>
+            <div class="process">
+              <div class="progress-bar bg-red2f" ng-class="{'bg-red2f':newbieBiaoProject.status === 7 || newbieBiaoProject.status === 6 ,'bg-greyc8':newbieBiaoProject.status === 11 || newbieBiaoProject.status === 9 || newbieBiaoProject.status === 10}" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:{{(newbieBiaoProject.soldStock + newbieBiaoProject.occupancyStock) * newbieBiaoProject.increaseAmount / newbieBiaoProject.total * 100}}%;">
+                <div class="type-img"></div>
+              </div>
+            </div>
+            <span class="ft-1p2 font-grey position-ab">{{(newbieBiaoProject.soldStock + newbieBiaoProject.occupancyStock) * newbieBiaoProject.increaseAmount / newbieBiaoProject.total * 100 | number:1}}%</span>
+          </div>
+          <img src="/images/activity/invest-purple.png" width="95%" ui-sref="root.project-detail({number: newbieBiaoProject.number})">
+        </div>
+      </div>
+    </div>
+    <!-- 增信部分 -->
+    <div class="padding-l-1 padding-r-1 margin-t-2">
+      <div class="tittle ft-white">
+        <img src="/images/activity/tittle-bg.png" width="100%" class="display-bl padding-t-1">
+        <p class="text-center">宏财网 · 关于我们</p>
+      </div>
+      <div class="landing-bottom margin-t-4">
+        <ul class="pagging-l-1">
+          <li class="bg-white1 clearfix">
+            <img class="fl" src="/images/activity/aboutus.png" alt="">
+            <p class="fl">宏财介绍</p>
+            <span class="fl">宏财网是一家国有企业战略投资的互联网金融平台，2016年A轮融资1亿元。</span>
+          </li>
+          <li class="bg-white1 clearfix">
+            <img class="fl" src="/images/activity/product.png" alt="">
+            <p class="fl">产品介绍</p>
+            <span class="fl">精挑细选、小额投资标的，车辆房产、优质资产抵押。</span>
+          </li>
+          <li class="bg-white1 clearfix">
+          <img class="fl" src="/images/activity/origin.png" alt="">
+            <p class="fl">项目来源</p>
+            <span class="fl">项目推荐方鑫融基金控集团，是新三板“金控”第一股和首家全牌照民间金融服务商。</span>
+          </li>
+          <li class="bg-white1 clearfix">
+            <img class="fl" src="/images/activity/ensure.png" alt="">
+            <p class="fl">本息保障</p>
+            <span class="fl">政府参与出资、全国排名前三的民营担保机构提供担保，保障投资者权益。</span>
+          </li>
+          <li class="bg-white1 clearfix">
+            <img class="fl" src="/images/activity/safe.png" alt="">
+            <p class="fl">资金安全</p>
+            <span class="fl" ng-if="payCompany === 'yeepay'">联合易宝支付打造一套完整的资金支付与托管第三方账户体系。</span>
+            <span class="fl" ng-if="payCompany === 'cgt'">联合海口联合农商银行打造一套完整的风险监控及资金存管系统。</span>
+          </li>
+        </ul>
+        <div class="explain">
+          <p>北京竞财投资服务有限公司</p>
+          <p class="ft-1p2">京ICP备15025477号-1</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+{
+  "YEEPAY_ADDRESS": "https://cg2.unitedbank.cn/bha-neo-app/lanmaotech/gateway",
+  "wechatRedirect": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx643d9b3aa9ca1e64&redirect_uri=http%3A%2F%2Fdz.test321.hongcai.com%2F&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
+  "consume": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx643d9b3aa9ca1e64&redirect_uri=http%3A%2F%2Fdz.test321.hongcai.com%2Fiou&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
+  "recharge": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx643d9b3aa9ca1e64&redirect_uri=http%3A%2F%2Fdz.test321.hongcai.com%2F&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
+  "account": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx643d9b3aa9ca1e64&redirect_uri=http%3A%2F%2Fdz.test321.hongcai.com%2Faccount&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
+  "rexin": "http://apitest.rexingo.com/index.php/api/index/blankNote?",
+  "wechatAppid": "wx643d9b3aa9ca1e64",
+  "sysUpdateUrl": "https://m.hongcai.com/sys-update.html",
+  "debug": false,
+  "test": false,
+  "domain":"https://m.hongcai.com",
+  "base_file_url":"https://www.hongcai.com/uploads/",
+  "wechat_id": "gh_9eddaa04a222",
+  "pay_company":"cgt",
+  "vue_domain": "https://app.hongcai.com"
+}

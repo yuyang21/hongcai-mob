@@ -1,0 +1,103 @@
+<!-- 放款审批列表 -->
+<html class="no-js" lang="zh-cn">
+<script type="text/javascript" src="/styles/un-min/jquery.min.js"></script>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1">
+  <title>放款审批列表</title>
+  <script src="/styles/un-min/rem.js"></script>
+<style>
+	table{
+	    width: 95%;
+    	margin: 0 auto;
+    	margin-top: .4rem;
+	    border-collapse: collapse;
+	    border: 1px solid #ddd;
+	    text-align: center;
+	    border-radius: .2rem;
+	}
+	thead{
+		color: #666;
+	}
+	thead th{
+		line-height: .7rem;
+		border: 1px solid #ddd;
+	}
+	tbody tr{
+		line-height: .7rem;
+	}
+	td{
+		border: 1px solid #ddd;
+	}
+	.blue{
+		color: #0B0AEF;
+	}
+	.noData{
+		padding-top: 4rem;
+		font-size: .3rem;
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+  <table>
+  	<thead>
+  	  <tr>
+		<th onclick="fun1()">项目名称</th>
+		<th>资产推荐方</th>
+		<th>操作</th>
+	  </tr>
+  	</thead>
+  	<tbody>
+  	</tbody>
+  </table>
+</body>
+<script type="text/javascript">
+
+  function fun1(){
+  	alert(1);
+  }
+  function getProjectList() {
+  	$.get('/hongcai/rest/erp/projects?maxDate=0&minDate=0&status=8&type=0&skip=0&max=1000',function (res,status) {
+	  	this.projectList = res.list;
+	  	if(this.projectList == false){
+	  		$('table').css({display:'none'});
+	  		$('body').append('<div class="noData">暂无放款审批项目</div>')
+	  	}else{
+	  		for(var i = 0; i < this.projectList.length; i++){
+	  			if(!this.projectList[i].projectAudit){
+	  				if(this.projectList[i].project.type === 5){
+	  					$('tbody').append('<tr><td><span class="blue">宏财精选 --</span>'+this.projectList[i].project.name+'</td><td>'+this.projectList[i].project.parentEnterpriseName+'</td><td onclick="examine('+this.projectList[i].project.id+')" class="examine blue">审批</td></tr>');
+	  				}else if(this.projectList[i].project.type === 6){
+	  					$('tbody').append('<tr><td><span class="blue">宏财尊贵 --</span>'+this.projectList[i].project.name+'</td><td>'+this.projectList[i].project.parentEnterpriseName+'</td><td onclick="examine('+this.projectList[i].project.id+')" class="examine blue">审批</td></tr>');
+	  				}
+	  			}else{
+	  				if(this.projectList[i].project.type === 5){
+	  					$('tbody').append('<tr><td><span class="blue">宏财精选 --</span>'+this.projectList[i].project.name+'</td><td>'+this.projectList[i].project.parentEnterpriseName+'</td><td>已审批</td></tr>');
+	  				}else if(this.projectList[i].project.type === 6){
+	  					$('tbody').append('<tr><td><span class="blue">宏财尊贵 --</span>'+this.projectList[i].project.name+'</td><td>'+this.projectList[i].project.parentEnterpriseName+'</td><td>已审批</td></tr>');
+	  				}
+	  			}
+		  	}
+	  	}
+  	})
+  }
+
+  function examine(projectId){
+	$.ajax({
+	    url: '/hongcai/rest/erp/project/loanAudit?projectId=' + projectId,
+	    type: 'PUT',
+	    success: function( response ) {
+	    	if (response && response.ret !== -1) {
+		    	alert('已审批成功');
+		    	window.location.reload();
+		    } else {
+		    	alert(response.msg);
+		    }
+		}
+	});
+  }
+  getProjectList();
+
+</script>
+</html>

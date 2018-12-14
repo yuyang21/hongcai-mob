@@ -1,0 +1,121 @@
+<!-- 新宏财精选和宏财尊贵项目详情页 -->
+<div class="new-project-detail">
+	<div class="header">
+		<ul>
+			<li>
+				<p>{{project.annualEarnings || 0}}<span>%</span></p>
+				<p>年化利率</p>
+			</li>
+			<li>
+				<p>{{project.projectDays || 0}}<span>天(项目期限)</span></p>
+				<p>{{project.total || 0 | currency:"":0}}<span>元</span></p>
+				<div class="pro-info3">
+					<div class="process">
+		        <div class="progress-bar bg-orange" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:{{project.percent | number: 1}}%;">
+		          <div class="type-img"></div>
+		        </div>
+	        </div>
+	        <div class="join-in">{{project.percent | number: 1}}%</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="content">
+		<div class="column" ui-sref="root.project-detail({number:project.number})">
+      <span>项目详情</span>
+      <span>
+      	<i class="fa fa-angle-right"></i>
+      </span>
+    </div>
+    <div class="column" ng-click="toOrderList()">
+      <span>出借记录</span>
+      <span><i class="fa fa-angle-right"></i></span>
+    </div>
+    <a class="column border-grey3-top margin-t-1p2" ng-click="toRealNameAuth()" ng-show="isLogged && userAuth.authStatus !== 2">
+      <span>账户余额：<i class="ft-orange ft-normal1">{{account.balance || 0 | number:2}}</i> 元</span>
+      <span><b class="ft-normal">开通 </b><i class="fa fa-angle-right"></i></span>
+    </a>
+    <a class="column border-grey3-top margin-t-1p2" ng-click="toRecharge()" ng-show="isLogged && userAuth.authStatus === 2">
+      <span>账户余额：<i class="ft-orange ft-normal1">{{account.balance || 0 | number:2}}</i> 元</span>
+      <span><b class="ft-normal">充值 </b><i class="fa fa-angle-right"></i></span>
+    </a>
+    <a class="column border-grey3-top margin-t-1p2" ng-click="toLogin()" ng-show="!isLogged">
+      <span>您的账号未登录，请先登录</span>
+      <span><b class="ft-normal">登录 </b><i class="fa fa-angle-right"></i></span>
+    </a>
+    <a class="column">
+      <span>可用奖励</span>
+      <span class="award_coupon" ng-click="showSelectIncreaseRateCoupon=true;blurNumber();">
+        <b class="ft-normal" ng-show="selectIncreaseRateCoupon.type ===1 && selectIncreaseRateCoupon">{{selectIncreaseRateCoupon.value}}%加息券 有效期到{{selectIncreaseRateCoupon.endTime | date : 'yy-MM-dd'}}</b>
+      	<b class="ft-normal" ng-show="selectIncreaseRateCoupon && selectIncreaseRateCoupon.type === 2 ">现金{{selectIncreaseRateCoupon.value}}元 出借金额需&ge;{{selectIncreaseRateCoupon.minInvestAmount || 0}}</b>
+      	<b class="ft-normal" ng-show="selectIncreaseRateCoupon.length == null">{{unSelectCouponMsg}}</b>
+      	<i class="fa fa-angle-right"></i>
+      </span>
+    </a>
+    <ul>
+    	<li>
+    		<p>剩余可出借(元)</p>
+    		<p>{{project.amount || 0 | currency:"":0}}</p>
+    	</li>
+    	<li>
+    		<p>预计利息(元)</p>
+        <p>{{ project.repaymentType === 1 ? profit : profit.profit || 0|  number: 2 }}
+          <span ng-show="selectIncreaseRateCoupon">+ {{selectIncreaseRateCoupon.type ===2 ? cashProfit : project.repaymentType === 1 ? increaseRateProfit : increaseRateProfit.profit || 0 | number : 2}}</span>
+        </p>
+    	</li>
+    </ul>
+    <!-- input输入框 -->
+    <div class="invest">
+    	<!-- <div ng-click="modInvestAmout(-project.increaseAmount,$event)" class="plus grey-status"><hr></div> -->
+    	<input id="invest-input" class="invest-input" type="number" placeholder="请输入出借金额" ng-model="project.investAmount" ng-disabled="project.status !==7 || userAuth.authStatus !== 2">
+    	<!-- <div ng-click="modInvestAmout(project.increaseAmount,$event)" class="add orange-status"><hr><hr></div> -->
+    </div>
+	</div>
+  <!-- 状态按钮 -->
+	<div class="invest-btn">
+    <button id="invest-btn1" class="button button-primary" type="button" ng-show="!msg && isLogged && project.status === 7 && userAuth.authStatus === 2 && project.investAmount" ng-click="toInvest(project)" ng-disabled="showSelectIncreaseRateCoupon && clicked">立即出借</button>
+    <button class="button btn-disabled" ng-show="(project.status ===7 && userAuth.authStatus === 2 && msg) || (project.status ===7 && !project.investAmount && userAuth.authStatus === 2)">立即出借</button>
+    <button class="button btn-disabled" ng-show="project.status ===6 ">预发布</button>
+    <button class="button btn-disabled" ng-show="project.status ===9 ">还款中</button>
+    <button class="button btn-disabled" ng-show="project.status ===8 ">融资成功</button>
+    <button class="button btn-disabled" ng-show="project.status ===10 ">已完成</button>
+    <button class="button btn-disabled" ng-show="project.status ===11 ">预约中</button>
+    <button class="button button-primary" type="button" ng-show="isLogged && project.status ===7 && userAuth.authStatus !== 2" ng-click="toRealNameAuth()">开通银行存管账户</button>
+    <button class="button button-primary" type="button" ng-show="!isLogged && project.status ===7" ng-click="toLogin()">立即登录</button>
+  </div>
+</div>
+<!-- 加息券弹出 -->
+<div class="rate-increase" ng-show="(increaseRateCoupons.length > 0 && showSelectIncreaseRateCoupon)" ng-click="hideCoupons($event);">
+  <div class="bg-white position-ab rate-increase-list width-pull" id="coupons">
+    <ul class="padding-1 margin-b-0 padding-b-0 normal-mid padding-b-7">
+      <!-- 可用奖励 ：加息券 + 现金券-->
+      <!-- 现金券 -->
+      <li class="margin-b-0p5 position-re" ng-click="selectCoupon(coupon)" ng-repeat=" coupon in increaseRateCoupons | orderBy : 'value' " ng-show="coupon.type === 2">
+        <img src="/images/rate-ticket2.png" alt="">
+        <p class="fl position-ab margin-b-0 ticket-left margin-l-p1"><span class="ft-1p6">￥</span>{{coupon.value | number }}</p>
+        <div class="position-ab ticket-right">
+          <p class="ft-grey4 ft-1p2">•&nbsp;使用范围：{{ coupon.investProductType == 5 ? '宏财精选' : coupon.investProductType == 6 ? '宏财尊贵' : '宏财精选、宏财尊贵'}}</p>
+          <p class="ft-grey4 ft-1p2">•&nbsp;使用条件：出借金额&ge;{{coupon.minInvestAmount}}元</p>
+          <p class="ft-grey4 ft-1p2">•&nbsp;有效期至{{coupon.endTime | date : 'yyyy-MM-dd'}}</p>
+        </div>
+      </li>
+        <!-- 加息券 -->
+      <li class="margin-b-0p5 position-re" ng-click="selectCoupon(coupon)" ng-repeat=" coupon in increaseRateCoupons | orderBy : '-value' " ng-show="coupon.type === 1">
+        <img src="/images/rate-ticket.png" alt="">
+        <p class="fl position-ab margin-b-0 ticket-left">{{coupon.value | number : 1}}<span class="ft-1p5">%</span></p>
+        <div class="position-ab ticket-right">
+          <p class="ft-grey4 ft-1p2">•&nbsp;出借产品：{{ coupon.investProductType == 5 ? '宏财精选' : coupon.investProductType == 6 ? '宏财尊贵' : '宏财精选、宏财尊贵'}}</p>
+          <p class="ft-grey4 ft-1p2">•&nbsp;加息天数：{{ coupon.type == '5' ? '1天' : '与所出借产品时长相同'}}</p>
+          <p class="ft-grey4 ft-1p2">•&nbsp;有效期至{{coupon.endTime | date : 'yyyy-MM-dd'}}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- <p class="text-center ft-grey4 margin-b-2" ng-show="initLimit < increaseRateCoupons.length" ng-click="viewMoreCoupon()">
+      <i class="fa fa-list-ul ft-orange" aria-hidden="true">&nbsp;</i>
+      <span class="text-underline ">查看更多</span>
+    </p> -->
+    <p class="text-center padding-t-1 padding-b-1 ft-grey4 margin-b-0 boder-grey-t boder-grey-b click-active" ng-click="unUseIncreaseRateCoupon()" >暂不使用</p>
+    <p class="text-center padding-t-1 padding-b-1 margin-b-0 ft-orange click-cancel" ng-click="showSelectIncreaseRateCoupon=false;" >取消</p>
+</div>
+

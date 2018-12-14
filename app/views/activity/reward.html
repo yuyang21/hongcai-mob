@@ -1,0 +1,71 @@
+<div class="invite-reward overflow-hid" auto-h>
+	<div class="head">
+		<p class="ft-1p6 text-center">您已成功邀请<span class="ft-3 display-inbl margin-l-1 margin-r-1">{{inviteCount || 0}}</span>位好友了！</p>
+	</div>
+	<p class="ft-1p8 text-center margin-t--0p5 margin-b-1 ft-white">好友共为您带来</p>
+	<div class="part2">
+		<div>
+			<p class="text-center margin-b-0">{{privilegedCapital.amount | number:0 || 0}}</p>
+			<p class="text-center">累计特权本金(元)</p>
+		</div>
+		<div>
+			<p class="text-center margin-b-0">{{privilegedCapital.profit | number:2 || 0}}</p>
+			<p class="text-center">累计收益(元)</p>
+		</div>
+	</div>
+	<div class="invite-list">
+		<div class="table-wrap-wrap">
+			<div class="table-wrap">
+				<table>
+					<thead class="ft-1p2 text-center">
+						<tr>
+							<td class="bd-right bd-bottom">成功邀请好友</td>
+							<td class="bd-right bd-bottom">累计特权本金(元)</td>
+							<td class="bd-bottom">剩余获得天数(天)</td>
+						</tr>
+					</thead>
+					<tbody class="ft-1p2" ng-repeat="detail in details" ng-if="details.length > 0">
+						<tr ng-if="detail.firstInvestTime > 0">
+							<td class="bd-right bd-bottom {{intervalDays(detail.firstInvestTime) <= 0 ? 'color_grey' : ''}}">{{detail.mobile}}</td>
+							<td class="bd-right bd-bottom {{intervalDays(detail.firstInvestTime) <= 0 ? 'color_grey' : ''}}">{{detail.amount | number:0 || 0}}</td>
+							<td class="bd-bottom {{intervalDays(detail.firstInvestTime) <= 0 ? 'color_grey' : ''}}">{{intervalDays(detail.firstInvestTime)}}</td>
+						</tr>
+						<tr ng-if="detail.firstInvestTime <= 0">
+							<td class="bd-right bd-bottom {{ intervalDays(detail.registTime) <= 0 ? 'color_grey' : ''}}">{{detail.mobile}}<img src="/images/invite/award-off.png" ng-show="intervalDays(detail.registTime) <= 0"></td>
+							<td class="bd-right bd-bottom color_grey" ng-if="intervalDays(detail.registTime) <= 0">——</td>
+							<td class="bd-right bd-bottom" ng-if="intervalDays(detail.registTime) > 0">暂无</td>
+							<td class="bd-bottom color_grey" ng-if="intervalDays(detail.registTime) <= 0">——</td>
+							<td class="bd-bottom" ng-if="intervalDays(detail.registTime) > 0">未投资</td>
+						</tr>
+					</tbody>
+					<tbody ng-if="totalPage > page">
+						<tr>
+							<td></td>
+							<td><p class="padding-t-3 text-center ft-white" ng-click="loadMore();"><i class="fa fa-list-ul ft-orange"></i>&nbsp;查看更多</p></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="con-invite-btn">
+		<img src="/images/invite/award-btn-on.png" class="display-bl margin-auto margin-t-1 {{deviceCode === 5 || deviceCode === 6 ? '' : 'margin-b-1p5'}}"  ng-click="showDownload = true" width="94%">
+		<p class="ft-1p2 ft-white text-center margin-b-0p5" ng-show="deviceCode === 5 || deviceCode === 6">该活动与设备生产商Apple Inc.公司无关 </p>
+	</div>
+
+	<!-- 下载app提示 -->
+	<div class="project-mask bankcard-setting" ng-show="showDownload === true && (deviceCode === 3 || deviceCode === 6 || deviceCode === 2 || deviceCode === 5)" ng-init="showDownload =  false">
+	  <div class="project-mask-inner margin-t-20 text-center bg-white ft-black4 ft-1p6 padding-t-3 padding-b-2">
+	    <div>
+	      <p class="margin-b-0">下载宏财网app</p>
+	      <p class="margin-b-2">马上参与活动！</p>
+	      <div class="padding-l-2 padding-r-2 padding-t-1 clearfix">
+	        <button class="fr text-center bg-orange ft-white ft-1p8" ng-click="downloadApp();showDownload=false;">下载</button>
+	        <button class="fl text-center bg-white ft-orange ft-1p8" ng-click="showDownload = false">取消</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+

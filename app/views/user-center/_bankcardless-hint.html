@@ -1,0 +1,21 @@
+
+<div class="padding-1 text-center"  ng-disabled="!timeout">
+  <!-- <i class="fa fa-smile-o ft-7"></i> -->
+  <!-- ng-if="simpleWithdraw.cardStatus == 'INIT'" -->
+  <!-- ng-if="simpleWithdraw.cardStatus == 'VERIFY_NOT'" -->
+  <div class="add-bank text-center" ng-show="simpleWithdraw.cardStatus == 'INIT'">
+    <i class="fa fa-clock-o fa-3x" aria-hidden="true"></i>
+  	<p>您的银行卡正在解绑中</p>
+  </div>
+  <div class="add-bank text-center" ng-show="simpleWithdraw.cardStatus !== 'INIT'" ng-click="bindBankcard()">
+    <i class="fa fa-plus-square fa-3x margin-t-1 margin-b-1"></i><br>
+    <p>请先添加银行卡</p>
+  </div>
+  <!-- <div class="ft-orange text-left margin-t-1">
+  	<p class="margin-b-0">温馨提示：</p>
+  	<p class="margin-b-1">邮政银行卡认证周期较长，需5-6个工作日，请尽量绑定其他银行的借记卡。</p>
+  </div> -->
+  <h6 class="margin-t-2" ng-show="simpleWithdraw.cardStatus !== 'VERIFYING'">您还没绑定银行卡哦，请点击完成绑卡操作吧~</h6>
+  <!-- <h6 class="margin-t-2" ng-show="simpleWithdraw.cardStatus == 'VERIFYING'">亲，您的银行卡还在审核中，请稍等哦~</h6> -->
+</div>
+

@@ -1,0 +1,55 @@
+<div class="credit-item margin-b-1p3 border-grey-top border-grey-bottom" ng-click="goDtail(item.creditRight.number);">
+  <div class="padding-l-1p5 padding-r-1p5 bg-white">
+    <div class="border-grey2-bottom padding-t-1 padding-b-1 overflow-hid ft-666">
+      <span class="u-pull-left" ng-show="widthFlag===0 && item.creditRight.projectName.length <= 11">
+        <span class="{{item.creditRight.type === 6 ? 'border-left-none' : 'border-left'}}"></span>
+        <span class="zhuan" ng-show="item.creditRight.type === 6">转</span>
+        <span class="display-inb fl margin-t--0p2">{{item.creditRight.projectName}}</span> 
+      </span>
+      <span class="u-pull-left" ng-show="widthFlag===0 && item.creditRight.projectName.length > 11">
+        <span class="{{item.creditRight.type === 6 ? 'border-left-none' : 'border-left'}}"></span>
+        <span class="zhuan" ng-show="item.creditRight.type === 6">转</span>
+        <span class="display-inb fl margin-t--0p2">{{item.creditRight.projectName | limitTo:8}}...</span> 
+      </span>
+      <span class="u-pull-left" ng-show="widthFlag===1 || widthFlag===2">
+        <span class="{{item.creditRight.type === 6 ? 'border-left-none' : 'border-left'}}"></span>
+        <span class="zhuan" ng-show="item.creditRight.type === 6">转</span>
+        <span class="display-inb fl margin-t--0p2">{{item.creditRight.projectName}}</span>
+      </span>
+      <!-- <img class="fl" src="/images/user-center/rate-icon.png" alt="" width="9%" ng-show="true"> --> 
+      <div ng-show="(item.increaseRateCoupon && (item.increaseRateCoupon.type === 1 || item.increaseRateCoupon.type === 6 || item.increaseRateCoupon.type === 7)) || item.privilegeValue">
+        <div class="fl arrow-left"></div><div class="fl rate-icon">
+          <span ng-show="item.increaseRateCoupon && item.increaseRateCoupon.type === 1 || item.increaseRateCoupon.type === 6 || item.increaseRateCoupon.type === 7">{{item.increaseRateCoupon.value}}%</span>
+          <span ng-show="item.increaseRateCoupon && (item.increaseRateCoupon.type === 1 || item.increaseRateCoupon.type === 6 || item.increaseRateCoupon.type === 7) && item.privilegeValue">＋</span>
+          <span ng-show="item.privilegeValue">{{item.privilegeValue}}%</span>
+        </div>
+      </div>
+      <!-- <div class="fl red-rate">加息</div> -->
+      <span class="u-pull-right ft-2 fa fa-angle-right margin-0p2 ft-greyddd"></span>
+      <span class="u-pull-right ft-orange1" ng-show="item.creditRight.isRepeatInvest === 1"><i class="fa fa-history"></i>&nbsp;已自动续投&nbsp;</span>
+      <span class="u-pull-right ft-666" ng-show="item.creditRight.isRepeatInvest === 2"><i class="fa fa-history"></i>&nbsp;未自动续投&nbsp;</span>
+      <!-- <span class="endtime u-pull-right ft-grey2 ft-1p3" ng-show="creditStatus === '1' && item.creditRight.type !== 3">到期日:{{item.project.repaymentDate | date : 'yyyy-MM-dd'}}</span> -->
+    </div>
+  </div>
+  <div class="u-full-width padding-t-1p2 padding-r-1 padding-l-0p5 overflow-hid bg-white">
+    <div class="credit-item-info u-pull-left text-center ft-1p4 border-greye-right">
+      <span class="ft-grey999 ft-Arial ft-1p6">{{item.creditRight.amount - item.creditRight.transferedAmount |currency:"":0 || 0}}</span>
+      <br>
+      <span class="ft-greyaaa padding-l-0p5">本(元)</span>
+    </div>
+    <div class="credit-item-info u-pull-left text-center ft-1p4 border-greye-right">
+      <span class="ft-grey999 ft-Arial ft-1p6">{{item.creditRight.profit + item.creditRight.discountInterest |currency:"":2 || 0}}</span><span class="ft-red0 ft-1p6" ng-show="(item.increaseRateCoupon && item.increaseRateCoupon.type === 1 || item.increaseRateCoupon.type === 6 || item.increaseRateCoupon.type === 7) || item.privilegeValue">+{{item.increaseRateCoupon.profit + item.privilegePofit | number:2}}</span>
+      <br>
+      <span class="ft-greyaaa">息(元)</span>
+    </div>
+    <div class="credit-item-info u-pull-right text-center ft-1p4 ft-Arial">
+      <span class="ft-grey999 ft-1p6" ng-if="item.creditRight.type !== 3">{{item.projectPrepayment != null && creditStatus == '4' ? item.projectPrepayment.realRepaymentTime : item.project.repaymentDate | date : 'yyyy/MM/dd'}}</span>
+      <span class="ft-grey999 ft-1p6" ng-if="item.creditRight.type == 3">{{item.fundsProject.repaymentDate | date : 'yyyy/MM/dd'}}</span>
+      <br>
+      <span class="ft-greyaaa">到期日</span>
+    </div>
+  </div>
+  <div class="tips" ng-if="item.projectPrepayment != null && creditStatus == '1'">预计于{{prepaymentTime | date : 'yyyy/MM/dd'}}日前还本付息</div>
+  <div class="tips" ng-if="item.projectPrepayment != null && creditStatus == '4'">已于{{item.projectPrepayment.realRepaymentTime | date : 'yyyy/MM/dd'}}日提前还本付息</div>
+</div>
+

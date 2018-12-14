@@ -1,0 +1,95 @@
+
+<!-- 债权详情 -->
+<div class="credit-detail position-re" ng-class="{'bg-offWhite':creditRight.type !== 3,'':creditRight.type == 3}" auto-height>
+  <div class="detail-header ft-white">
+    <img src="/images/user-center/security-bg.png" width="100%" class="display-bl">
+    <div class="annualEarnings position-ab text-center">
+      <p class="margin-b-0 text-cneter">{{creditRight.baseRate || 0}}<span class="ft-1p4">%</span><span class="ft-1p8 ft-red0" ng-show="increaseRateCoupon.value && (increaseRateCoupon.type == 1 || increaseRateCoupon.type == 6 || increaseRateCoupon.type == 7)">+{{increaseRateCoupon.value}}<span class="ft-1p4 ">%</span></span><span class="ft-1p8 ft-red0" ng-show="isPrivilegeRate">+{{privilegeRate.value}}<span class="ft-1p4 ">%</span></span></p>
+      <p class="margin-b-0">年化利率</p>
+    </div>
+    <div  class="projectDays position-ab text-center">
+      <p class="margin-b-0">{{project.projectDays || 0}}<span class="ft-1p3">天</span></p>
+      <p class="margin-b-0">项目期限</p>
+    </div>
+  </div>
+  <div class="detail-steps padding-b-4">
+    <ul>
+      <!-- 投资本金 -->
+      <li class="margin-b--0p5">
+        <div class="timeline display-inb">
+          <p  class="margin-b-0 grey-bg"></p>
+          <div class="margin-t--0p5">
+            <img src="/images/user-center/circle-ed.png" width="19%" class="display-inb">
+          </div>
+        </div>
+        <div class="step display-inb position-ab margin-l--0p5">
+          <span class="display-inb"></span>
+          <p class="margin-t-2p5 display-inb ft-grey4 ft-1p4 margin-b--0p5 grey-line" ng-if="creditRight.type !== 6">出借：本金{{creditRight.amount | number:2 || 0}}元<br><span class="ft-blue7 ft-1p2 margin-t--0p5">{{creditRight.createTime | date:'yyyy-MM-dd'}}</span></p>
+          <p class="margin-t-2p5 display-inb ft-grey4 ft-1p4 margin-b--0p5 grey-line" ng-if="creditRight.type === 6">债权认购：本金{{creditRight.amount | number:2 || 0}}元<br><span class="ft-blue7 ft-1p2 margin-t--0p5">{{creditRight.createTime | date:'yyyy-MM-dd'}}</span></p>
+        </div>
+      </li>
+      <!-- 计息日期 -->
+      <li class="margin-b--0p5" ng-hide="creditRight.type == 3">
+        <div class="timeline display-inb">
+          <p  class="margin-b-0" ng-class="{'grey-bg':project.loanTime > 0,'orange-bg':project.loanTime <= 0}"></p>
+          <div class="margin-t--0p5">
+            <img src="/images/user-center/circle-ed.png" width="19%" class="display-inb" ng-if="project.loanTime > 0">
+            <img src="/images/user-center/circle-ex.png" width="19%" class="display-inb" ng-if="project.loanTime <= 0">
+          </div>
+        </div>
+        <div class="step display-inb position-ab margin-l--0p5">
+          <span class="hyphen display-inb"></span>
+          <p class="display-inb ft-grey4 ft-1p4 margin-b--0p5" ng-if="project.loanTime > 0 || creditRight.type == 3" ng-class="{'grey-line':project.loanTime > 0,'orange-line':project.loanTime <= 0}">计息日期：{{project.loanTime | date:'yyyy-MM-dd'}}</p>
+          <p class="display-inb ft-grey4 ft-1p4 margin-b--0p5" ng-if="project.loanTime <= 0" ng-hide="creditRight.type === 6 || creditRight.type === 3 " ng-class="{'grey-line':project.loanTime > 0,'orange-line':project.loanTime <= 0}">项目募集中</p>
+        </div>
+      </li>
+      <!-- 每次回款 -->
+      <li class="margin-b--0p5" ng-repeat="item in credits track by $index">
+        <div class="timeline display-inb" ng-if="item.type !== 2 && item.type !== 3 && item.type !== 1 && item.type !== 8">
+          <p  class="margin-b-0" ng-class="{'grey-bg':item.status === 1,'orange-bg':item.status === 0}"></p>
+          <div class="margin-t--0p5">
+            <img src="/images/user-center/circle-ed.png" width="19%" class="display-inb" ng-if="item.status==1">
+            <img src="/images/user-center/circle-ex.png" width="19%" class="display-inb" ng-if="item.status==0">
+          </div>
+        </div>
+        <div class="step display-inb position-ab margin-l--0p5" ng-if="item.type !== 2 && item.type !== 3 && item.type !== 1 && item.type !== 8">
+          <span class="display-inb"></span>
+          <p class="display-inb ft-grey4 ft-1p4 margin-b--0p5" ng-class="{'grey-line':item.status === 1,'orange-line':item.status === 0}" ng-if="item.type === 6">募集期奖励：{{ item.amount | number: 2 }}元<br/>
+            <span class="ft-blue7 ft-1p2 margin-t--0p5">{{ item.date }}</span>
+          </p>
+          <p class="display-inb ft-grey4 ft-1p4 margin-b--0p5" ng-if="item.type === 7">特权加息：{{ item.amount | number: 2 }}元<br/>
+            <span class="ft-blue7 ft-1p2 margin-t--0p5">{{ item.date }}</span>
+          </p>
+          <p class="display-inb ft-grey4 ft-1p4 margin-b--0p5" ng-class="{'grey-line':item.status === 1,'orange-line':item.status === 0}" ng-if="item.type !== 6 && item.type !== 7 && item.type !== 8">
+            回款：<span ng-if="item.principal">本金{{ item.principal | number: 2 }}元</span><br ng-if="item.principal && item.profit"/>
+            <span ng-if="item.profit">利息{{ item.profit | number: 2 }}元</span>
+            <b class="ft-red0 display-inb ft-normal" ng-if="item.type !== 5 && item.couponProfit >0">+{{item.couponProfit | number:2 || 0}}元</b>
+            <br><span class="ft-1p2 margin-t--0p5" ng-class="{'ft-blue7':item.status === 1,'orange-ft':item.status === 0}">{{ item.date}}</span>
+          </p>
+          <!-- <p class="display-inb ft-grey4 ft-1p4 margin-b--0p5" ng-if="item.type === 8" ng-class="{'grey-line':item.status === 1,'orange-line':item.status === 0}">债权转让：利息{{ item.profit | number: 2 }}元<br><span class="ft-1p2 margin-t--0p5" ng-class="{'ft-blue7':item.status==1,'orange-ft':item.status==0}">{{ item.date}}</span></p> -->
+        </div>
+        <div ng-if="item.type === 8">
+          <div class="timeline display-inb">
+            <p  class="margin-b-0" ng-class="{'grey-bg':item.status === 1,'orange-bg':item.status === 0}"></p>
+            <div class="margin-t--0p5">
+              <img src="/images/user-center/circle-ed.png" width="19%" class="display-inb" ng-if="item.status==1">
+              <img src="/images/user-center/circle-ex.png" width="19%" class="display-inb" ng-if="item.status==0">
+            </div>
+          </div>
+          <div class="step display-inb position-ab margin-l--0p5">
+            <span class="display-inb"></span>
+            <p class="display-inb ft-grey4 ft-1p4 margin-b--0p5" ng-if="item.amount" ng-class="{'grey-line':item.status === 1,'orange-line':item.status === 0}">债权转让：本金{{ item.amount || 0 | number: 2 }}元<br>
+              <span ng-if="item.profit">利息{{ item.profit | number: 2 }}元<br></span>
+              <span class="ft-1p2 margin-t--0p5" ng-class="{'ft-blue7':item.status==1,'orange-ft':item.status==0}">{{ item.date}}</span>
+            </p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="project-details text-center" ng-hide="creditRight.type == 3">
+    <span class="display-inb"></span>
+    <p class="ft-1p6 display-inb padding-l-0p5 padding-r-0p5" ng-click="goDetail();">查看项目详情<b class="ft-1p8 ft-normal">></b></p>
+    <span class="display-inb"></span>
+  </div>
+</div>

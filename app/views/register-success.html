@@ -1,0 +1,30 @@
+<div class="register bg-white padding-l-1 padding-r-1 padding-t-2">
+    <div class="text-center">
+        <img src="/images/signup-4.png" width="30%">
+        <p class="padding-t-1 ft-2 ft-orange"><strong>恭喜您，成功注册宏财网！</strong></p>
+        <p>
+            <strong class="ft-grey" ng-if="payCompany ==='cgt'">建议您完成个人身份认证，开通银行资金存管账户，让您的资金更安全，出借更靠谱！</strong>
+            <strong class="ft-grey"  ng-if="payCompany ==='yeepay'">建议您完成个人身份认证，开通易宝账户，让您的资金更安全，出借更靠谱！</strong>
+        </p>
+    </div>
+    <form name="registerYeepayForm" class="margin-0 padding-b-2 padding-t-1 ft-grey" autocomplete="on">
+        <p class="margin-0 border-grey border-ra-0p5 margin-b-1p5">
+            <label for="realnamesignup"><small>真实姓名</small></label>
+            <input id="realnamesignup" name="realnamesignup" ng-model="user.realName" required="required" type="text" placeholder="请输入身份证上的姓名"/>
+        </p>
+        <p class="margin-0 border-grey border-ra-0p5 margin-b-1p5" ng-class="{'border-red':registerYeepayForm.IDcardsignup.$dirty && registerYeepayForm.$invalid && !registerYeepayForm.IDcardsignup.$focused && registerYeepayForm.$error.pattern}">
+            <label for="IDcardsignup"><small>身份证</small></label>
+            <input id="IDcardsignup" type="text" name="IDcardsignup" ng-model="user.idCardNo" required="required"  ng-pattern="/^([0-9]{17}[0-9xX]{1})$|^([0-9]{15})$/" placeholder="请输入身份证上的号码" ng-focus/>
+        </p>
+        <p ng-if="registerYeepayForm.IDcardsignup.$dirty && registerYeepayForm.$invalid && !registerYeepayForm.IDcardsignup.$focused && registerYeepayForm.$error.pattern" class="text-center ft-red"><small>输入的身份证号码格式不正确</small></p>
+        <p class="signin margin-0 text-center padding-t-1">
+            <input type="submit" class="button button-primary column {{registerYeepayForm.$invalid ? 'button-disabled' : ''}}" ng-disabled="registerYeepayForm.$invalid" ng-if="payCompany ==='cgt'" value="开通银行存管账户" ng-click="signUpYeepay(user);"/>
+            <input type="submit" class="button button-primary column {{registerYeepayForm.$invalid ? 'button-disabled' : ''}}" ng-disabled="registerYeepayForm.$invalid" ng-if="payCompany ==='yeepay'" value="开通易宝账户" ng-click="signUpYeepay(user);"/>
+        </p>
+        <p class="change_link margin-0 text-center clear">
+            <small>
+                <a ui-sref="root.main" class="to_login"> 暂不开通 </a>
+            </small>
+        </p>
+    </form>
+</div>

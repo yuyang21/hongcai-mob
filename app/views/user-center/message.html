@@ -1,0 +1,33 @@
+<div class="messages" ng-init="activeTab=0">
+  <ul class="account-tab1 nav-ul bg-white overflow-hid border-grey2-bottom ft-666 ft-Arial margin-b-0 ft-1p6">
+    <li class="column position-re text-center margin-0 padding-t-1 padding-b-1" ng-class="{active: activeTab===0}" ng-click="toggleTab(0)">公告</li>
+    <li class="column position-re text-center margin-0 padding-t-1 padding-b-1" ng-class="{active: activeTab===1}" ng-click="toggleTab(1)"><span>提醒</span><p class="red-point" ng-if="unReadMsgs > 0"></p></li>
+  </ul>
+  <div ng-if="activeTab == 0">
+    <div class="web-site-notice" ng-if="notices.length > 0"> 
+    	<ul class="margin-b-0 padding-b-1p2">
+    	 	<li class="margin-t-1p2 margin-b-0 padding-l-1p5 padding-r-1p5 bg-white padding-b-1p5" ui-sref="root.userCenter.web-site-notice({id:notice.id})" ng-repeat="notice in notices">
+    	 		<p class="padding-t-1p5 margin-b-1 ft-1p6 ft-666"> {{notice.title}}</p>
+    	 		<div class="notice-foot ft-grey999 ft-1p3" ><span>{{notice.createTime | date: 'yyyy/MM/dd HH:mm:ss'}}</span><span>查看详情</span></div>
+    	 	</li>
+    	 </ul>
+       <div class="text-center bg-white" ng-show="page < noticeTotalPage" ng-click="viewMore(getNotice);">
+        <p class="padding-b-3 padding-t-3 margin-b-0"><i class="fa fa-list-ul ft-orange"></i>&nbsp;<a class="ft-black">查看更多</a></p>
+      </div>
+    </div>
+    <div ng-if="notices.length <= 0" class="text-center padding-t-10" auto-height>暂无任何公告</div>
+  </div>
+  <div ng-if="activeTab == 1" class="margin-b-4">
+    <div ng-if="userMsgsList.length > 0">
+      <div class="messages-remind margin-t-1p2 padding-l-1p5 padding-r-1p5 padding-b-0p5 bg-white" ng-repeat="item in userMsgsList">
+        <div class="remind-title padding-t-1p5 margin-b-1 ft-1p6 ft-666">{{item.title || '宏财网'}}</div>
+        <div class="remind-time ft-grey999 ft-1p3">{{item.createTime | date: 'yyyy/MM/dd HH:mm:ss' || '2017/01/04 00:00:00'}}</div>
+        <div class="remind-content margin-b-1p5 ft-grey999">{{item.content || '充值'}}</div>
+      </div>
+      <div class="text-center bg-white margin-t-1p2" ng-show="page < msgTotalPage" ng-click="viewMore(getUserMsgs);">
+        <p class="padding-b-3 padding-t-3"><i class="fa fa-list-ul ft-orange"></i>&nbsp;<a class="ft-black">查看更多</a></p>
+      </div>
+    </div>
+    <div ng-if="userMsgsList.length <= 0" class="text-center padding-t-10" auto-height>暂无任何消息提醒</div>
+  </div>
+</div>

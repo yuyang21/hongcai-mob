@@ -1,0 +1,12 @@
+<div class="activity-center" auto-height>
+  <div class="content" ng-repeat="item in activityBannerList track by item.id">
+    <div class="header">
+      <span class="pull-left display-inb">{{item.title}}</span>
+      <span class="pull-right display-inb" ng-if="item.endTime-NowTime > 0"><i class="clock"></i>剩余{{item.dueDayTime}}天{{item.dueHourTime}}小时</span>
+      <span class="pull-right display-inb" ng-if="item.endTime-NowTime <= 0"><i class="clock"></i>已结束</span>
+    </div>
+    <a ng-click="clickImage(item.linkUrl)">
+      <img ng-src="{{item.imageUrl}}" alt="" width="100%" class="display-bl">
+    </a>
+  </div>
+</div>
