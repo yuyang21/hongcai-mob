@@ -103,11 +103,11 @@ module.exports = function(grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
+        port: 9008,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: '*',
         // hostname: '192.168.60.34',
-        livereload: 35728
+        livereload: 35722
       },
       proxies: [{
         context: '/ipa',
